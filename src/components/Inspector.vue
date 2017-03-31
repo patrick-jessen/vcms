@@ -4,7 +4,7 @@
   <div class='ui dividing large header' v-if='!selected'>Select a component</div>
   <template v-else>
     <div class='ui dividing large header'>{{selected}}</div>
-    <Property v-for='(p, idx) in properties' :property='p' @change='propertyChange(p, $event)' :key='idx'></Property>
+    <Property v-for='(p, idx) in properties' :property='p' @change='propertyChange(p, $event)' :key='p'></Property>
   </template>
   </div>
 </div>
@@ -35,6 +35,7 @@ export default {
   }),
 
   methods: {
+    // override default component select
     select(e) {
       e.stopPropagation()
     },

@@ -7,7 +7,23 @@ const search = window.utils.createStoreModule({
   icon: 'search'
 })
 
-const itemList = window.utils.createStoreModule({
+const albums = window.utils.createStoreModule({
+  type: 'ItemList',
+  showEmpty: false
+})
+const artists = window.utils.createStoreModule({
+  type: 'ItemList',
+  showEmpty: false
+})
+const tracks = window.utils.createStoreModule({
+  type: 'ItemList',
+  showEmpty: false
+})
+const playlists = window.utils.createStoreModule({
+  type: 'ItemList',
+  showEmpty: false
+})
+const queue = window.utils.createStoreModule({
   type: 'ItemList',
   showEmpty: false
 })
@@ -19,9 +35,13 @@ const inspector = window.utils.createStoreModule({
 const app = {
   namespaced: true,
   modules: {
-    itemList,
+    inspector,
     search,
-    inspector
+    albums,
+    artists,
+    tracks,
+    playlists,
+    queue
   },
 }
 

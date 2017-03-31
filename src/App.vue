@@ -4,12 +4,12 @@
     <div class='main ui container'>
       <Search name='search' @change='onSearch' :loading='isSearching'></Search>
       <template v-if='searchQuery.length > 0'>
-        <ItemList name='itemList' title='Albums' :items='albums'></ItemList>
-        <ItemList name='itemList' title='Artists' :items='artists'></ItemList>
-        <ItemList name='itemList' title='Tracks' :items='tracks'></ItemList>
+        <ItemList name='albums' title='Albums' :items='albums'></ItemList>
+        <ItemList name='artists' title='Artists' :items='artists'></ItemList>
+        <ItemList name='tracks' title='Tracks' :items='tracks'></ItemList>
       </template>
-      <ItemList name='itemList' v-else title='Playlists' :items='playlists'></ItemList>
-      <ItemList name='itemList' title='Queue' :items='queue'></ItemList>
+      <ItemList name='playlists' v-else title='Playlists' :items='playlists'></ItemList>
+      <ItemList name='queue' title='Queue' :items='queue'></ItemList>
     </div>
   </div>
 </template>

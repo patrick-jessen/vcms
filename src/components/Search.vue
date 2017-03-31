@@ -1,7 +1,19 @@
 <template>
-<div class='ui icon input' :class='{loading}' @click='select'>
-  <input class='search icon' :value='text' @input='onInput' :placeholder='placeholder'>
-  <i class='icon' :class='icon'></i>
+<!-- Wrapper -->
+<div class='ui icon input' 
+  :class='{loading}' 
+  @click='select'>
+
+  <!-- Text input -->
+  <input class='search icon' 
+    :value='text' 
+    @input='onInput' 
+    :placeholder='placeholder'>
+
+  <!-- Icon -->
+  <i class='icon' 
+    :class='icon'>
+  </i>
 </div>
 </template>
 
@@ -14,16 +26,16 @@ export default {
       default: false
     }
   },
-
   data() {
     return {
       // Search string
       text: ''
     }
   },
-
-  computed: window.utils.mapState(['placeholder', 'icon']),
-  
+  computed: window.utils.mapState([
+    'placeholder', 
+    'icon'
+  ]),
   methods: {
     onInput(e) {
       // Update local state
@@ -32,14 +44,8 @@ export default {
       // Emit change to parent
       this.$emit('change', this.text)
     },
-
-    select(e) {
-      window.$store.commit('app/inspector/selected', this.namespace)
-      e.stopPropagation()
-    }
   },
 }
-
 
 // Create component CMS definition
 window.utils.createTemplate('Search', [

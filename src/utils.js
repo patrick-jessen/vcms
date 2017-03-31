@@ -35,6 +35,8 @@ window.utils = {
     return obj
   },
 
+  // create a throtteled version of a function.
+  // returns a promise.
   createThrottle(func, minInt, context) {
     var time = 0
     var timeout = null
@@ -65,6 +67,7 @@ window.utils = {
     }
   },
 
+  // create CMS template for a component
   createTemplate(componentName, defs) {
     if(!window.components)
       window.components = {}
@@ -83,7 +86,7 @@ window.utils = {
     return store
   },
 
-
+  // create a namespaced VUEX store module with naive mutators
   createStoreModule(state) {
     var keys = Object.keys(state)
     var mutations = {}

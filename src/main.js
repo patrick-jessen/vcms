@@ -22,6 +22,14 @@ Vue.mixin({
       this.namespace = this.$parent.namespace + '/' + this.name
     else
       this.namespace = ''
+  },
+  methods: {
+    // selects the component for inspection
+    select(e) {
+      window.$store.commit('app/inspector/selected', this.namespace)
+      e.stopPropagation()
+      e.preventDefault()
+    }
   }
 })
 
