@@ -1,11 +1,12 @@
 <template>
 <div class='sidebar' @click='select'>
-  <h1 v-if='!selected'>Select a component</h1>
+  <div class='main ui container'>
+  <div class='ui dividing large header' v-if='!selected'>Select a component</div>
   <template v-else>
-    <h1 v-if='selected'>{{selected}}</h1>
-
+    <div class='ui dividing large header'>{{selected}}</div>
     <Property v-for='(p, idx) in properties' :property='p' @change='propertyChange(p, $event)' :key='idx'></Property>
   </template>
+  </div>
 </div>
 
 </template>
@@ -52,13 +53,17 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .sidebar {
   position: fixed;
   width: 400px;
   height: 100%;
-  background-color: lightgray;
+  background-color: #eeeeee;
   right: 0;
   border-left: 1px solid gray;
+}
+.main.ui.container {
+  width: 80%;
+  margin-top: 20px
 }
 </style>

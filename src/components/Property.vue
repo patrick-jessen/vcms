@@ -1,13 +1,15 @@
 <template>
-<div>
-  <h3>{{property.name}}</h3>
-  <component 
-    :is='type'
-    v-bind='attr' 
-    v-html='cont' 
-    @input='onChange' 
-    @click='onClick'>
-  </component>
+<div class='ui item'>
+  <div class='ui small header'>{{property.name}}</div>
+  <div :class='wrapperClass'>
+    <component 
+      :is='type'
+      v-bind='attr' 
+      v-html='cont' 
+      @input='onChange' 
+      @click='onClick'>
+    </component>
+  </div>
 </div>
 </template>
 
@@ -34,7 +36,9 @@ export default {
             value: this.property.value
           }
         case 'select':
-          return {}
+          return {
+            class: 'ui dropdown'
+          }
         case 'toggle':
           return {
             type: 'checkbox',
@@ -56,6 +60,14 @@ export default {
           }
           return str
         }
+      }
+    },
+    wrapperClass() {
+      switch(this.property.type) {
+        case 'string':
+          return 'ui input'
+        case 'toggle':
+          return ''//ui slider checkbox'
       }
     }
   },

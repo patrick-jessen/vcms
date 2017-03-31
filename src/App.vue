@@ -152,7 +152,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #app {
   height: 100%;
 }

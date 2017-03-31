@@ -11,3 +11,23 @@ window.vue = new Vue({
   el: '#app',
   render: h => h(App)
 })
+
+// Vue.mixin({
+//   props: {
+//     // Namespace for state
+//     name: {
+//       type: String
+//     }
+//   },
+//   data: {
+//     namespace: ''
+//   },
+//   created() {
+//     this.namespace = this.$parent.namespace + '/' + this.name
+//   },
+//   methods: {
+//     name(str) {
+//       return this.namespace + '/' + str
+//     }
+//   }
+// })
