@@ -1,10 +1,9 @@
 window.utils = {
 
   // Maps VUEX state to computed functions.
-  // refObj is a wrapper for a reference to the Vue component (eg. refObject.ref = COMPONENT).
   // state is an array or object specifying the state objects to capture.
   // other [optional] is an object containing other computed functions to add.
-  mapState(refObj, state, other) {
+  mapState(state, other) {
     var obj = {}
     
     // get state names (array style)
@@ -24,12 +23,10 @@ window.utils = {
     
       // create the function
       obj[funcNames[i]] = function() {
-        var store = refObj.ref.$store
-        var namespace = refObj.ref.namespace
-        if(typeof namespace === 'undefined')
-          return store.state[s]
-        else
-          return store.state[namespace][s]
+        var namespace = this.namespace
+        var store = window.utils.namespaceToStore(namespace)
+
+        return store[s]
       }
     }
     
@@ -73,6 +70,17 @@ window.utils = {
       window.components = {}
 
     window.components[componentName] = defs
+  },
+
+  // get the store module with the specified namespace
+  namespaceToStore(namespace) {
+    var store = window.$store.state
+    var path = namespace.split('/')
+
+    for(var i = 0; i < path.length; i++)
+      store = store[path[i]]
+
+    return store
   }
 
 }

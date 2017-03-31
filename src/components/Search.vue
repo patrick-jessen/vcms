@@ -6,15 +6,8 @@
 </template>
 
 <script>
-var componentRef = {};
 export default {
   props: {
-    // Namespace for state
-    namespace: {
-      type: String,
-      default: 'search'
-    },
-
     // Whether to indicate loading
     loading: {
       type: Boolean,
@@ -28,11 +21,8 @@ export default {
       text: ''
     }
   },
-  created() {
-    componentRef.ref = this
-  },
 
-  computed: window.utils.mapState(componentRef, ['placeholder', 'icon']),
+  computed: window.utils.mapState(['placeholder', 'icon']),
   
   methods: {
     onInput(e) {
@@ -44,7 +34,7 @@ export default {
     },
 
     select(e) {
-      this.$store.dispatch('select', this.namespace)
+      this.$store.dispatch('app/inspector/select', this.namespace)
       e.stopPropagation()
     }
   },

@@ -8,15 +8,8 @@
 </template>
 
 <script>
-var componentRef = {};
 export default {
   props: {
-    // Namespace for state
-    namespace: {
-      type: String,
-      default: 'itemList'
-    },
-
     title: {
       type: String,
       required: true
@@ -26,16 +19,13 @@ export default {
       required: true
     }
   },
-  created() {
-    componentRef.ref = this
-  },
   components: {
     Item: require('./Item.vue')
   },
-  computed: window.utils.mapState(componentRef, ['showEmpty']),
+  computed: window.utils.mapState(['showEmpty']),
   methods: {
     select(e) {
-      this.$store.dispatch('select', this.namespace)
+      this.$store.dispatch('app/inspector/select', this.namespace)
       e.stopPropagation()
     }
   }

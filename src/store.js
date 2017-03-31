@@ -44,7 +44,8 @@ const itemList = {
   }
 }
 
-export default new Vuex.Store({
+const inspector = {
+  namespaced: true,
   state: {
     selected: ''
   },
@@ -58,9 +59,23 @@ export default new Vuex.Store({
       commit('select', arg)
     }
   },
+}
+
+const app = {
+  namespaced: true,
   modules: {
-    search: search,
-    itemList: itemList
+    itemList,
+    search,
+    inspector
+  },
+}
+
+var store = new Vuex.Store({
+  modules: {
+    app
   }
 })
+
+window.$store = store
+export default store
 

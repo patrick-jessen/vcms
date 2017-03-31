@@ -1,15 +1,15 @@
 <template>
   <div id="app" @click='select'>
-    <Inspector></Inspector>
+    <Inspector name='inspector'></Inspector>
     <div class='main ui container'>
-      <Search @change='onSearch' :loading='isSearching'></Search>
+      <Search name='search' @change='onSearch' :loading='isSearching'></Search>
       <template v-if='searchQuery.length > 0'>
-        <ItemList title='Albums' :items='albums'></ItemList>
-        <ItemList title='Artists' :items='artists'></ItemList>
-        <ItemList title='Tracks' :items='tracks'></ItemList>
+        <ItemList name='itemList' title='Albums' :items='albums'></ItemList>
+        <ItemList name='itemList' title='Artists' :items='artists'></ItemList>
+        <ItemList name='itemList' title='Tracks' :items='tracks'></ItemList>
       </template>
-      <ItemList v-else title='Playlists' :items='playlists'></ItemList>
-      <ItemList title='Queue' :items='queue'></ItemList>
+      <ItemList name='itemList' v-else title='Playlists' :items='playlists'></ItemList>
+      <ItemList name='itemList' title='Queue' :items='queue'></ItemList>
     </div>
   </div>
 </template>
@@ -33,10 +33,13 @@ export default {
         {image: '', title: 'Some song', subTitle: 'Some artist'},
         {image: '', title: 'Some song', subTitle: 'Some artist'},
       ],
-      searchQuery: ''
+      searchQuery: '',
+      namespace: 'app'
     }
   },
   created() {
+    console.log(this)
+    this.namespace = 'app'
     componentRef.ref = this
   },
   methods: {

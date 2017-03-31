@@ -12,17 +12,11 @@
 </template>
 
 <script>
-var componentRef = {};
 export default {
-  created() {
-    componentRef.ref = this
-  },
-  computed: window.utils.mapState(componentRef, ['selected'], {
+  computed: window.utils.mapState(['selected'], {
     properties() {
-      var storeModule = this.$store.state[this.selected]
+      var storeModule = window.utils.namespaceToStore(this.selected)
       var compDef = window.components[storeModule.type]
-
-      console.log('props', storeModule, compDef)
 
       var inspectorArr = []
       for(var i = 0; i < Object.keys(compDef).length; i++) {
