@@ -66,6 +66,13 @@ window.utils = {
         }
       })
     }
+  },
+
+  createTemplate(componentName, defs) {
+    if(!window.components)
+      window.components = {}
+
+    window.components[componentName] = defs
   }
 
 }

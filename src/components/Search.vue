@@ -52,10 +52,7 @@ export default {
 
 
 // Create component CMS definition
-if(!window.components)
-  window.components = {}
-
-window.components.Search = [
+window.utils.createTemplate('Search', [
   {
     name: 'placeholder',
     type: 'string'
@@ -67,5 +64,11 @@ window.components.Search = [
       'search', 'find'
     ]
   }
-]
+])
 </script>
+
+<style scoped>
+.ui.icon.input {
+  width: 100%
+}
+</style>

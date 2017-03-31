@@ -4,7 +4,7 @@
   <template v-else>
     <h1 v-if='selected'>{{selected}}</h1>
 
-    <Property v-for='p in properties' :property='p' @change='propertyChange(p, $event)'></Property>
+    <Property v-for='(p, idx) in properties' :property='p' @change='propertyChange(p, $event)' :key='idx'></Property>
   </template>
 </div>
 
@@ -20,6 +20,8 @@ export default {
     properties() {
       var storeModule = this.$store.state[this.selected]
       var compDef = window.components[storeModule.type]
+
+      console.log('props', storeModule, compDef)
 
       var inspectorArr = []
       for(var i = 0; i < Object.keys(compDef).length; i++) {

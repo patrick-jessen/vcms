@@ -3,9 +3,13 @@
     <Inspector></Inspector>
     <div class='main ui container'>
       <Search @change='onSearch' :loading='isSearching'></Search>
-      <ItemList title='Albums' :items='albums'></ItemList>
-      <ItemList title='Artists' :items='artists'></ItemList>
-      <ItemList title='Tracks' :items='tracks'></ItemList>
+      <template v-if='searchQuery.length > 0'>
+        <ItemList title='Albums' :items='albums'></ItemList>
+        <ItemList title='Artists' :items='artists'></ItemList>
+        <ItemList title='Tracks' :items='tracks'></ItemList>
+      </template>
+      <ItemList v-else title='Playlists' :items='playlists'></ItemList>
+      <ItemList title='Queue' :items='queue'></ItemList>
     </div>
   </div>
 </template>
@@ -18,7 +22,18 @@ export default {
       isSearching : false,
       albums: [],
       artists: [],
-      tracks: []
+      tracks: [],
+      playlists: [
+        {image: '', title: 'Party', subTitle: '22 tracks'},
+        {image: '', title: 'Chill mix', subTitle: '13 tracks'},
+        {image: '', title: 'Meditational', subTitle: '5 tracks'}
+      ],
+      queue: [
+        {image: '', title: 'Some song', subTitle: 'Some artist'},
+        {image: '', title: 'Some song', subTitle: 'Some artist'},
+        {image: '', title: 'Some song', subTitle: 'Some artist'},
+      ],
+      searchQuery: ''
     }
   },
   created() {
@@ -26,13 +41,21 @@ export default {
   },
   methods: {
 
-    onSearch: window.utils.createThrottle((q) => {
+    onSearch(q) {
+      this.searchQuery = q
+      if(q) {
+        this.isSearching = true
+        this.searchFunc(q)
+      }
+      else
+        this.isSearching = false
+    },
+    
+    searchFunc: window.utils.createThrottle((q) => {
       if(!q)
         return
 
       let self = componentRef.ref
-
-      self.isSearching = true
       var req = window.spotify.search(q, ['album','artist','track'], {limit:3})
 
       req.then((r) => {
@@ -132,5 +155,10 @@ export default {
 <style>
 #app {
   height: 100%;
+}
+.ui.container {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid gray;
 }
 </style>

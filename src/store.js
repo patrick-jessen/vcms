@@ -26,6 +26,24 @@ const search = {
   }
 }
 
+const itemList = {
+  namespaced: true,
+  state: {
+    type: 'ItemList',
+    showEmpty: false
+  },
+  mutations: {
+    editShowEmpty(state, arg) {
+      state.showEmpty = arg
+    }
+  },
+  actions: {
+    showEmpty({commit}, arg) {
+      commit('editShowEmpty', arg)
+    }
+  }
+}
+
 export default new Vuex.Store({
   state: {
     selected: ''
@@ -41,7 +59,8 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    search: search
+    search: search,
+    itemList: itemList
   }
 })
 
