@@ -25,7 +25,7 @@ export default {
   computed: window.utils.mapState(['showEmpty']),
   methods: {
     select(e) {
-      this.$store.dispatch('app/inspector/select', this.namespace)
+      window.$store.commit('app/inspector/selected', this.namespace)
       e.stopPropagation()
     }
   }

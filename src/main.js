@@ -1,7 +1,7 @@
-import './utils.js'
+import './utils'
+import './store'
 import Vue from 'vue'
 import App from './App.vue'
-import store from './store'
 
 var Spotify = require('spotify-web-api-js');
 window.spotify = new Spotify();
@@ -26,7 +26,6 @@ Vue.mixin({
 })
 
 window.vue = new Vue({
-  store: store,
   el: '#app',
   render: h => h(App),
 })

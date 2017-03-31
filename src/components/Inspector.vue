@@ -17,6 +17,8 @@ export default {
     properties() {
       var storeModule = window.utils.namespaceToStore(this.selected)
       var compDef = window.components[storeModule.type]
+      if(!compDef)
+        return []
 
       var inspectorArr = []
       for(var i = 0; i < Object.keys(compDef).length; i++) {
@@ -37,7 +39,7 @@ export default {
       e.stopPropagation()
     },
     propertyChange(p, v) {
-      this.$store.dispatch(this.selected + '/' + p.name, v)
+      window.$store.commit(this.selected + '/' + p.name, v)
     }
 
   },

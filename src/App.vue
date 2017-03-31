@@ -38,7 +38,6 @@ export default {
     }
   },
   created() {
-    console.log(this)
     this.namespace = 'app'
     componentRef.ref = this
   },
@@ -142,7 +141,7 @@ export default {
     }, 2000),
 
     select(e) {
-      this.$store.dispatch('select', this.namespace)
+      window.$store.commit('app/inspector/selected', this.namespace)
       e.stopPropagation()
     },
     

@@ -81,6 +81,26 @@ window.utils = {
       store = store[path[i]]
 
     return store
+  },
+
+
+  createStoreModule(state) {
+    var keys = Object.keys(state)
+    var mutations = {}
+
+    for(var i = 0; i < keys.length; i++) {
+      let key = keys[i]
+
+      mutations[key] = (state, arg) => {
+        state[key] = arg
+      }
+    }
+
+    return {
+      namespaced: true,
+      state: state,
+      mutations: mutations
+    }
   }
 
 }
