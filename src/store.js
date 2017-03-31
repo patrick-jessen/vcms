@@ -17,10 +17,10 @@ const search = {
     }
   },
   actions: {
-    editPlaceholder({commit}, arg) {
+    placeholder({commit}, arg) {
       commit('editPlaceholder', arg)
     },
-    editIcon({commit}, arg) {
+    icon({commit}, arg) {
       commit('editIcon', arg)
     }
   }

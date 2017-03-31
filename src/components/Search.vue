@@ -32,7 +32,7 @@ export default {
     componentRef.ref = this
   },
 
-  computed: window.mapState(componentRef, ['placeholder', 'icon']),
+  computed: window.utils.mapState(componentRef, ['placeholder', 'icon']),
   
   methods: {
     onInput(e) {
@@ -47,7 +47,7 @@ export default {
       this.$store.dispatch('select', this.namespace)
       e.stopPropagation()
     }
-  }
+  },
 }
 
 
@@ -55,15 +55,17 @@ export default {
 if(!window.components)
   window.components = {}
 
-window.components.Search = {
-  placeholder: {
+window.components.Search = [
+  {
+    name: 'placeholder',
     type: 'string'
   },
-  icon: {
+  {
+    name: 'icon',
     type: 'select',
     options: [
-      'search', 'comment', 'find'
+      'search', 'find'
     ]
   }
-}
+]
 </script>

@@ -1,77 +1,71 @@
-window.mapState = function(refObj, state, other) {
-  var obj = {}
-  
-  // get state names (array style)
-  var funcNames = state
-  var stateNames = state
+window.utils = {
 
-  // get state names (object style)
-  if(!Array.isArray(state)) {
-    funcNames = Object.keys(state)
-    stateNames = Object.values(state)
-  }
-  
-  // create function for obtaining each state object
-  for(var i = 0; i < funcNames.length; i++) {   
+  // Maps VUEX state to computed functions.
+  // refObj is a wrapper for a reference to the Vue component (eg. refObject.ref = COMPONENT).
+  // state is an array or object specifying the state objects to capture.
+  // other [optional] is an object containing other computed functions to add.
+  mapState(refObj, state, other) {
+    var obj = {}
     
-    let s = stateNames[i] // capture state name
-  
-    // create the function
-    obj[funcNames[i]] = function() {
-      var store = refObj.ref.$store
-      var namespace = refObj.ref.namespace
-      if(typeof namespace === 'undefined')
-        return store.state[s]
-      else
-        return store.state[namespace][s]
+    // get state names (array style)
+    var funcNames = state
+    var stateNames = state
+
+    // get state names (object style)
+    if(!Array.isArray(state)) {
+      funcNames = Object.keys(state)
+      stateNames = Object.values(state)
+    }
+    
+    // create function for obtaining each state object
+    for(var i = 0; i < funcNames.length; i++) {   
+      
+      let s = stateNames[i] // capture state name
+    
+      // create the function
+      obj[funcNames[i]] = function() {
+        var store = refObj.ref.$store
+        var namespace = refObj.ref.namespace
+        if(typeof namespace === 'undefined')
+          return store.state[s]
+        else
+          return store.state[namespace][s]
+      }
+    }
+    
+    // merge other functions
+    Object.assign(obj, other)
+    return obj
+  },
+
+  createThrottle(func, minInt, context) {
+    var time = 0
+    var timeout = null
+
+    return function(...args) {
+      clearTimeout(timeout)
+
+      return new Promise((res, rej) => {
+
+        // are we allowed to run?
+        if(Date.now() - time >= minInt) {
+          func.call(context, ...args)
+          time = Date.now()
+          res()
+        }
+        // try again later
+        else {
+          timeout = setTimeout(() => {
+            // are we allowed to run now?
+            if(Date.now() - time >= minInt) {
+              func.call(context, ...args)
+              time = Date.now()
+              res()
+            }
+          }, (time + minInt) - Date.now() + 10)
+        }
+      })
     }
   }
-  
-  Object.assign(obj, other)
-  return obj
+
 }
-
-window.mapActions = function(component, actions) {
-  var obj = {}
-  
-  var funcNames = actions
-  var actionNames = actions
-  
-  if(!Array.isArray(actions)) {
-    funcNames = Object.keys(actions)
-    actionNames = Object.values(actions)
-  }
-  
-  for(var i = 0; i < funcNames.length; i++) {   
-    let s = actionNames[i]
-   
-    obj[funcNames[i]] = function(arg) {
-      component.$store.dispatch(component.namespace + '/' + s, arg)
-    }
-  }
-  
-  return obj
-}
-
-//var computed = mapState(component, ['placeholder', 'icon'])
-// var computed = mapState(component, {
-//   test : 'placeholder', 
-//   icon: 'icon'
-// })
-// var actions = mapActions(component, {
-//   setPlaceholder: 'placeholder',
-//   setIcon: 'setIcon'
-// })
-
-// setTimeout(() => {
-//   actions.setPlaceholder('top kek')
-//   actions.setIcon('top kek')
-  
-//   console.log(computed.test())
-//   console.log(computed.icon())
-// }, 200)
-
-// Test dispatcher
-// console.log('before dispatch', store.state.search.placeholder)
-// dispatch('search/placeholder', 'lel')
-// console.log('after dispatch', store.state.search.placeholder)

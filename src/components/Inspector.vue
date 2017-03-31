@@ -16,30 +16,20 @@ export default {
   created() {
     componentRef.ref = this
   },
-  computed: window.mapState(componentRef, ['selected'], {
+  computed: window.utils.mapState(componentRef, ['selected'], {
     properties() {
-      console.log(this.selected)
-
       var storeModule = this.$store.state[this.selected]
+      var compDef = window.components[storeModule.type]
 
-      var inspectorArr = [
-        {
-          name: 'Placeholder',
-          type: 'string',
-          value: 'Search...'
-        },
-        {
-          name: 'Icon',
-          type: 'select',
-          value: 'search',
-          options: ['comment','search']
-        },
-        {
-          name: 'ShowProgress',
-          type: 'toggle',
-          value: true,
-        }
-      ]
+      var inspectorArr = []
+      for(var i = 0; i < Object.keys(compDef).length; i++) {
+        
+        var obj = Object.assign({}, compDef[i])
+
+        var name = compDef[i].name
+        obj.value = storeModule[name]
+        inspectorArr.push(obj)
+      }
 
       return inspectorArr
     }
@@ -50,9 +40,7 @@ export default {
       e.stopPropagation()
     },
     propertyChange(p, v) {
-      this.$store.dispatch(this.selected + '/edit' + p.name, v)
-
-      console.log(this.selected, p, v)
+      this.$store.dispatch(this.selected + '/' + p.name, v)
     }
 
   },
