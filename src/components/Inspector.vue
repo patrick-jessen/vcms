@@ -4,7 +4,7 @@
   <template v-else>
     <h1 v-if='selected'>{{selected}}</h1>
 
-    <Property v-for='p in properties' :property='p'></Property>
+    <Property v-for='p in properties' :property='p' @change='propertyChange(p, $event)'></Property>
   </template>
 </div>
 
@@ -24,18 +24,18 @@ export default {
 
       var inspectorArr = [
         {
-          name: 'placeholder',
+          name: 'Placeholder',
           type: 'string',
           value: 'Search...'
         },
         {
-          name: 'icon',
+          name: 'Icon',
           type: 'select',
           value: 'search',
           options: ['comment','search']
         },
         {
-          name: 'showProgress',
+          name: 'ShowProgress',
           type: 'toggle',
           value: true,
         }
@@ -49,6 +49,11 @@ export default {
     select(e) {
       e.stopPropagation()
     },
+    propertyChange(p, v) {
+      this.$store.dispatch(this.selected + '/edit' + p.name, v)
+
+      console.log(this.selected, p, v)
+    }
 
   },
   components: {
