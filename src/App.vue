@@ -10,6 +10,7 @@
       </template>
       <ItemList name='playlists' v-else title='Playlists' :items='playlists'></ItemList>
       <ItemList name='queue' title='Queue' :items='queue'></ItemList>
+      <Controls name='controls'></Controls>
     </div>
   </div>
 </template>
@@ -149,7 +150,8 @@ export default {
   components: {
     Search: require('./components/Search.vue'),
     Inspector: require('./components/Inspector.vue'),
-    ItemList: require('./components/ItemList.vue')
+    ItemList: require('./components/ItemList.vue'),
+    Controls: require('./components/Controls.vue'),
   },
 }
 </script>

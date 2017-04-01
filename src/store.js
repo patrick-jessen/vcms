@@ -27,6 +27,10 @@ const queue = window.utils.createStoreModule({
   type: 'ItemList',
   showEmpty: false
 })
+const controls = window.utils.createStoreModule({
+  type: 'Controls',
+  showNowPlaying: true
+})
 
 const inspector = window.utils.createStoreModule({
   selected: ''
@@ -41,7 +45,8 @@ const app = {
     artists,
     tracks,
     playlists,
-    queue
+    queue,
+    controls
   },
 }
 

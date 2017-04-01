@@ -16,6 +16,9 @@ export default {
   computed: window.utils.mapState(['selected'], {
     properties() {
       var storeModule = window.utils.namespaceToStore(this.selected)
+      if(!storeModule)
+        return []
+
       var compDef = window.components[storeModule.type]
       if(!compDef)
         return []
