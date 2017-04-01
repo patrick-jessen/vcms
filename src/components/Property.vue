@@ -1,6 +1,6 @@
 <template>
 <div class='ui item'>
-  <div class='ui small header'>{{property.name}}</div>
+  <div class='ui small header'>{{name}}</div>
   <div :class='wrapperClass'>
     <component 
       :is='type'
@@ -69,6 +69,15 @@ export default {
         case 'toggle':
           return ''//ui slider checkbox'
       }
+    },
+    name() {
+      return this.property.name
+        // insert a space before all caps
+        .replace(/([A-Z])/g, ' $1')
+        // convert to lowercase
+        .toLowerCase()
+        // uppercase the first character
+        .replace(/^./, function(str){ return str.toUpperCase(); })
     }
   },
   methods: {
