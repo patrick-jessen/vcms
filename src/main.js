@@ -14,7 +14,8 @@ Vue.mixin({
   },
   data() {
     return {
-      namespace: ''
+      namespace: '',
+      hovered: false
     }
   },
   created() {
@@ -23,12 +24,24 @@ Vue.mixin({
     else
       this.namespace = ''
   },
+  computed: {
+    inspectClass() {
+      var isSelected = window.$store.state.app.inspector.selected === this.namespace
+      return {
+        'inspect' : isSelected,
+        'inspect-hover': this.hovered && !isSelected
+      }
+    }
+  },
   methods: {
     // selects the component for inspection
     select(e) {
       window.$store.commit('app/inspector/selected', this.namespace)
       e.stopPropagation()
       e.preventDefault()
+    },
+    hover(v) {
+      this.hovered = v
     }
   }
 })

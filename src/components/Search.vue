@@ -1,8 +1,13 @@
 <template>
+<div  
+  @click='select'
+  @mouseenter='hover(true)'
+  @mouseleave='hover(false)'
+  :class='inspectClass'>
+
 <!-- Wrapper -->
 <div class='ui icon input' 
-  :class='{loading}' 
-  @click='select'>
+  :class='{loading}'>
 
   <!-- Text input -->
   <input class='search icon' 
@@ -14,6 +19,7 @@
   <i class='icon' 
     :class='icon'>
   </i>
+</div>
 </div>
 </template>
 

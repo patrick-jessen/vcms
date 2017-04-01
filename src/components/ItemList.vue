@@ -1,9 +1,16 @@
 <template>
-<div v-if='showEmpty || items.length' @click='select'>
+<div  
+  @click='select'
+  @mouseenter='hover(true)'
+  @mouseleave='hover(false)'
+  :class='inspectClass'>
+
+<div v-if='showEmpty || items.length'>
   <div class='ui dividing header'>{{title}}</div>
   <div class='ui link items'>
     <Item v-for='(i, idx) in items' v-bind='i' :key='idx'></Item>
   </div>
+</div>
 </div>
 </template>
 
