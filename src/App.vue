@@ -2,6 +2,9 @@
   <div id="app" @click='select'>
     <Inspector name='inspector'></Inspector>
     <div class='main ui container'>
+
+      <Comp :name='i' v-for='(c,i) in children' :data='c'></Comp>
+      
       <Search name='search' @change='onSearch' :loading='isSearching'></Search>
       <template v-if='searchQuery.length > 0'>
         <ItemList name='albums' title='Albums' :items='albums'></ItemList>
@@ -18,6 +21,11 @@
 <script>
 var componentRef = {};
 export default {
+  _store: [{
+    name: 'children',
+    type: 'children',
+    options: ['Search', 'ItemList']
+  }],
   data () {
     return {
       isSearching : false,
@@ -152,6 +160,7 @@ export default {
     Inspector: require('./components/Inspector.vue'),
     ItemList: require('./components/ItemList.vue'),
     Controls: require('./components/Controls.vue'),
+    Comp: require('./components/Comp.vue')
   },
 }
 </script>

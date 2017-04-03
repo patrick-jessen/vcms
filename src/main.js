@@ -34,7 +34,7 @@ Vue.mixin({
   }
 })
 
-import Vcms from './plugin.js'
+import Vcms from './vcms.js'
 Vue.use(Vcms)
 
 window.vue = new Vue({

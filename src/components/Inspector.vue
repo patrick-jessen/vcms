@@ -44,6 +44,7 @@ export default {
       e.stopPropagation()
     },
     propertyChange(p, v) {
+      console.log("HERE2")
       window.utils.namespaceToStore(this.selected)[p.name] = v
     }
 

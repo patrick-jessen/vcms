@@ -1,11 +1,11 @@
+window.components = {}
+
 export default function plugin(Vue) {
   Vue.mixin({
-    props: {
-      name: {type: String}
-    },
+    props: ['name'],
     data() {
       return {
-        namespace: ''
+        namespace: '',
       }
     },
     beforeCreate() {
@@ -23,6 +23,8 @@ export default function plugin(Vue) {
 function StoreAccessor(property) {
   return {
     get() {
+      if(!this.namespace) return
+
       var path = this.namespace.split('/') 
       var store = this.$root.$data._store;
 
@@ -36,6 +38,8 @@ function StoreAccessor(property) {
     },
 
     set(value) {
+      if(!this.namespace) return
+
       var path = this.namespace.split('/') 
       var length = path.length;
       var store = this.$root.$data._store;
@@ -52,6 +56,8 @@ function StoreAccessor(property) {
 }
 
 function registerStore(vm) {
+  if(vm == vm.$root) return
+
   // 1.) Check for a store "option" on the component.
   // 2.) Check for a store "object" on the root vue model.
   if (typeof vm.$options._store !== 'undefined' && typeof vm.$root.$data._store !== 'undefined') {
@@ -62,7 +68,7 @@ function registerStore(vm) {
     }
 
     var name = vm.$options._componentTag
-    window.utils.createTemplate(name, vm.$options._store)
+    components[name] = vm.$options._store
 
     // Loop through the elements of the "store" option.
     vm.$options._store.forEach(property => {

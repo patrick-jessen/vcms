@@ -29,6 +29,25 @@ export default {
     controls: {
       type: 'Controls',
       showNowPlaying: true
-    }
+    },
+
+    children: [
+      {
+        type: 'Search',
+        placeholder: 'WOW',
+        icon: 'comment'
+      },
+      {
+        type: 'Search',
+        placeholder: 'OWO',
+        icon: 'facebook'
+      },
+      {
+        type: 'ItemList',
+        showEmpty: false,
+        title: 'Playlists',
+        items: [{image:'',title:'damn'}]
+      },
+    ]
   }
 }

@@ -32,14 +32,6 @@ window.utils = {
     }
   },
 
-  // create CMS template for a component
-  createTemplate(componentName, defs) {
-    if(!window.components)
-      window.components = {}
-
-    window.components[componentName] = defs
-  },
-
   // get the store module with the specified namespace
   namespaceToStore(namespace) {
     var store = window.vue.$data._store
