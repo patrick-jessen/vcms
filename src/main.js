@@ -7,22 +7,10 @@ var Spotify = require('spotify-web-api-js');
 window.spotify = new Spotify();
 
 Vue.mixin({
-  props: {
-    name: {
-      type: String
-    }
-  },
   data() {
     return {
-      namespace: '',
       hovered: false
     }
-  },
-  created() {
-    if(this.$parent)
-      this.namespace = this.$parent.namespace + '/' + this.name
-    else
-      this.namespace = ''
   },
   computed: {
     inspectClass() {

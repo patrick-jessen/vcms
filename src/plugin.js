@@ -1,7 +1,21 @@
 export default function plugin(Vue) {
   Vue.mixin({
+    props: {
+      name: {type: String}
+    },
+    data() {
+      return {
+        namespace: ''
+      }
+    },
     beforeCreate() {
       registerStore(this)
+    },
+    created() {
+      if(this.$parent)
+        this.namespace = this.$parent.namespace + '/' + this.name
+      else
+        this.namespace = this.name
     },
   })
 }
@@ -41,35 +55,18 @@ function registerStore(vm) {
   // 1.) Check for a store "option" on the component.
   // 2.) Check for a store "object" on the root vue model.
   if (typeof vm.$options._store !== 'undefined' && typeof vm.$root.$data._store !== 'undefined') {
+
     // Initialize the computed option if it hasn't already been initialized.
     if (typeof vm.$options.computed === 'undefined') {
       vm.$options.computed = {};
     }
 
-    // Check if the store option is a non-empty array.
-    if (Array.isArray(vm.$options._store)) {
-      // Loop through the elements of the "store" option.
-      vm.$options._store.forEach(property => {
-        // Create a computed property using our StoreAccessor helper class.
-        vm.$options.computed[property] = new StoreAccessor(property);
-      });
-    } else {
-      // Loop through the store options.
-      for (var key in vm.$options._store) {
-        if (typeof vm.$options._store[key] == 'function') {
-          // Handle a function
-          vm.$options.computed[key] = new StoreAccessor(vm.$options._store[key]());
-        } else if (typeof vm.$options.store[key] == 'string') {
-          // Handle a string
-          vm.$options.computed[key] = new StoreAccessor(vm.$options._store[key]);
-        }
-      }
-    }
+    // Loop through the elements of the "store" option.
+    vm.$options._store.forEach(property => {
+      // Create a computed property using our StoreAccessor helper class.
+      vm.$options.computed[property] = new StoreAccessor(property);
+    });
   }
-}
-
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(plugin);
 }
 
 //export default plugin;
