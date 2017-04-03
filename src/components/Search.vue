@@ -5,6 +5,8 @@
   @mouseleave='hover(false)'
   :class='inspectClass'>
 
+  {{lel}}
+
 <!-- Wrapper -->
 <div class='ui icon input' 
   :class='{loading}'>
@@ -25,6 +27,7 @@
 
 <script>
 export default {
+  _store: ['lel'],
   props: {
     // Whether to indicate loading
     loading: {

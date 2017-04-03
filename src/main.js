@@ -46,8 +46,24 @@ Vue.mixin({
   }
 })
 
+import Vcms from './plugin.js'
+Vue.use(Vcms)
+
+
+var testData = {
+  app: {
+    search: {
+      lel: 42
+
+    }
+  }
+}
+
 window.vue = new Vue({
   el: '#app',
   render: h => h(App),
+  data: {
+    _store: testData  
+  }
 })
 
