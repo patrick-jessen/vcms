@@ -29,10 +29,10 @@ export default {
   components: {
     Item: require('./Item.vue')
   },
-  computed: window.utils.mapState(['showEmpty']),
+  _store: ['showEmpty'],
   methods: {
     select(e) {
-      window.$store.commit('app/inspector/selected', this.namespace)
+      this.$root.$data._store.app.inspector.selected = this.namespace
       e.stopPropagation()
     }
   }

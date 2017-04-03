@@ -5,8 +5,6 @@
   @mouseleave='hover(false)'
   :class='inspectClass'>
 
-  {{lel}}
-
 <!-- Wrapper -->
 <div class='ui icon input' 
   :class='{loading}'>
@@ -27,7 +25,7 @@
 
 <script>
 export default {
-  _store: ['lel'],
+  _store: ['placeholder', 'icon'],
   props: {
     // Whether to indicate loading
     loading: {
@@ -41,10 +39,6 @@ export default {
       text: ''
     }
   },
-  computed: window.utils.mapState([
-    'placeholder', 
-    'icon'
-  ]),
   methods: {
     onInput(e) {
       // Update local state

@@ -1,40 +1,5 @@
 window.utils = {
 
-  // Maps VUEX state to computed functions.
-  // state is an array or object specifying the state objects to capture.
-  // other [optional] is an object containing other computed functions to add.
-  mapState(state, other) {
-    var obj = {}
-    
-    // get state names (array style)
-    var funcNames = state
-    var stateNames = state
-
-    // get state names (object style)
-    if(!Array.isArray(state)) {
-      funcNames = Object.keys(state)
-      stateNames = Object.values(state)
-    }
-    
-    // create function for obtaining each state object
-    for(var i = 0; i < funcNames.length; i++) {   
-      
-      let s = stateNames[i] // capture state name
-    
-      // create the function
-      obj[funcNames[i]] = function() {
-        var namespace = this.namespace
-        var store = window.utils.namespaceToStore(namespace)
-
-        return store[s]
-      }
-    }
-    
-    // merge other functions
-    Object.assign(obj, other)
-    return obj
-  },
-
   // create a throtteled version of a function.
   // returns a promise.
   createThrottle(func, minInt, context) {
@@ -76,8 +41,7 @@ window.utils = {
   },
 
   // get the store module with the specified namespace
-  namespaceToStore(namespace) {
-    var store = window.$store.state
+  namespaceToStore(namespace, store) {
     var path = namespace.split('/')
 
     for(var i = 0; i < path.length; i++)
@@ -85,25 +49,4 @@ window.utils = {
 
     return store
   },
-
-  // create a namespaced VUEX store module with naive mutators
-  createStoreModule(state) {
-    var keys = Object.keys(state)
-    var mutations = {}
-
-    for(var i = 0; i < keys.length; i++) {
-      let key = keys[i]
-
-      mutations[key] = (state, arg) => {
-        state[key] = arg
-      }
-    }
-
-    return {
-      namespaced: true,
-      state: state,
-      mutations: mutations
-    }
-  }
-
 }

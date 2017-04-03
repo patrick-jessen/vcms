@@ -1,5 +1,5 @@
 import './utils'
-import './store'
+import Store from './store'
 import Vue from 'vue'
 import App from './App.vue'
 
@@ -14,7 +14,7 @@ Vue.mixin({
   },
   computed: {
     inspectClass() {
-      var isSelected = window.$store.state.app.inspector.selected === this.namespace
+      var isSelected = this.$root.$data._store.app.inspector.selected === this.namespace
       return {
         'inspect' : isSelected,
         'inspect-hover': this.hovered && !isSelected
@@ -24,7 +24,7 @@ Vue.mixin({
   methods: {
     // selects the component for inspection
     select(e) {
-      window.$store.commit('app/inspector/selected', this.namespace)
+      this.$root.$data._store.app.inspector.selected = this.namespace
       e.stopPropagation()
       e.preventDefault()
     },
@@ -37,21 +37,11 @@ Vue.mixin({
 import Vcms from './plugin.js'
 Vue.use(Vcms)
 
-
-var testData = {
-  app: {
-    search: {
-      lel: 42
-
-    }
-  }
-}
-
 window.vue = new Vue({
   el: '#app',
   render: h => h(App),
   data: {
-    _store: testData  
+    _store: Store  
   }
 })
 

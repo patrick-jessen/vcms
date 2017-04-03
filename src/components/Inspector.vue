@@ -13,9 +13,11 @@
 
 <script>
 export default {
-  computed: window.utils.mapState(['selected'], {
+  _store: ['selected'],
+  computed: {
     properties() {
-      var storeModule = window.utils.namespaceToStore(this.selected)
+      var store = this.$root.$data._store
+      var storeModule = window.utils.namespaceToStore(this.selected, store)
       if(!storeModule)
         return []
 
@@ -35,7 +37,7 @@ export default {
 
       return inspectorArr
     }
-  }),
+  },
 
   methods: {
     // override default component select
@@ -43,7 +45,7 @@ export default {
       e.stopPropagation()
     },
     propertyChange(p, v) {
-      window.$store.commit(this.selected + '/' + p.name, v)
+      window.utils.namespaceToStore(this.selected, this.$root.$data._store)[p.name] = v
     }
 
   },

@@ -19,6 +19,7 @@
 
 <script>
 export default {
+  _store: ['showNowPlaying'],
   data() {
     return {
       nowPlaying: {
@@ -28,9 +29,6 @@ export default {
       }
     }
   },
-  computed: window.utils.mapState([
-    'showNowPlaying'
-  ]),
   components: {
     Item: require('./Item.vue')
   }
