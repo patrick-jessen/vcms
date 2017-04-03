@@ -25,45 +25,35 @@
 
 <script>
 export default {
-  _store: ['placeholder', 'icon'],
+  _store: [
+    {
+      name: 'placeholder',
+      type: 'string'
+    },
+    {
+      name: 'icon',
+      type: 'select',
+      options: ['search', 'find']
+    }
+  ],
   props: {
-    // Whether to indicate loading
-    loading: {
+    loading: { // Whether to indicate loading
       type: Boolean,
       default: false
     }
   },
   data() {
     return {
-      // Search string
-      text: ''
+      text: '' // Search string
     }
   },
   methods: {
     onInput(e) {
-      // Update local state
-      this.text = e.target.value;
-
-      // Emit change to parent
-      this.$emit('change', this.text)
+      this.text = e.target.value;     // Update local state
+      this.$emit('change', this.text) // Emit change to parent
     },
   },
 }
-
-// Create component CMS definition
-window.utils.createTemplate('Search', [
-  {
-    name: 'placeholder',
-    type: 'string'
-  },
-  {
-    name: 'icon',
-    type: 'select',
-    options: [
-      'search', 'find'
-    ]
-  }
-])
 </script>
 
 <style scoped>

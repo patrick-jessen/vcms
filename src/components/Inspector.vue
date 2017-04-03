@@ -13,11 +13,10 @@
 
 <script>
 export default {
-  _store: ['selected'],
+  _store: [{name:'selected'}],
   computed: {
     properties() {
-      var store = this.$root.$data._store
-      var storeModule = window.utils.namespaceToStore(this.selected, store)
+      var storeModule = window.utils.namespaceToStore(this.selected)
       if(!storeModule)
         return []
 
@@ -45,7 +44,7 @@ export default {
       e.stopPropagation()
     },
     propertyChange(p, v) {
-      window.utils.namespaceToStore(this.selected, this.$root.$data._store)[p.name] = v
+      window.utils.namespaceToStore(this.selected)[p.name] = v
     }
 
   },

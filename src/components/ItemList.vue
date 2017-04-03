@@ -29,7 +29,10 @@ export default {
   components: {
     Item: require('./Item.vue')
   },
-  _store: ['showEmpty'],
+  _store: [{
+    name: 'showEmpty',
+    type: 'toggle'
+  }],
   methods: {
     select(e) {
       this.$root.$data._store.app.inspector.selected = this.namespace
@@ -37,14 +40,6 @@ export default {
     }
   }
 }
-
-// Create component CMS definition
-window.utils.createTemplate('ItemList', [
-  {
-    name: 'showEmpty',
-    type: 'toggle'
-  },
-])
 </script>
 
 <style scoped>

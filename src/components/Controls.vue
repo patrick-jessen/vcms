@@ -19,7 +19,10 @@
 
 <script>
 export default {
-  _store: ['showNowPlaying'],
+  _store: [{
+    name: 'showNowPlaying',
+    type: 'toggle',
+  }],
   data() {
     return {
       nowPlaying: {
@@ -33,11 +36,4 @@ export default {
     Item: require('./Item.vue')
   }
 }
-
-window.utils.createTemplate('Controls', [
-  {
-    name: 'showNowPlaying',
-    type: 'toggle',
-  }
-])
 </script>

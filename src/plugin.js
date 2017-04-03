@@ -61,10 +61,12 @@ function registerStore(vm) {
       vm.$options.computed = {};
     }
 
+    var name = vm.$options._componentTag
+    window.utils.createTemplate(name, vm.$options._store)
+
     // Loop through the elements of the "store" option.
     vm.$options._store.forEach(property => {
-      // Create a computed property using our StoreAccessor helper class.
-      vm.$options.computed[property] = new StoreAccessor(property);
+        vm.$options.computed[property.name] = new StoreAccessor(property.name);
     });
   }
 }

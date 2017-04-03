@@ -41,7 +41,8 @@ window.utils = {
   },
 
   // get the store module with the specified namespace
-  namespaceToStore(namespace, store) {
+  namespaceToStore(namespace) {
+    var store = window.vue.$data._store
     var path = namespace.split('/')
 
     for(var i = 0; i < path.length; i++)
