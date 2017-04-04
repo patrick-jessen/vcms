@@ -1,5 +1,5 @@
 <template>
-<div class='item'>
+<div class='item' @mouseenter='hovered=true' @mouseleave='hovered=false'>
   <div class='ui image'>
     <img :style='imageStyle'>
   </div>
@@ -7,6 +7,11 @@
     <label class='ui small header'>{{title}}</label>
     <div class="meta">
       <span>{{subTitle}}</span>
+      <div class='ui right floated' v-show='hovered'>
+        <i class="play small icon"></i>
+        <i class="wait small icon"></i>
+        <i class="plus small icon"></i>
+      </div>
     </div>
   </div>
 </div>
@@ -15,6 +20,11 @@
 <script>
 export default {
   props: ['image', 'title', 'subTitle'],
+  data() {
+    return {
+      hovered: false
+    }
+  },
   computed: {
     imageStyle() {
       return {'background-image':'url('+this.image+')'}
@@ -38,5 +48,11 @@ export default {
 }
 .ui.items>.item>.ui.image+.content {
   padding-left: 1em;
+}
+.ui.right.floated>i{
+  color: darkgray;
+}
+.ui.right.floated>i:hover{
+  color: dimgray;
 }
 </style>
