@@ -2,16 +2,24 @@
   <div id="app" @click='select'>
     <Inspector name='inspector'></Inspector>
     <div class='main ui container'>
-      <Child name='search' @change='onSearch' :loading='isSearching'/>
+
+      <!-- Search -->
+      <Child name='search' :props='{loading:isSearching}' @change='onSearch'/>
+
+      <!-- Search results-->
       <template v-if='searchQuery.length > 0'>
         <Child name='albums'  :props='{items:albums}'/>
         <Child name='artists' :props='{items:artists}'/>
         <Child name='tracks'  :props='{items:tracks}'/>
       </template>
+
+      <!-- Content when not searching -->
       <template v-else>
         <Child name='playlists' :props='{items:playlists}'/>
+        <Child name='queue' :props='{items:queue}'/>
       </template>
-      <Child name='queue' :props='{items:queue}'/>
+
+      <!-- Playback controls -->
       <Child name='controls'/>
     </div>
   </div>

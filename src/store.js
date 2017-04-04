@@ -19,19 +19,21 @@ export default {
       },
       controls: {
         $type: 'Controls',
-        title: 'Queue',
         showNowPlaying: true
       },
       albums: {
         $type: 'ItemList',
+        title: 'Albums',
         showEmpty: false
       },
       artists: {
         $type: 'ItemList',
+        title: 'Artists',
         showEmpty: false
       },
       tracks: {
         $type: 'ItemList',
+        title: 'Tracks',
         showEmpty: false
       },
     }
