@@ -51,7 +51,7 @@ export default {
   },
   components: {
     Property: require('./Property.vue')
-  }
+  },
 }
 </script>
 

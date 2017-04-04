@@ -1,6 +1,6 @@
 <template>
   <div id="app" @click='select'>
-    <Inspector name='inspector'></Inspector>
+    <Inspector id='inspector' name='inspector'></Inspector>
     <div class='main ui container'>
 
       <!-- Search -->
@@ -183,6 +183,7 @@ export default {
   height: 100%;
 }
 .ui.container {
+  margin-right: 675px !important;
   width: 300px;
   padding: 20px;
   border: 1px solid gray;
