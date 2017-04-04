@@ -32,8 +32,5 @@ export default {
       }
     }
   },
-  components: {
-    Item: require('./Item.vue')
-  }
 }
 </script>

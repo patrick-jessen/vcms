@@ -16,11 +16,5 @@ export default {
   created() {
     this.namespace = this.$parent.namespace + '/children'
   },
-  components: {
-    Search: require('./Search.vue'),
-    Inspector: require('./Inspector.vue'),
-    ItemList: require('./ItemList.vue'),
-    Controls: require('./Controls.vue'),
-  }
 }
 </script>

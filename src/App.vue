@@ -156,11 +156,7 @@ export default {
     
   },
   components: {
-    Search: require('./components/Search.vue'),
     Inspector: require('./components/Inspector.vue'),
-    ItemList: require('./components/ItemList.vue'),
-    Controls: require('./components/Controls.vue'),
-    Comp: require('./components/Comp.vue')
   },
 }
 </script>

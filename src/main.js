@@ -37,6 +37,19 @@ Vue.mixin({
 import Vcms from './vcms.js'
 Vue.use(Vcms)
 
+
+
+var components = [
+  'Comp',
+  'Search',
+  'Controls',
+  'ItemList',
+  'Item'
+]
+for(var i = 0; i < components.length; i++) {
+  Vue.component(components[i], require('./components/' + components[i] + '.vue'))
+}
+
 window.vue = new Vue({
   el: '#app',
   render: h => h(App),
@@ -44,4 +57,3 @@ window.vue = new Vue({
     _store: Store  
   }
 })
-

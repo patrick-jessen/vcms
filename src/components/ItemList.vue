@@ -26,9 +26,6 @@ export default {
       required: true
     }
   },
-  components: {
-    Item: require('./Item.vue')
-  },
   _store: [{
     name: 'showEmpty',
     type: 'toggle'
