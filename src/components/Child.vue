@@ -14,7 +14,7 @@
 export default {
   props: ['props', 'name'],
   created() {
-    this.namespace = this.$parent.namespace + '/children'
+    this.namespace = this.$parent.namespace
   },
   computed: {
     self() {

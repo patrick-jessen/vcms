@@ -7,17 +7,13 @@
       <Child name='search' :props='{loading:isSearching}' @change='onSearch'/>
 
       <!-- Search results-->
-      <template v-if='searchQuery.length > 0'>
-        <Child name='albums'  :props='{items:albums}'/>
-        <Child name='artists' :props='{items:artists}'/>
-        <Child name='tracks'  :props='{items:tracks}'/>
-      </template>
+      <Child name='albums'  :props='{items:albums}'/>
+      <Child name='artists' :props='{items:artists}'/>
+      <Child name='tracks'  :props='{items:tracks}'/>
 
       <!-- Content when not searching -->
-      <template v-else>
-        <Child name='playlists' :props='{items:playlists}'/>
-        <Child name='queue' :props='{items:queue}'/>
-      </template>
+      <Child name='playlists' :props='{items:playlists}'/>
+      <Child name='queue' :props='{items:queue}'/>
 
       <!-- Playback controls -->
       <Child name='controls'/>
@@ -28,11 +24,14 @@
 <script>
 var componentRef = {};
 export default {
-  _store: [{
-    name: 'children',
-    type: 'children',
-    options: ['ItemList']
-  }],
+  _store: [
+    {name: 'search',    type: 'child', options: ['Search']},
+    {name: 'albums',    type: 'child', options: ['ItemList']},
+    {name: 'artists',   type: 'child', options: ['ItemList']},
+    {name: 'tracks',    type: 'child', options: ['ItemList']},
+    {name: 'playlists', type: 'child', options: ['ItemList']},
+    {name: 'queue',     type: 'child', options: ['ItemList']}
+  ],
   data () {
     return {
       isSearching : false,
@@ -72,8 +71,12 @@ export default {
         this.isSearching = true
         this.searchFunc(q)
       }
-      else
+      else {
         this.isSearching = false
+        this.$set(this, 'albums', [])
+        this.$set(this, 'artists', [])
+        this.$set(this, 'tracks', [])
+      }
     },
     
     searchFunc: window.utils.createThrottle((q) => {
