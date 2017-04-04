@@ -2,18 +2,17 @@
   <div id="app" @click='select'>
     <Inspector name='inspector'></Inspector>
     <div class='main ui container'>
-
-      <Comp :name='i' v-for='(c,i) in children' :data='c'></Comp>
-      
-      <Search name='search' @change='onSearch' :loading='isSearching'></Search>
+      <Child name='search' @change='onSearch' :loading='isSearching'/>
       <template v-if='searchQuery.length > 0'>
-        <ItemList name='albums' title='Albums' :items='albums'></ItemList>
-        <ItemList name='artists' title='Artists' :items='artists'></ItemList>
-        <ItemList name='tracks' title='Tracks' :items='tracks'></ItemList>
+        <Child name='albums'  :props='{items:albums}'/>
+        <Child name='artists' :props='{items:artists}'/>
+        <Child name='tracks'  :props='{items:tracks}'/>
       </template>
-      <ItemList name='playlists' v-else title='Playlists' :items='playlists'></ItemList>
-      <ItemList name='queue' title='Queue' :items='queue'></ItemList>
-      <Controls name='controls'></Controls>
+      <template v-else>
+        <Child name='playlists' :props='{items:playlists}'/>
+      </template>
+      <Child name='queue' :props='{items:queue}'/>
+      <Child name='controls'/>
     </div>
   </div>
 </template>
@@ -24,7 +23,7 @@ export default {
   _store: [{
     name: 'children',
     type: 'children',
-    options: ['Search', 'ItemList']
+    options: ['ItemList']
   }],
   data () {
     return {
@@ -51,6 +50,13 @@ export default {
     componentRef.ref = this
   },
   methods: {
+    child(name, props) {
+      var obj = {}
+      obj['data'] = this.children[name], 
+      obj['props'] = props
+      obj['name'] = name
+      return obj 
+    },
 
     onSearch(q) {
       this.searchQuery = q

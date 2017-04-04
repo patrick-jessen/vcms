@@ -2,7 +2,7 @@ window.components = {}
 
 export default function plugin(Vue) {
   Vue.mixin({
-    props: ['name'],
+    props: ['name', 'eventbus'],
     data() {
       return {
         namespace: '',
@@ -17,6 +17,14 @@ export default function plugin(Vue) {
       else
         this.namespace = this.name
     },
+    methods: {
+      emit(event, ...args) {
+        if(this.eventbus)
+          this.eventbus.$emit(event, ...args)
+        else
+          this.$emit(event, ...args)
+      }
+    }
   })
 }
 

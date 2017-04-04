@@ -40,7 +40,7 @@ export default {
     loading: { // Whether to indicate loading
       type: Boolean,
       default: false
-    }
+    },
   },
   data() {
     return {
@@ -50,7 +50,7 @@ export default {
   methods: {
     onInput(e) {
       this.text = e.target.value;     // Update local state
-      this.$emit('change', this.text) // Emit change to parent
+      this.emit('change', this.text) // Emit change to parent
     },
   },
 }

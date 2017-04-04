@@ -17,10 +17,6 @@
 <script>
 export default {
   props: {
-    title: {
-      type: String,
-      required: true
-    },
     items: {
       type: Array,
       required: true
@@ -29,6 +25,10 @@ export default {
   _store: [{
     name: 'showEmpty',
     type: 'toggle'
+  },
+  {
+    name: 'title',
+    type: 'string'
   }],
   methods: {
     select(e) {

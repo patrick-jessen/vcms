@@ -14,19 +14,7 @@
 
 <script>
 export default {
-  props: {
-    image: {
-      type: String,
-      required: true
-    },
-    title: {
-      type: String,
-      required: true
-    },
-    subTitle: {
-      type: String
-    }
-  },
+  props: ['image', 'title', 'subTitle'],
   computed: {
     imageStyle() {
       return {'background-image':'url('+this.image+')'}

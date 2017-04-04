@@ -37,10 +37,15 @@ Vue.mixin({
 import Vcms from './vcms.js'
 Vue.use(Vcms)
 
-
+window.vue = new Vue({
+  render: h => h(App),
+  data: {
+    _store: Store  
+  }
+})
 
 var components = [
-  'Comp',
+  'Child',
   'Search',
   'Controls',
   'ItemList',
@@ -50,10 +55,4 @@ for(var i = 0; i < components.length; i++) {
   Vue.component(components[i], require('./components/' + components[i] + '.vue'))
 }
 
-window.vue = new Vue({
-  el: '#app',
-  render: h => h(App),
-  data: {
-    _store: Store  
-  }
-})
+window.vue.$mount('#app')
