@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  _store: [{
+  static: [{
     name: 'showNowPlaying',
     type: 'toggle',
   }],

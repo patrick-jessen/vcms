@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  _store: [{name:'selected'}],
+  static: [{name:'selected'}],
   computed: {
     properties() {
       var storeModule = window.utils.namespaceToStore(this.selected)
@@ -25,14 +25,24 @@ export default {
         return []
 
       var inspectorArr = []
-      for(var i = 0; i < Object.keys(compDef).length; i++) {
-        
-        var obj = Object.assign({}, compDef[i])
+      Object.keys(compDef).forEach(property => {
 
-        var name = compDef[i].name
+        console.log(property)
+
+        var obj = Object.assign({}, compDef[property])
+        var name = compDef[property].name
         obj.value = storeModule[name]
         inspectorArr.push(obj)
-      }
+      })
+
+      // for(var i = 0; i < Object.keys(compDef).length; i++) {
+        
+      //   var obj = Object.assign({}, compDef[i])
+
+      //   var name = compDef[i].name
+      //   obj.value = storeModule[name]
+      //   inspectorArr.push(obj)
+      // }
 
       return inspectorArr
     }

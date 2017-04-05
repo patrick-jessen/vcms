@@ -22,7 +22,7 @@ export default {
       required: true
     }
   },
-  _store: [{
+  static: [{
     name: 'showEmpty',
     type: 'toggle'
   },

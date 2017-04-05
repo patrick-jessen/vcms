@@ -68,7 +68,7 @@ function registerStore(vm) {
 
   // 1.) Check for a store "option" on the component.
   // 2.) Check for a store "object" on the root vue model.
-  if (typeof vm.$options._store !== 'undefined' && typeof vm.$root.$data._store !== 'undefined') {
+  if (typeof vm.$options.static !== 'undefined' && typeof vm.$root.$data._store !== 'undefined') {
 
     // Initialize the computed option if it hasn't already been initialized.
     if (typeof vm.$options.computed === 'undefined') {
@@ -76,11 +76,18 @@ function registerStore(vm) {
     }
 
     var name = vm.$options._componentTag
-    components[name] = vm.$options._store
+    components[name] = vm.$options.static
 
-    // Loop through the elements of the "store" option.
-    vm.$options._store.forEach(property => {
+    var iter = vm.$options.static
+    if(!Array.isArray(iter))
+      iter = Object.keys(iter)
+
+    // Loop through the elements of the "static" option.
+    iter.forEach(property => {
+      if(property.name)
         vm.$options.computed[property.name] = new StoreAccessor(property.name);
+      else
+        vm.$options.computed[property] = new StoreAccessor(property);
     });
   }
 }

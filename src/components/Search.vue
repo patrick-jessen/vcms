@@ -7,7 +7,7 @@
 
 <!-- Wrapper -->
 <div class='ui icon input' 
-  :class='{loading}'>
+  :class='{loading:isSearching}'>
 
   <!-- Text input -->
   <input class='search icon' 
@@ -25,23 +25,15 @@
 
 <script>
 export default {
-  _store: [
-    {
-      name: 'placeholder',
-      type: 'string'
-    },
-    {
-      name: 'icon',
-      type: 'select',
-      options: ['search', 'find']
-    }
-  ],
+  emits: ['search'],
   props: {
-    loading: { // Whether to indicate loading
-      type: Boolean,
-      default: false
-    },
+    'isSearching': {type:Boolean,default:false},
   },
+  static: {
+    'placeholder':  {type: 'string',default:'Search...'},
+    'icon':         {type: 'select',default:'search',options: ['search', 'find']}
+  },
+  
   data() {
     return {
       text: '' // Search string

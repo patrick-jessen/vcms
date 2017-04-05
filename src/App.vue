@@ -4,7 +4,7 @@
     <div class='main ui container'>
 
       <!-- Search -->
-      <Child name='search' :loading='isSearching' @change='onSearch'/>
+      <Child name='search' :isSearching='isSearching' @change='onSearch'/>
 
       <!-- Search results-->
       <Child name='albums'  :items='albums'/>
@@ -13,7 +13,7 @@
 
       <!-- Content when not searching -->
       <Child name='playlists' :items='playlists'/>
-      <Child name='queue' :items='queue'/>
+      <Child name='queue'     :items='queue'/>
 
       <!-- Playback controls -->
       <Child name='controls'/>
@@ -24,7 +24,7 @@
 <script>
 var componentRef = {};
 export default {
-  _store: [
+  static: [
     {name: 'search',    type: 'child', options: ['Search']},
     {name: 'albums',    type: 'child', options: ['ItemList']},
     {name: 'artists',   type: 'child', options: ['ItemList']},
