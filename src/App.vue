@@ -4,16 +4,16 @@
     <div class='main ui container'>
 
       <!-- Search -->
-      <Child name='search' :props='{loading:isSearching}' @change='onSearch'/>
+      <Child name='search' :loading='isSearching' @change='onSearch'/>
 
       <!-- Search results-->
-      <Child name='albums'  :props='{items:albums}'/>
-      <Child name='artists' :props='{items:artists}'/>
-      <Child name='tracks'  :props='{items:tracks}'/>
+      <Child name='albums'  :items='albums'/>
+      <Child name='artists' :items='artists'/>
+      <Child name='tracks'  :items='tracks'/>
 
       <!-- Content when not searching -->
-      <Child name='playlists' :props='{items:playlists}'/>
-      <Child name='queue' :props='{items:queue}'/>
+      <Child name='playlists' :items='playlists'/>
+      <Child name='queue' :items='queue'/>
 
       <!-- Playback controls -->
       <Child name='controls'/>

@@ -5,15 +5,26 @@
   @mouseleave='hover(false)'
   :class='inspectClass'>
 
-  <!--<h1>This is a component</h1>-->
-  <component :is='type' v-bind='props' :name='name' :eventbus='self'></component>
+  <component :is='type' v-bind='$props' :name='name' :eventbus='self'></component>
 </div>
 </template>
 
 <script>
 export default {
-  props: ['props', 'name'],
+  props: ['name'],
+
+  beforeCreate() {
+    // Dynamically add properties provided by the parent
+    var props = this.$options._parentVnode.data.attrs
+    for(var key in props) {
+      if(!props.hasOwnProperty(key)) continue
+
+      this.$options.props[key] = {type: null}   // Create prop definition
+      this.$options.propsData[key] = props[key] // Set data for prop
+    }
+  },
   created() {
+    // Proxy namespace of parent (makes this component invisible to child)
     this.namespace = this.$parent.namespace
   },
   computed: {

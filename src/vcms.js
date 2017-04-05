@@ -171,3 +171,153 @@ function createComponent(name) {
   
   return obj
 }*/
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Golang interface style
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*////////////////////////////////////////////////////////////////////////
+<template>
+<div>
+  <input :placeholder='placeholder' @input='emitSearch($event.target.value)'>
+  <i class='icon' :class='[icon, {loading:isSearching}]'></i>
+</div>
+</template>
+
+export default {
+  emits: ['search'],
+  props: {
+    'isSearching': {type:Boolean,required:true}
+  },
+  static: {
+    'placeholder':  {type:'string',default:'Start typing...'},
+    'icon':         {type:'select',default:'search',valid:['search','find']}
+  }
+}
+////////////////////////////////////////////////////////////////////////
+<template>
+<div>
+  <h1>{{heading}}</h1>
+  <Child name='search' :isSearching='isSearching' @search='onSearch'/>
+  <Child name='results' :items='items'/>
+</div>
+</template>
+
+export default {
+  static: {
+    'heading':  {type:'string',default:'change me'},
+    'search':   {type:'child',default:'SearchBar'},
+    'results':  {type:'child',default:'itemList'}
+  },
+  data() {
+    return {
+      isSearching: false,
+      items: []
+    }
+  },
+  methods: {
+    onSearch(query) {
+      this.isSearching = true
+      console.log("searching for", query)
+      //...
+      this.isSearching = false
+    }
+  }
+}
+///////////////////////////////////////////////////////////////
+Find('')._vnode.children[0].child._vnode.children[0].children[0].children[0].children[0].children[2].children[0].data.on.click.fn
+//////
+el.$vnode.componentOptions.listeners
+//////
+el.$options._parentListeners
+el.$options.propsData
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Traditional interface style
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Searcher interface //////////////////////////////////////////////////////
+var Searcher = {
+  props: {
+    isLoading: {type:Boolean,required:true}
+  },
+  methods: {
+    emitSearch(query) {this.$emit('search', query)}
+  }
+}
+
+// Toggler interface //////////////////////////////////////////////////////
+var Toggler = {
+  props: {
+    isToggled: {type:Boolean,required:true}
+  },
+  methods: {
+    emitToggled() {this.$emit('toggled')}
+  }
+}
+
+// Component //////////////////////////////////////////////////////////////
+<template>
+    <div>
+      <input type=checkbox :checked='isToggled' @change='emitToggled'>
+      <input placeholder='Search...' @input='emitSearch($event.target.value)'>
+    </div>
+</template>
+
+var SearchBox = {
+  mixins: ['Searcher', 'Toggler'],
+}
+
+// Parent /////////////////////////////////////////////////
+_store: [{
+  name: 'Search',
+  type: 'child',
+  valid: ['Searcher']
+}]
+
+////////////////////////////////////////////////////
+var Searcher = {
+  props: {
+    isLoading: {type:Boolean,default:false}
+  },
+  methods: {
+    emitSearch(query) {
+      assertType(query, 'string')
+      this.$emit('search', query)
+    }
+  }
+}
+
+var Itemizer = {
+  props: {
+    items: {type:Array,required:true}
+  },
+  methods: {
+    emitAddItem(item) {
+      this.$emit('addItem', index)
+    },
+    emitRemoveItem(index) {
+      assertType(index, 'number')
+      this.$emit('removeItem', index)
+    }
+  }
+}
+////////////////////////////////////////////////////////////////////////
+// Access props not in 'props' def
+this.$options._parentVnode.data.attrs
+
+// Names of props and listeners
+methods: {
+  printProps() {
+    return Object.keys(this.$options._parentVnode.data.attrs)
+  },
+  printEmits() {
+    return Object.keys(this.$options._parentListeners)
+  }
+},*/
