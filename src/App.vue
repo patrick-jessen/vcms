@@ -57,14 +57,6 @@ export default {
     componentRef.ref = this
   },
   methods: {
-    child(name, props) {
-      var obj = {}
-      obj['data'] = this.children[name], 
-      obj['props'] = props
-      obj['name'] = name
-      return obj 
-    },
-
     onSearch(q) {
       this.searchQuery = q
       if(q) {
@@ -164,16 +156,10 @@ export default {
         console.error(e)
       })
 
-    }, 2000),
-
-    select(e) {
-      this.$root.$data._store.app.inspector.selected = this.namespace
-      e.stopPropagation()
-    },
-    
+    }, 2000),    
   },
   components: {
-    Inspector: require('./components/Inspector.vue'),
+    Inspector: require('./inspector/Inspector.vue'),
   },
 }
 </script>

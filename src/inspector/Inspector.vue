@@ -6,6 +6,9 @@
     <div class='ui dividing large header'>{{selected}}</div>
     <Property v-for='(p, idx) in properties' :property='p' @change='propertyChange(p, $event)' :key='p'></Property>
   </template>
+
+  <div class='ui dividing large header'>Hierarchy</div>
+  <Hierarchy/>
   </div>
 </div>
 
@@ -56,7 +59,8 @@ export default {
 
   },
   components: {
-    Property: require('./Property.vue')
+    Property: require('./Property.vue'),
+    Hierarchy: require('./Hierarchy.vue')
   },
 }
 </script>
