@@ -19,7 +19,11 @@
 
 <script>
 export default {
-  props: ['image', 'title', 'subTitle'],
+  props: {
+    'image':{type:String,required:true},
+    'title':{type:String,required:true},
+    'subTitle':{type:String}
+  },
   data() {
     return {
       hovered: false

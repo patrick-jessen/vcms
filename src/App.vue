@@ -4,7 +4,7 @@
     <div class='main ui container'>
 
       <!-- Search -->
-      <Child name='search' :isSearching='isSearching' @change='onSearch'/>
+      <Child name='search' :isSearching='isSearching' @search='onSearch'/>
 
       <!-- Search results-->
       <Child name='albums'  :items='albums'/>

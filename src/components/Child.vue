@@ -1,6 +1,6 @@
 <template>
 <div 
-  @click='select'
+  @click.capture='select'
   @mouseenter='hover(true)'
   @mouseleave='hover(false)'
   :class='inspectClass'>
@@ -34,6 +34,12 @@ export default {
     type() {
       var store = window.utils.namespaceToStore(this.namespace)
       return store[this.name].$type
+    }
+  },
+  methods: {
+    select(e) {
+      this.$root.$data._store.app.inspector.selected = this.namespace + '/' + this.name
+      e.stopPropagation()
     }
   }
 }

@@ -1,4 +1,5 @@
 window.components = {}
+window.interfaces = {}
 
 export default function plugin(Vue) {
   Vue.mixin({
@@ -75,20 +76,55 @@ function registerStore(vm) {
       vm.$options.computed = {};
     }
 
+    // Register static fields
     var name = vm.$options._componentTag
     components[name] = vm.$options.static
 
+    // Register interface
+    // Requires
+    var requires = []
+    var val = vm.$options.props
+    for(var key in val) {
+      if(val[key].required)
+        requires.push(key)
+    }
+
+    // Emits
+    var emits = []
+    var el = vm.$options.emits
+    if(el) {
+      for(var i = 0; i < el.length; i++) {
+        emits.push(el[i])
+      }
+    }
+    window.interfaces[name] = {input:requires,output:emits}
+
+    // Loop through the elements of the "static" option.
     var iter = vm.$options.static
     if(!Array.isArray(iter))
       iter = Object.keys(iter)
 
-    // Loop through the elements of the "static" option.
     iter.forEach(property => {
       if(property.name)
         vm.$options.computed[property.name] = new StoreAccessor(property.name);
       else
         vm.$options.computed[property] = new StoreAccessor(property);
     });
+
+    // Loop through emits
+    if (typeof vm.$options.methods === 'undefined') {
+      vm.$options.methods = {};
+    }
+
+    var iter = vm.$options.emits
+    if(iter) {
+      iter.forEach(emit => {
+        var capitalized = emit.replace(/^./, (str) => str.toUpperCase())
+        vm.$options.methods['emit' + capitalized] = (...args) => {
+          vm.eventbus.$emit(emit, ...args)
+        }
+      })
+    }
   }
 }
 

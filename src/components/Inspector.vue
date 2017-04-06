@@ -26,9 +26,6 @@ export default {
 
       var inspectorArr = []
       Object.keys(compDef).forEach(property => {
-
-        console.log(property)
-
         var obj = Object.assign({}, compDef[property])
         var name = compDef[property].name
         obj.value = storeModule[name]
@@ -54,7 +51,6 @@ export default {
       e.stopPropagation()
     },
     propertyChange(p, v) {
-      console.log("HERE2")
       window.utils.namespaceToStore(this.selected)[p.name] = v
     }
 
