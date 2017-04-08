@@ -1,15 +1,14 @@
 <template>
-<ul>
-  <li>dummy item</li>
-  <HierarchyItem :data='rootItem' name='root'/>
-</ul>
+<div class='ui list'>
+  <HierarchyItem :data='root' name='app'/>
+</div>
 </template>
 
 <script>
 export default {
   computed: {
-    rootItem() {
-      return window.vue.$data._store
+    root() {
+      return window.vue.$data._store.app
     }
   },
   components: {
@@ -17,3 +16,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.ui.list {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid gray;
+}
+</style>

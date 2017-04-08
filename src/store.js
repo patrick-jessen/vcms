@@ -5,7 +5,10 @@ export default {
       search: {
         $type: 'Search',
         placeholder: 'Search...',
-        icon: 'search'
+        icon: 'search',
+        $children: {
+          someChild: {$type: 'Search'}
+        }
       },
       playlists: {
         $type: 'ItemList',
