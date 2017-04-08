@@ -2,14 +2,14 @@ export default {
   inspector: {selected: ''},
   app: {
     $children: {
-      search: {
-        $type: 'Search',
-        placeholder: 'Search...',
-        icon: 'search',
-        $children: {
-          someChild: {$type: 'Search'}
-        }
-      },
+      // search: {
+      //   $type: 'Search',
+      //   placeholder: 'Search...',
+      //   icon: 'search',
+      //   $children: {
+      //     someChild: {$type: 'Search'}
+      //   }
+      // },
       playlists: {
         $type: 'ItemList',
         title: 'Playlists',

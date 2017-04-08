@@ -1,14 +1,12 @@
 <template>
 <div class='ui five wide column' @click='select'>
   <div class='main ui container'>
-  <div class='ui dividing large header' v-if='!selected'>Select a component</div>
-  <template v-else>
-    <div class='ui dividing large header'>{{selected}}</div>
-    <Property v-for='(p, idx) in properties' :property='p' @change='propertyChange(p, $event)' :key='p'></Property>
-  </template>
-
   <div class='ui dividing large header'>Hierarchy</div>
   <Hierarchy/>
+
+  <div class='ui dividing large header'>Properties</div>
+  <Property v-for='(p, idx) in properties' :property='p' @change='propertyChange(p, $event)' :key='p'></Property>
+
   </div>
 </div>
 

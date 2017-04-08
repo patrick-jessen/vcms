@@ -26,14 +26,14 @@ window.spotify = new Spotify();
 
 var componentRef = {};
 export default {
-  // static: [
-  //   {name: 'search',    type: 'child', options: ['Search']},
-  //   {name: 'albums',    type: 'child', options: ['ItemList']},
-  //   {name: 'artists',   type: 'child', options: ['ItemList']},
-  //   {name: 'tracks',    type: 'child', options: ['ItemList']},
-  //   {name: 'playlists', type: 'child', options: ['ItemList']},
-  //   {name: 'queue',     type: 'child', options: ['ItemList']}
-  // ],
+  children: [
+    {name: 'search',    type: 'child'},
+    {name: 'albums',    type: 'child'},
+    {name: 'artists',   type: 'child'},
+    {name: 'tracks',    type: 'child'},
+    {name: 'playlists', type: 'child'},
+    {name: 'queue',     type: 'child'}
+  ],
   data () {
     return {
       isSearching : false,
