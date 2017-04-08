@@ -11,6 +11,9 @@ export default {
       return window.vue.$data._store.app
     }
   },
+  created() {
+    this.namespace = ''
+  },
   components: {
     HierarchyItem: require('./HierarchyItem.vue')
   }

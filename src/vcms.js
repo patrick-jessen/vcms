@@ -13,7 +13,7 @@ export default function plugin(Vue) {
       registerStore(this)
     },
     created() {
-      if(this.$parent)
+      if(this.$parent && this.$parent.namespace && this.$parent.namespace.length > 0)
         this.namespace = this.$parent.namespace + '/' + this.name
       else
         this.namespace = this.name

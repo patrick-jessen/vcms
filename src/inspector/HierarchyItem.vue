@@ -1,6 +1,6 @@
 <template>
-<div class='item'>
-  <i class='square icon'></i>
+<div class='item link' @click='onClick'>
+  <i class='cube icon'></i>
   <div class='content'>
     <div class='header'>{{name}}</div>
     <!--<div class='description'>{{data.$type}}</div>-->
@@ -17,6 +17,12 @@ export default {
   beforeCreate() {
     this.$options.components.HierarchyItem = require('./HierarchyItem.vue')
   },
+  created() {
+    if(this.$parent.namespace.length > 0)
+      this.namespace = this.$parent.namespace + '/$children/' + this.name
+    else
+      this.namespace = this.name
+  },
   computed: {
     childrenKeys() {
       if(!this.data.$children)
@@ -29,6 +35,11 @@ export default {
     child(key) {
       return this.data.$children[key]
     },
+    onClick(e) {
+      console.log(this.namespace)
+      window.vue.$data._store.inspector.selected = this.namespace
+      e.stopPropagation()
+    }
   }
 }
 </script>
