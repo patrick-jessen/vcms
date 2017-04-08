@@ -22,4 +22,8 @@ export default {
 .ui.icon.input {
   width: 100%
 }
+
+.ui.icon.input>.search.icon {
+  border-radius: 30px;
+}
 </style>

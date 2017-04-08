@@ -9,6 +9,7 @@
 export default {
   computed: {
     rootItem() {
+      console.log('rootItem', window.vue.$data._store)
       return window.vue.$data._store
     }
   },
