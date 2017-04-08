@@ -1,6 +1,5 @@
 <template>
-  <div id="app" @click='select'>
-    <Inspector id='inspector' name='inspector'></Inspector>
+  <div id="app" class='ui eleven wide column' @click='select'>
     <div class='main ui container'>
 
       <!-- Search -->
@@ -22,16 +21,19 @@
 </template>
 
 <script>
+var Spotify = require('spotify-web-api-js');
+window.spotify = new Spotify();
+
 var componentRef = {};
 export default {
-  static: [
-    {name: 'search',    type: 'child', options: ['Search']},
-    {name: 'albums',    type: 'child', options: ['ItemList']},
-    {name: 'artists',   type: 'child', options: ['ItemList']},
-    {name: 'tracks',    type: 'child', options: ['ItemList']},
-    {name: 'playlists', type: 'child', options: ['ItemList']},
-    {name: 'queue',     type: 'child', options: ['ItemList']}
-  ],
+  // static: [
+  //   {name: 'search',    type: 'child', options: ['Search']},
+  //   {name: 'albums',    type: 'child', options: ['ItemList']},
+  //   {name: 'artists',   type: 'child', options: ['ItemList']},
+  //   {name: 'tracks',    type: 'child', options: ['ItemList']},
+  //   {name: 'playlists', type: 'child', options: ['ItemList']},
+  //   {name: 'queue',     type: 'child', options: ['ItemList']}
+  // ],
   data () {
     return {
       isSearching : false,
@@ -157,6 +159,12 @@ export default {
       })
 
     }, 2000),    
+
+    select(e) {
+      this.$root.$data._store.inspector.selected = this.namespace
+      e.stopPropagation()
+      e.preventDefault()
+    },
   },
   components: {
     Inspector: require('./inspector/Inspector.vue'),
@@ -169,7 +177,6 @@ export default {
   height: 100%;
 }
 .ui.container {
-  margin-right: 675px !important;
   width: 300px;
   padding: 20px;
   border: 1px solid gray;

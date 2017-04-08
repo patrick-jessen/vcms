@@ -27,13 +27,42 @@ export default function plugin(Vue) {
       }
     }
   })
+
+  Vue.mixin({
+  data() {
+    return {
+      hovered: false
+    }
+  },
+  computed: {
+    inspectClass() {
+      var isSelected = this.$root.$data._store.inspector.selected === this.namespace
+      return {
+        'inspect' : isSelected,
+        'inspect-hover': this.hovered && !isSelected
+      }
+    }
+  },
+  methods: {
+    // // selects the component for inspection
+    // select(e) {
+    //   this.$root.$data._store.inspector.selected = this.namespace
+    //   e.stopPropagation()
+    //   e.preventDefault()
+    // },
+    hover(v) {
+      this.hovered = v
+    }
+  }
+})
+
 }
+
 
 function StoreAccessor(property) {
   return {
     get() {
       if(!this.namespace) return
-
       var path = this.namespace.split('/') 
       var store = this.$root.$data._store;
 
@@ -42,7 +71,6 @@ function StoreAccessor(property) {
           store = store[path[i]];
         }
       }
-
       return store[property]
     },
 
@@ -66,7 +94,6 @@ function StoreAccessor(property) {
 
 function registerStore(vm) {
   if(vm == vm.$root) return
-
   // 1.) Check for a store "option" on the component.
   // 2.) Check for a store "object" on the root vue model.
   if (typeof vm.$options.static !== 'undefined' && typeof vm.$root.$data._store !== 'undefined') {
@@ -267,7 +294,6 @@ export default {
   methods: {
     onSearch(query) {
       this.isSearching = true
-      console.log("searching for", query)
       //...
       this.isSearching = false
     }

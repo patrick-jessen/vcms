@@ -2,8 +2,7 @@
 <div 
   @click.capture='select'
   @mouseenter='hover(true)'
-  @mouseleave='hover(false)'
-  :class='inspectClass'>
+  @mouseleave='hover(false)'>
 
   <component :is='type' v-bind='$props' :name='name' :eventbus='self'></component>
 </div>
@@ -25,7 +24,8 @@ export default {
   },
   created() {
     // Proxy namespace of parent (makes this component invisible to child)
-    this.namespace = this.$parent.namespace
+    this.namespace = this.$parent.namespace + '/$children'
+    console.log("CHILD CREATED", this.name, this.namespace)
   },
   computed: {
     self() {
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     select(e) {
-      this.$root.$data._store.app.inspector.selected = this.namespace + '/' + this.name
+      this.$root.$data._store.inspector.selected = this.namespace + '/' + this.name
       e.stopPropagation()
     }
   }

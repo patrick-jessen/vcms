@@ -44,8 +44,6 @@ export default {
   },
   methods: {
     child(key) {
-      console.log(this.data)
-
       if(this.data.hasOwnProperty(key))
         return this.data[key]
       return {}

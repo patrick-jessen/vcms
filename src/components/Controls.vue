@@ -1,5 +1,5 @@
 <template>
-<div class='ui container' @click='select'>
+<div class='ui container'>
   <div class='ui items' v-if='showNowPlaying'>
     <div class='ui dividing heading'>Now playing</div>
     <Item name='nowPlaying' v-bind='nowPlaying'></Item>

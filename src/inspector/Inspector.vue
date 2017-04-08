@@ -1,5 +1,5 @@
 <template>
-<div class='sidebar' @click='select'>
+<div class='ui five wide column' @click='select'>
   <div class='main ui container'>
   <div class='ui dividing large header' v-if='!selected'>Select a component</div>
   <template v-else>
@@ -17,6 +17,9 @@
 <script>
 export default {
   static: [{name:'selected'}],
+  created() {
+    this.namespace = 'inspector'
+  },
   computed: {
     properties() {
       var storeModule = window.utils.namespaceToStore(this.selected)
@@ -66,12 +69,8 @@ export default {
 </script>
 
 <style scoped>
-.sidebar {
-  position: fixed;
-  width: 400px;
-  height: 100%;
+.ui.five.wide.column {
   background-color: #eeeeee;
-  right: 0;
   border-left: 1px solid gray;
 }
 .main.ui.container {
