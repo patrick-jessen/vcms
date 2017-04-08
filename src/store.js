@@ -1,6 +1,7 @@
 export default {
   inspector: {selected: ''},
   app: {
+    $type: 'App',
     $children: {
       // search: {
       //   $type: 'Search',

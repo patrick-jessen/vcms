@@ -1,5 +1,4 @@
 window.components = {}
-window.interfaces = {}
 
 export default function plugin(Vue) {
   Vue.mixin({
@@ -96,16 +95,10 @@ function registerStore(vm) {
   if(vm == vm.$root) return
   // 1.) Check for a store "option" on the component.
   // 2.) Check for a store "object" on the root vue model.
-  if (typeof vm.$options.static !== 'undefined' && typeof vm.$root.$data._store !== 'undefined') {
-
-    // Initialize the computed option if it hasn't already been initialized.
-    if (typeof vm.$options.computed === 'undefined') {
-      vm.$options.computed = {};
-    }
+  if (typeof vm.$root.$data._store !== 'undefined') {
 
     // Register static fields
     var name = vm.$options._componentTag
-    components[name] = vm.$options.static
 
     // Register interface
     // Requires
@@ -116,27 +109,31 @@ function registerStore(vm) {
         requires.push(key)
     }
 
-    // Emits
-    var emits = []
-    var el = vm.$options.emits
-    if(el) {
-      for(var i = 0; i < el.length; i++) {
-        emits.push(el[i])
-      }
+    window.components[name] = {
+      static: vm.$options.static,
+      input: requires,
+      output: vm.$options.emits,
+      children: vm.$options.children
     }
-    window.interfaces[name] = {input:requires,output:emits}
 
     // Loop through the elements of the "static" option.
     var iter = vm.$options.static
-    if(!Array.isArray(iter))
-      iter = Object.keys(iter)
+    if(iter) {
+      // Initialize the computed option if it hasn't already been initialized.
+      if (typeof vm.$options.computed === 'undefined') {
+        vm.$options.computed = {};
+      }
 
-    iter.forEach(property => {
-      if(property.name)
-        vm.$options.computed[property.name] = new StoreAccessor(property.name);
-      else
-        vm.$options.computed[property] = new StoreAccessor(property);
-    });
+      if(!Array.isArray(iter))
+        iter = Object.keys(iter)
+
+      iter.forEach(property => {
+        if(property.name)
+          vm.$options.computed[property.name] = new StoreAccessor(property.name);
+        else
+          vm.$options.computed[property] = new StoreAccessor(property);
+      });
+    }
 
     // Loop through emits
     if (typeof vm.$options.methods === 'undefined') {

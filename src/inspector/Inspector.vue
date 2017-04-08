@@ -24,7 +24,7 @@ export default {
       if(!storeModule)
         return []
 
-      var compDef = window.components[storeModule.$type]
+      var compDef = window.components[storeModule.$type].static
       if(!compDef)
         return []
 

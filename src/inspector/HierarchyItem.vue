@@ -1,12 +1,13 @@
 <template>
-<div class='item link' @click='onClick'>
+<div class='item link' @click='onClick' :class='{disable:!data}'>
   <i class='cube icon'></i>
   <div class='content'>
     <div class='header' :class='{selected:isSelected}'>{{name}}</div>
-    <!--<div class='description'>{{data.$type}}</div>-->
-    <div class='list' v-if='childrenKeys.length > 0'>
-      <HierarchyItem v-for='c in childrenKeys' :name='c' :data='child(c)' :key='c'/>
-    </div>
+    <template v-if='data'>
+      <div class='list' v-if='childrenKeys.length > 0'>
+        <HierarchyItem v-for='c in childrenKeys' :name='c' :data='child(c)' :key='c'/>
+      </div>
+    </template>
   </div>
 </div>
 </template>
@@ -25,13 +26,13 @@ export default {
   },
   computed: {
     childrenKeys() {
-      var def = window.components[this.data.$type]
-      console.log(def)
-
-      if(!this.data.$children)
+      var def = window.components[this.data.$type].children
+      if(!def) 
         return []
-
-      return Object.keys(this.data.$children)
+        
+      return def.map((c) => {
+        return c.name
+      })
     },
     isSelected() {
       return window.vue.$data._store.inspector.selected === this.namespace
@@ -42,7 +43,6 @@ export default {
       return this.data.$children[key]
     },
     onClick(e) {
-      console.log(this.namespace)
       window.vue.$data._store.inspector.selected = this.namespace
       e.stopPropagation()
     }
@@ -53,5 +53,11 @@ export default {
 <style scoped>
 .selected {
   background-color: lightblue;
+}
+.disable {
+  color: darkgray !important;
+}
+.disable .header {
+  color: darkgray !important;
 }
 </style>

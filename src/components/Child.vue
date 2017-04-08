@@ -2,7 +2,8 @@
 <div 
   @click.capture='select'
   @mouseenter='hover(true)'
-  @mouseleave='hover(false)'>
+  @mouseleave='hover(false)'
+  v-if='exists'>
 
   <component :is='type' v-bind='$props' :name='name' :eventbus='self'></component>
 </div>
@@ -25,11 +26,13 @@ export default {
   created() {
     // Proxy namespace of parent (makes this component invisible to child)
     this.namespace = this.$parent.namespace + '/$children'
-    console.log("CHILD CREATED", this.name, this.namespace)
   },
   computed: {
     self() {
       return this
+    },
+    exists() {
+      return typeof window.utils.namespaceToStore(this.namespace)[this.name] !== 'undefined'
     },
     type() {
       var store = window.utils.namespaceToStore(this.namespace)
