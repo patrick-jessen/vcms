@@ -22,13 +22,23 @@ export default {
     properties() {
       var storeModule = window.utils.namespaceToStore(this.selected)
       if(!storeModule)
-        return []
+        return [{
+          name: 'type',
+          type: 'select',
+          options: ['none'],
+          value: 'none'
+        }]
 
       var compDef = window.components[storeModule.$type].static
       if(!compDef)
         return []
 
-      var inspectorArr = []
+      var inspectorArr = [{
+          name: 'type',
+          type: 'select',
+          options: [storeModule.$type],
+          value: storeModule.$type
+        }]
       Object.keys(compDef).forEach(property => {
         var obj = Object.assign({}, compDef[property])
         var name = compDef[property].name

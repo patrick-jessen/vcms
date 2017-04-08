@@ -24,10 +24,13 @@ var components = [
   'Search',
   'Controls',
   'ItemList',
-  'Item'
+  'Item',
+  'AlternativeSearch'
 ]
 for(var i = 0; i < components.length; i++) {
-  Vue.component(components[i], require('./components/' + components[i] + '.vue'))
+  var comp = require('./components/' + components[i] + '.vue')
+  Vue.component(components[i], comp)
+  console.error('Register components here')
 }
 
 window.vue.$mount('#app')
