@@ -18,7 +18,7 @@ window.vue = new Vue({
   }
 })
 
-var components = [
+var componentNames = [
   'Child',
   'Search',
   'Controls',
@@ -26,15 +26,16 @@ var components = [
   'Item',
   'AlternativeSearch'
 ]
+window.componentNames = componentNames
 window.components = {}
 
 var app = require('./App.vue')
 Vue.component('App', app)
 registerComponent(app)
 
-for(var i = 0; i < components.length; i++) {
-  var comp = require('./components/' + components[i] + '.vue')
-  Vue.component(components[i], comp)
+for(var i = 0; i < componentNames.length; i++) {
+  var comp = require('./components/' + componentNames[i] + '.vue')
+  Vue.component(componentNames[i], comp)
   registerComponent(comp)
 }
 

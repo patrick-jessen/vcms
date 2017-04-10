@@ -21,25 +21,32 @@ export default {
   computed: {
     properties() {
       var storeModule = window.utils.getStore(this.selected)
-      if(!storeModule || !storeModule.$type)
+      if(!storeModule || !storeModule.$type) {
+
+        var parent = this.selected.split('/').slice(0, -1).join('/')
+        if(!parent.length)  return[]
+        var store = window.utils.getStore(parent)
+        if(!store) return []
+        
+        var compDef = window.components[store.$type].children
+        console.log(compDef)
+
         return [{
-          name: 'type',
+          name: '$type',
           type: 'select',
-          options: ['none'],
+          options: window.componentNames,
           value: 'none'
         }]
+      }
 
       var compDef = window.components[storeModule.$type].static
       if(!compDef)
         return []
 
-      // find compatible types
-      console.error('asd')
-
       var inspectorArr = [{
-          name: 'type',
+          name: '$type',
           type: 'select',
-          options: [storeModule.$type],
+          options: window.componentNames,
           value: storeModule.$type
         }]
       Object.keys(compDef).forEach(property => {
@@ -64,7 +71,16 @@ export default {
 
   methods: {
     propertyChange(p, v) {
-      window.utils.getStore(this.selected)[p.name] = v
+      var store = window.utils.getStore(this.selected)
+      if(!store) {
+        var name = this.selected.split('/').slice(-1)[0]
+        var parent = this.selected.split('/').slice(0, -1).join('/')
+
+        this.$set(window.utils.getStore(parent).$children, name, {})
+        store = window.utils.getStore(this.selected)
+      }
+
+      this.$set(store, p.name, v)
     }
 
   },
