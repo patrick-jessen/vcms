@@ -20,8 +20,8 @@ export default {
   },
   computed: {
     properties() {
-      var storeModule = window.utils.namespaceToStore(this.selected)
-      if(!storeModule)
+      var storeModule = window.utils.getStore(this.selected)
+      if(!storeModule || !storeModule.$type)
         return [{
           name: 'type',
           type: 'select',
@@ -65,7 +65,7 @@ export default {
       e.stopPropagation()
     },
     propertyChange(p, v) {
-      window.utils.namespaceToStore(this.selected)[p.name] = v
+      window.utils.getStore(this.selected)[p.name] = v
     }
 
   },

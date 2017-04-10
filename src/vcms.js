@@ -62,30 +62,15 @@ function StoreAccessor(property) {
   return {
     get() {
       if(!this.namespace) return
-      var path = this.namespace.split('/') 
-      var store = this.$root.$data._store;
 
-      for (var i = 0; i < path.length; i++) {
-        if (store.hasOwnProperty(path[i])) {
-          store = store[path[i]];
-        }
-      }
+      var store = window.utils.getStore(this.namespace)
       return store[property]
     },
 
     set(value) {
       if(!this.namespace) return
 
-      var path = this.namespace.split('/') 
-      var length = path.length;
-      var store = this.$root.$data._store;
-
-      for (var i = 0; i < path.length; i++) {
-        if (store.hasOwnProperty(path[i])) {
-          store = store[path[i]];
-        }
-      }
-
+      var store = window.utils.getStore(this.namespace)
       store[property] = value;
     }
   }

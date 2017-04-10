@@ -20,7 +20,7 @@ export default {
   },
   created() {
     if(this.$parent.namespace.length > 0)
-      this.namespace = this.$parent.namespace + '/$children/' + this.name
+      this.namespace = this.$parent.namespace + '/' + this.name
     else
       this.namespace = this.name
   },

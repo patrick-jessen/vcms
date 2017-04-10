@@ -42,4 +42,21 @@ window.utils = {
 
     return store
   },
+
+  getStore(namespace) {
+    var store = window.vue.$data._store
+    var path = namespace.split('/')
+
+    for(var i = 0; i < path.length; i++) {
+      if(!path[i].length)
+        continue
+
+      if(i != 0)
+        store = store.$children
+
+      store = store[path[i]]
+    }
+
+    return store
+  }
 }

@@ -30,7 +30,7 @@ var components = [
 for(var i = 0; i < components.length; i++) {
   var comp = require('./components/' + components[i] + '.vue')
   Vue.component(components[i], comp)
-  console.error('Register components here')
+  // console.error('Register components here')
 }
 
 window.vue.$mount('#app')
