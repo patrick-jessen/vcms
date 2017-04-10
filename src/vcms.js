@@ -1,4 +1,3 @@
-window.components = {}
 
 export default function plugin(Vue) {
   Vue.mixin({
@@ -19,42 +18,10 @@ export default function plugin(Vue) {
     },
     methods: {
       emit(event, ...args) {
-        if(this.eventbus)
-          this.eventbus.$emit(event, ...args)
-        else
-          this.$emit(event, ...args)
+        this.$emit(event, ...args)
       }
     }
   })
-
-  Vue.mixin({
-  data() {
-    return {
-      hovered: false
-    }
-  },
-  computed: {
-    inspectClass() {
-      var isSelected = this.$root.$data._store.inspector.selected === this.namespace
-      return {
-        'inspect' : isSelected,
-        'inspect-hover': this.hovered && !isSelected
-      }
-    }
-  },
-  methods: {
-    // // selects the component for inspection
-    // select(e) {
-    //   this.$root.$data._store.inspector.selected = this.namespace
-    //   e.stopPropagation()
-    //   e.preventDefault()
-    // },
-    hover(v) {
-      this.hovered = v
-    }
-  }
-})
-
 }
 
 
@@ -84,22 +51,6 @@ function registerStore(vm) {
 
     // Register static fields
     var name = vm.$options._componentTag
-
-    // Register interface
-    // Requires
-    var requires = []
-    var val = vm.$options.props
-    for(var key in val) {
-      if(val[key].required)
-        requires.push(key)
-    }
-
-    window.components[name] = {
-      static: vm.$options.static,
-      input: requires,
-      output: vm.$options.emits,
-      children: vm.$options.children
-    }
 
     // Loop through the elements of the "static" option.
     var iter = vm.$options.static

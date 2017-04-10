@@ -33,7 +33,7 @@ export default {
     {name: 'tracks',    type: 'child'},
     {name: 'playlists', type: 'child'},
     {name: 'queue',     type: 'child'},
-    {name: 'controls',     type: 'child'},
+    {name: 'controls',  type: 'child'},
   ],
   data () {
     return {

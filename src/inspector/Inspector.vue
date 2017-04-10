@@ -1,5 +1,5 @@
 <template>
-<div class='ui five wide column' @click='select'>
+<div class='ui five wide column'>
   <div class='main ui container'>
   <div class='ui dividing large header'>Hierarchy</div>
   <Hierarchy/>
@@ -33,6 +33,9 @@ export default {
       if(!compDef)
         return []
 
+      // find compatible types
+      console.error('asd')
+
       var inspectorArr = [{
           name: 'type',
           type: 'select',
@@ -60,10 +63,6 @@ export default {
   },
 
   methods: {
-    // override default component select
-    select(e) {
-      e.stopPropagation()
-    },
     propertyChange(p, v) {
       window.utils.getStore(this.selected)[p.name] = v
     }

@@ -25,7 +25,7 @@ export default {
       this.namespace = this.name
   },
   computed: {
-    childrenKeys() {
+    childrenKeys() {     
       var def = window.components[this.data.$type].children
       if(!def) 
         return []
