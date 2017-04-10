@@ -7,7 +7,7 @@ export default {
   render(createElement, context) {
 
     var namespace = context.parent.namespace + '/' + context.props.name
-    var store = window.utils.getStore(namespace)
+    var store = window.vcms.utils.getStore(namespace)
     if(!store) return // Child does not exist
     var type = store.$type
 
@@ -19,7 +19,7 @@ export default {
     return createElement('div', {
       on: {
         click: (e)=>{
-          window.utils.getStore('inspector').selected = namespace
+          window.vcms.utils.getStore('inspector').selected = namespace
           e.stopPropagation()
         }
       }

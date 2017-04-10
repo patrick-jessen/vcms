@@ -1,5 +1,75 @@
 
 export default function plugin(Vue) {
+
+  window.vcms = {
+    components: {}
+  }
+
+  window.vcms.utils = {
+    // create a throtteled version of a function.
+    // returns a promise.
+    createThrottle(func, minInt, context) {
+      var time = 0
+      var timeout = null
+
+      return function(...args) {
+        clearTimeout(timeout)
+
+        return new Promise((res, rej) => {
+
+          // are we allowed to run?
+          if(Date.now() - time >= minInt) {
+            func.call(context, ...args)
+            time = Date.now()
+            res()
+          }
+          // try again later
+          else {
+            timeout = setTimeout(() => {
+              // are we allowed to run now?
+              if(Date.now() - time >= minInt) {
+                func.call(context, ...args)
+                time = Date.now()
+                res()
+              }
+            }, (time + minInt) - Date.now() + 10)
+          }
+        })
+      }
+    },
+
+    // get store object which represents the namespace
+    getStore(namespace) {
+      var store = window.vue.$data._store
+      var path = namespace.split('/')
+
+      for(var i = 0; i < path.length; i++) {
+        if(!path[i].length) continue
+        if(i != 0) store = store.$children
+        store = store[path[i]]
+      }
+
+      return store
+    },
+
+    registerComponent(comp) {
+      var name = comp.name
+      var requires = []
+      for(var key in comp.props) {
+        if(comp.props[key].required)
+          requires.push(key)
+      }
+
+      window.components[name] = {
+        input: requires,
+        output: comp.emits,
+        static: comp.static,
+        children: comp.children
+      }
+    }
+  }
+
+
   Vue.mixin({
     props: ['name', 'eventbus'],
     data() {
@@ -30,14 +100,14 @@ function StoreAccessor(property) {
     get() {
       if(!this.namespace) return
 
-      var store = window.utils.getStore(this.namespace)
+      var store = window.vcms.utils.getStore(this.namespace)
       return store[property]
     },
 
     set(value) {
       if(!this.namespace) return
 
-      var store = window.utils.getStore(this.namespace)
+      var store = window.vcms.utils.getStore(this.namespace)
       store[property] = value;
     }
   }

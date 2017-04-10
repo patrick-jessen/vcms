@@ -20,12 +20,12 @@ export default {
   },
   computed: {
     properties() {
-      var storeModule = window.utils.getStore(this.selected)
+      var storeModule = window.vcms.utils.getStore(this.selected)
       if(!storeModule || !storeModule.$type) {
 
         var parent = this.selected.split('/').slice(0, -1).join('/')
         if(!parent.length)  return[]
-        var store = window.utils.getStore(parent)
+        var store = window.vcms.utils.getStore(parent)
         if(!store) return []
         
         var compDef = window.components[store.$type].children
@@ -71,13 +71,13 @@ export default {
 
   methods: {
     propertyChange(p, v) {
-      var store = window.utils.getStore(this.selected)
+      var store = window.vcms.utils.getStore(this.selected)
       if(!store) {
         var name = this.selected.split('/').slice(-1)[0]
         var parent = this.selected.split('/').slice(0, -1).join('/')
 
-        this.$set(window.utils.getStore(parent).$children, name, {})
-        store = window.utils.getStore(this.selected)
+        this.$set(window.vcms.utils.getStore(parent).$children, name, {})
+        store = window.vcms.utils.getStore(this.selected)
       }
 
       this.$set(store, p.name, v)

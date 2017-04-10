@@ -74,7 +74,7 @@ export default {
       }
     },
     
-    searchFunc: window.utils.createThrottle((q) => {
+    searchFunc: window.vcms.utils.createThrottle((q) => {
       if(!q)
         return
 

@@ -1,4 +1,3 @@
-import './utils'
 import Store from './store'
 import Vue from 'vue'
 import Vcms from './vcms.js'
@@ -31,29 +30,13 @@ window.components = {}
 
 var app = require('./App.vue')
 Vue.component('App', app)
-registerComponent(app)
+window.vcms.utils.registerComponent(app)
 
 for(var i = 0; i < componentNames.length; i++) {
   var comp = require('./components/' + componentNames[i] + '.vue')
   Vue.component(componentNames[i], comp)
-  registerComponent(comp)
+  window.vcms.utils.registerComponent(comp)
 }
 
-function registerComponent(comp) {
-  var name = comp.name
-  var requires = []
-  for(var key in comp.props) {
-    if(comp.props[key].required)
-      requires.push(key)
-  }
-
-  console.log('here', name)
-  window.components[name] = {
-    input: requires,
-    output: comp.emits,
-    static: comp.static,
-    children: comp.children
-  }
-}
 
 window.vue.$mount('#app')
