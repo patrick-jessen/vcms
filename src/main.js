@@ -6,7 +6,7 @@ Vue.use(Vcms)
 
 window.vue = new Vue({
   template: `
-    <div class='ui grid'>
+    <div class='ui grid' style='height:103%'>
       <App/>
       <Inspector/>
     </div>`,

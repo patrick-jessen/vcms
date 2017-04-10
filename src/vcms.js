@@ -81,7 +81,7 @@ function registerStore(vm) {
       iter.forEach(emit => {
         var capitalized = emit.replace(/^./, (str) => str.toUpperCase())
         vm.$options.methods['emit' + capitalized] = (...args) => {
-          vm.eventbus.$emit(emit, ...args)
+          vm.$emit(emit, ...args)
         }
       })
     }
