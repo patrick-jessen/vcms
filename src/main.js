@@ -4,11 +4,10 @@ import Vcms from './vcms.js'
 Vue.use(Vcms)
 
 window.vue = new Vue({
-  template: `
-    <div class='ui grid' style='height:103%'>
-      <App/>
-      <Inspector/>
-    </div>`,
+  render(createElement) {
+    return createElement('div', {attrs:{class:'ui grid',style:'height:103%'}},
+     [createElement('App'),createElement('Inspector')])
+  },
   data: {
     _store: Store  
   },
@@ -17,7 +16,7 @@ window.vue = new Vue({
   }
 })
 
-var componentNames = [
+window.componentNames = [
   'Child',
   'Search',
   'Controls',
@@ -25,17 +24,12 @@ var componentNames = [
   'Item',
   'AlternativeSearch'
 ]
-window.componentNames = componentNames
-window.components = {}
 
-var app = require('./App.vue')
-Vue.component('App', app)
-window.vcms.utils.registerComponent(app)
+window.vcms.utils.registerComponent('App', require('./App.vue'))
 
-for(var i = 0; i < componentNames.length; i++) {
-  var comp = require('./components/' + componentNames[i] + '.vue')
-  Vue.component(componentNames[i], comp)
-  window.vcms.utils.registerComponent(comp)
+for(var i = 0; i < window.componentNames.length; i++) {
+  var comp = require('./components/' + window.componentNames[i] + '.vue')
+  window.vcms.utils.registerComponent(window.componentNames[i], comp)
 }
 
 

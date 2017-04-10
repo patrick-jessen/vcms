@@ -52,15 +52,16 @@ export default function plugin(Vue) {
       return store
     },
 
-    registerComponent(comp) {
-      var name = comp.name
+    registerComponent(name, comp) {
+      Vue.component(name, comp)
+
       var requires = []
       for(var key in comp.props) {
         if(comp.props[key].required)
           requires.push(key)
       }
 
-      window.components[name] = {
+      window.vcms.components[name] = {
         input: requires,
         output: comp.emits,
         static: comp.static,

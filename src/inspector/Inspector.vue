@@ -28,7 +28,7 @@ export default {
         var store = window.vcms.utils.getStore(parent)
         if(!store) return []
         
-        var compDef = window.components[store.$type].children
+        var compDef = window.vcms.components[store.$type].children
         console.log(compDef)
 
         return [{
@@ -39,7 +39,7 @@ export default {
         }]
       }
 
-      var compDef = window.components[storeModule.$type].static
+      var compDef = window.vcms.components[storeModule.$type].static
       if(!compDef)
         return []
 

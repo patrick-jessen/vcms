@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     childrenKeys() {     
-      var def = window.components[this.data.$type].children
+      var def = window.vcms.components[this.data.$type].children
       if(!def) 
         return []
         
