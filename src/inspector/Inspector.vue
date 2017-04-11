@@ -26,7 +26,7 @@ export default {
 
       // get interface of child
       var iface = window.vcms.utils.getInterface(this.selected)
-      console.log('Interface:', iface)
+      console.error('Limit list based on interface')
 
       var store = window.vcms.utils.getStore(this.selected)
       if(!store) {
@@ -37,7 +37,6 @@ export default {
           value: 'None'
         }]
       }
-      var compDef = window.vcms.components[store.$type].static
 
       var inspectorArr = [{
           name: '$type',
@@ -45,12 +44,16 @@ export default {
           options: window.componentNames,
           value: store.$type
         }]
-      Object.keys(compDef).forEach(property => {
-        var obj = Object.assign({}, compDef[property])
-        var name = compDef[property].name
-        obj.value = store[name]
-        inspectorArr.push(obj)
-      })
+
+      var compDef = window.vcms.components[store.$type].static
+      if(compDef) {   
+        Object.keys(compDef).forEach(property => {
+          var obj = Object.assign({}, compDef[property])
+          var name = compDef[property].name
+          obj.value = store[name]
+          inspectorArr.push(obj)
+        })
+      }
 
       return inspectorArr
     }
@@ -59,15 +62,43 @@ export default {
   methods: {
     propertyChange(p, v) {
       var store = window.vcms.utils.getStore(this.selected)
-      if(!store) {
-        var name = this.selected.split('/').slice(-1)[0]
-        var parent = this.selected.split('/').slice(0, -1).join('/')
 
-        this.$set(window.vcms.utils.getStore(parent).$children, name, {})
-        store = window.vcms.utils.getStore(this.selected)
+      if(p.name === '$type') {
+        if(!store) {
+          var name = this.selected.split('/').slice(-1)[0]
+          var parent = this.selected.split('/').slice(0, -1).join('/')
+          var type = v
+
+          var obj = {
+            $type: type
+          }
+
+          // copy defaults
+          var compDef = window.vcms.components[type]
+          if(compDef.static) {
+            compDef.static.forEach((s) => {
+              obj[s.name] = s.default
+            })
+          }
+
+          this.$set(window.vcms.utils.getStore(parent).$children, name, obj)
+        }
+        else {
+          store.$type = v
+
+          // copy defaults (if value does not already exist)
+          var compDef = window.vcms.components[v]
+          if(compDef.static) {
+            compDef.static.forEach((s) => {
+              if(!store[s.name])
+                this.$set(store, s.name, s.default)
+            })
+          }
+        }
       }
-
-      this.$set(store, p.name, v)
+      else {
+        this.$set(store, p.name, v)
+      }
     }
 
   },

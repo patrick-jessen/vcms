@@ -82,10 +82,10 @@ export default function plugin(Vue) {
       if(comp.$options._parentListeners)
         emits = Object.keys(comp.$options._parentListeners)
 
-      var props
+      var props = []
       if(comp.$options._componentTag === 'None')
         props = Object.keys(comp.$options.propsData.props)
-      else
+      else if(comp.$options.propsData)
         props = Object.keys(comp.$options.propsData)
 
       return {input: props, output: emits}
