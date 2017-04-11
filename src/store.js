@@ -1,5 +1,5 @@
 export default {
-  inspector: {selected: ''},
+  inspector: {selected: 'app'},
   app: {
     $type: 'App',
     $children: {

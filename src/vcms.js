@@ -53,18 +53,42 @@ export default function plugin(Vue) {
     },
 
     getComponent(namespace) {
+      if(!namespace.length)
+        return 
+
       var path = namespace.split('/')
       var comp = window.vue
 
-      for(var i = 0; i < path.length; i++) {
-        if(!path[i].length) continue
+      try {
+        for(var i = 0; i < path.length; i++) {
+          if(!path[i].length) continue
 
-        comp = comp.$children.filter((c) => {
-          return c.name === path[i]
-        })[0]
+          comp = comp.$children.filter((c) => {
+            return c.name === path[i]
+          })[0]
+        }
       }
+      catch(e) {return}
 
       return comp
+    },
+
+    getInterface(namespace) {
+      var comp = window.vcms.utils.getComponent(namespace)
+      if(!comp) 
+        return []
+
+      var emits = []
+      if(comp.$options._parentListeners)
+        emits = Object.keys(comp.$options._parentListeners)
+
+      var props
+      if(comp.$options._componentTag === 'None')
+        props = Object.keys(comp.$options.propsData.props)
+      else
+        props = Object.keys(comp.$options.propsData)
+
+      return {input: props, output: emits}
     },
 
     registerComponent(name, comp) {

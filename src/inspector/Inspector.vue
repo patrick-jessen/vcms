@@ -20,52 +20,37 @@ export default {
   },
   computed: {
     properties() {
-      var storeModule = window.vcms.utils.getStore(this.selected)
+      // app is imutable
+      if(this.selected === 'app') 
+        return []
 
-      // store does not exist
-      if(!storeModule || !storeModule.$type) {
+      // get interface of child
+      var iface = window.vcms.utils.getInterface(this.selected)
+      console.log('Interface:', iface)
 
-        var parent = this.selected.split('/').slice(0, -1).join('/')
-        if(!parent.length)  return[]
-        var store = window.vcms.utils.getStore(parent)
-        if(!store) return []
-        
-        var compDef = window.vcms.components[store.$type].children
-        console.log(compDef)
-
+      var store = window.vcms.utils.getStore(this.selected)
+      if(!store) {
         return [{
           name: '$type',
           type: 'select',
           options: window.componentNames,
-          value: 'none'
+          value: 'None'
         }]
       }
-
-      var compDef = window.vcms.components[storeModule.$type].static
-      if(!compDef)
-        return []
+      var compDef = window.vcms.components[store.$type].static
 
       var inspectorArr = [{
           name: '$type',
           type: 'select',
           options: window.componentNames,
-          value: storeModule.$type
+          value: store.$type
         }]
       Object.keys(compDef).forEach(property => {
         var obj = Object.assign({}, compDef[property])
         var name = compDef[property].name
-        obj.value = storeModule[name]
+        obj.value = store[name]
         inspectorArr.push(obj)
       })
-
-      // for(var i = 0; i < Object.keys(compDef).length; i++) {
-        
-      //   var obj = Object.assign({}, compDef[i])
-
-      //   var name = compDef[i].name
-      //   obj.value = storeModule[name]
-      //   inspectorArr.push(obj)
-      // }
 
       return inspectorArr
     }
