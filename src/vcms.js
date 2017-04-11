@@ -102,7 +102,7 @@ export default function plugin(Vue) {
 
       window.vcms.components[name] = {
         input: requires,
-        output: comp.emits,
+        output: comp.emits ? comp.emits : [],
         static: comp.static,
         children: comp.children
       }

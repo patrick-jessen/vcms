@@ -26,14 +26,41 @@ export default {
 
       // get interface of child
       var iface = window.vcms.utils.getInterface(this.selected)
-      console.error('Limit list based on interface')
+      var matchingTypes = ['None']
+
+      for(var key in window.vcms.components) {
+        if(!window.vcms.components.hasOwnProperty(key)) continue
+
+        var comp = window.vcms.components[key]
+        var valid = true
+
+        // check inputs
+        for(var i = 0; i < comp.input.length; i++) {
+          if(iface.input.indexOf(comp.input[i]) < 0) {
+            valid = false
+            break
+          }
+        }
+        if(!valid) continue
+
+        // check outputs
+        for(var i = 0; i < iface.output.length; i++) {
+          if(comp.output.indexOf(iface.output[i]) < 0) {
+            valid = false
+            break
+          }
+        }
+
+        if(valid)
+          matchingTypes.push(key)
+      }
 
       var store = window.vcms.utils.getStore(this.selected)
       if(!store) {
         return [{
           name: '$type',
           type: 'select',
-          options: window.componentNames,
+          options: matchingTypes,
           value: 'None'
         }]
       }
@@ -41,7 +68,7 @@ export default {
       var inspectorArr = [{
           name: '$type',
           type: 'select',
-          options: window.componentNames,
+          options: matchingTypes,
           value: store.$type
         }]
 
