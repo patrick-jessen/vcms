@@ -1,12 +1,13 @@
-import Store from './store'
 import Vue from 'vue'
 import Vcms from './vcms.js'
+import Store from './store'
+
 Vue.use(Vcms)
 
 window.vue = new Vue({
   render(createElement) {
-    return createElement('div', {attrs:{class:'ui grid',style:'height:103%'}},
-     [createElement('App'),createElement('Inspector')])
+    return createElement('div', {attrs:{class:'ui grid',style:'height:100%'}},
+     [createElement('App', {attrs:{name:'app'}}),createElement('Inspector')])
   },
   data: {
     _store: Store  
@@ -17,6 +18,7 @@ window.vue = new Vue({
 })
 
 window.componentNames = [
+  'None',
   'Child',
   'Search',
   'Controls',
@@ -26,11 +28,9 @@ window.componentNames = [
 ]
 
 window.vcms.utils.registerComponent('App', require('./App.vue'))
-
-for(var i = 0; i < window.componentNames.length; i++) {
-  var comp = require('./components/' + window.componentNames[i] + '.vue')
-  window.vcms.utils.registerComponent(window.componentNames[i], comp)
-}
-
+window.componentNames.forEach((name) => {
+  var comp = require('./components/' + name + '.vue')
+  window.vcms.utils.registerComponent(name, comp)
+})
 
 window.vue.$mount('#app')

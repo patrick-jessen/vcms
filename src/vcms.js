@@ -52,6 +52,21 @@ export default function plugin(Vue) {
       return store
     },
 
+    getComponent(namespace) {
+      var path = namespace.split('/')
+      var comp = window.vue
+
+      for(var i = 0; i < path.length; i++) {
+        if(!path[i].length) continue
+
+        comp = comp.$children.filter((c) => {
+          return c.name === path[i]
+        })[0]
+      }
+
+      return comp
+    },
+
     registerComponent(name, comp) {
       Vue.component(name, comp)
 

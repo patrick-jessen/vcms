@@ -5,16 +5,17 @@ export default {
   functional: true,
 
   render(createElement, context) {
+    context.data.attrs.name = context.props.name
 
     var namespace = context.parent.namespace + '/' + context.props.name
     var store = window.vcms.utils.getStore(namespace)
-    if(!store) return // Child does not exist
+    if(!store) {
+      context.data.attrs.props = context.data.attrs
+      return createElement('None', context.data)// Child does not exist
+    } 
     var type = store.$type
 
-    context.data.attrs.name = context.props.name
-
     var child = createElement(type, context.data)
-
 
     return createElement('div', {
       on: {

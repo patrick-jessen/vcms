@@ -21,6 +21,8 @@ export default {
   computed: {
     properties() {
       var storeModule = window.vcms.utils.getStore(this.selected)
+
+      // store does not exist
       if(!storeModule || !storeModule.$type) {
 
         var parent = this.selected.split('/').slice(0, -1).join('/')
