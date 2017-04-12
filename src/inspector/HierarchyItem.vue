@@ -26,7 +26,11 @@ export default {
   },
   computed: {
     childrenKeys() {     
-      var def = window.vcms.components[this.data.$type].children
+      var def = window.vcms.components[this.data.$type]
+      if(!def) 
+        return []
+
+      def = def.children
       if(!def) 
         return []
         
@@ -40,6 +44,9 @@ export default {
   },
   methods: {
     child(key) {
+      if(!this.data.$children)
+        return
+
       return this.data.$children[key]
     },
     onClick(e) {

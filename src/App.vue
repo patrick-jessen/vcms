@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class='ui eleven wide column' @click='select'>
+  <div id="app" @click='select'>
     <div class='main ui container'>
 
       <!-- Search -->

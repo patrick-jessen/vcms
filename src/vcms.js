@@ -43,10 +43,15 @@ export default function plugin(Vue) {
       var store = window.vue.$data._store
       var path = namespace.split('/')
 
-      for(var i = 0; i < path.length; i++) {
-        if(!path[i].length) continue
-        if(i != 0) store = store.$children
-        store = store[path[i]]
+      try {
+        for(var i = 0; i < path.length; i++) {
+          if(!path[i].length) continue
+          if(i != 0) store = store.$children
+          store = store[path[i]]
+        }
+      }
+      catch(e) {
+        return
       }
 
       return store
@@ -76,7 +81,7 @@ export default function plugin(Vue) {
     getInterface(namespace) {
       var comp = window.vcms.utils.getComponent(namespace)
       if(!comp) 
-        return []
+        return {input:[], output: []}
 
       var emits = []
       if(comp.$options._parentListeners)
@@ -103,15 +108,15 @@ export default function plugin(Vue) {
       window.vcms.components[name] = {
         input: requires,
         output: comp.emits ? comp.emits : [],
-        static: comp.static,
-        children: comp.children
+        static: comp.static ? comp.static : [],
+        children: comp.children ? comp.children : []
       }
     }
   }
 
 
   Vue.mixin({
-    props: ['name', 'eventbus'],
+    props: ['name'],
     data() {
       return {
         namespace: '',

@@ -43,6 +43,8 @@ export default {
         }
         if(!valid) continue
 
+        console.log('iface', iface)
+
         // check outputs
         for(var i = 0; i < iface.output.length; i++) {
           if(comp.output.indexOf(iface.output[i]) < 0) {
@@ -108,7 +110,11 @@ export default {
             })
           }
 
-          this.$set(window.vcms.utils.getStore(parent).$children, name, obj)
+          var parentStore = window.vcms.utils.getStore(parent)
+          if(!parentStore.$children)
+            this.$set(parentStore, '$children', {})
+
+          this.$set(parentStore.$children, name, obj)
         }
         else {
           store.$type = v
