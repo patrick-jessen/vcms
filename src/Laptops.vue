@@ -1,6 +1,8 @@
 <template>
 <div>
+<div class='app'>
     <Child name='menu'/>
+</div>
 </div>
 </template>
 
@@ -11,3 +13,10 @@ export default {
     ]
 }
 </script>
+
+<style scoped>
+.app {
+    background-color: gray;
+    height: 100%;
+}
+</style>

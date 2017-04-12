@@ -7,6 +7,17 @@
   <div class='ui dividing large header'>Properties</div>
   <Property v-for='(p, idx) in properties' :property='p' @change='propertyChange(p, $event)' :key='p'></Property>
 
+  <table class='ui striped table'>
+    <tr>
+      <td>Some property</td>
+      <td>Some value</td>
+    </tr>
+    <tr>
+      <td>Some property</td>
+      <td>Some value</td>
+    </tr>
+  </table>
+
   </div>
 </div>
 

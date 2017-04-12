@@ -29,6 +29,7 @@ export default {
 <style scoped>
 .wrapper {
     padding: 20px;
+    background-color: white;
 }
 .logo-link {
     display: inline-block;
