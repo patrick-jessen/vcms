@@ -24,6 +24,7 @@
 var Spotify = require('spotify-web-api-js');
 window.spotify = new Spotify();
 
+
 var componentRef = {};
 export default {
   children: [
@@ -171,6 +172,9 @@ export default {
     Inspector: require('./inspector/Inspector.vue'),
   },
 }
+
+
+
 </script>
 
 <style scoped>

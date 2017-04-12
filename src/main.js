@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Vcms from './vcms.js'
-import Store from './store'
 
+// const appComponent = 
+
+import Store from './store/store'
 Vue.use(Vcms)
 
 window.vue = new Vue({
@@ -13,8 +15,9 @@ window.vue = new Vue({
     _store: Store  
   },
   components: {
+    App: require('./App.vue'),
     Inspector: require('./inspector/Inspector.vue')
-  }
+  },
 })
 
 window.componentNames = [
