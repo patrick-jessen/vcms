@@ -82,6 +82,7 @@ export default {
           var obj = Object.assign({}, compDef[property])
           var name = compDef[property].name
           obj.value = store[name]
+          obj.store = store
           inspectorArr.push(obj)
         })
       }

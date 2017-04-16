@@ -7,14 +7,17 @@
   </div>
 
   <table v-if='expanded' class='ui striped table'>
-    <tr v-for='p in property.props'>
-      <td>
-        {{p.title}}
-      </td>
-      <td>
-        <Property :property='p'/>
-      </td>
-    </tr>
+    <template v-for='(p, i) in property.value'>
+      <th>Item #{{i}}</th>
+      <tr v-for='pd in property.props'>
+        <td>
+          {{pd.title}}
+        </td>
+        <td>
+          <Property :property='childProp(pd, p)' @change='onChange(pd, i, $event)'/>
+        </td>
+      </tr>
+    </template>
   </table>
 </div>
 </template>
@@ -41,6 +44,15 @@ export default {
   methods: {
     toggle() {
       this.expanded = !this.expanded
+    },
+    childProp(propDef, prop) {
+      var obj = Object.assign({}, propDef)
+      obj.value = prop[propDef.name]
+      return obj
+    },
+    onChange(pd, i, e) {
+      console.log(this.property.store, pd.name, e)
+      this.$set(this.property.store[this.property.name][i], pd.name, e)
     }
   },
 }

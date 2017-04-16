@@ -4,8 +4,8 @@
         <img :src='logo'>
     </a>
     <nav class='menus'>
-        <a class='menu' v-for='m in menus'>
-            {{m.name}}
+        <a class='menu' v-for='m in menus' :href='m.link'>
+            {{m.text}}
         </a>
     </nav>
     <nav class='ui actions'>
@@ -23,9 +23,9 @@ export default {
          title: 'Logo link', descr: 'Link when clicking logo'},
         {name:'logo', type:'string.img', default: 'https://d1vhcvzji58n1j.cloudfront.net/assets/logo-1c27efee7b.png',
          title: 'Logo image', descr: 'Image to display as logo'},
-        {name:'menus', type:'array', default: [{name:'laptops'},{name:'desktops'},{name:'servers'},{name:'swag'}],
-         props:[{name:'name', type:'string', title:'Name', descr:'Name of menu'},
-                {name:'link', type:'string,url', title:'Link', descr:'Link of menu'}],
+        {name:'menus', type:'array', default: [{text:'laptops'},{text:'desktops'},{text:'servers'},{text:'swag'}],
+         props:[{name:'text', type:'string', title:'Text', descr:'Text of menu'},
+                {name:'link', type:'string.url', title:'Link', descr:'Link of menu'}],
          title:'Menu items', descr:'Entries in the menu'},
     ]
 }
