@@ -7,9 +7,9 @@
   </div>
 
   <table v-if='expanded' class='ui striped table'>
-    <template v-for='(p, i) in property.value'>
-      <th>Item #{{i}}</th>
-      <tr v-for='pd in property.props'>
+    <template v-for='(p, i) in items'>
+      <th v-if='items.length > 1'>Item #{{i}}</th>
+      <tr v-for='pd in property.props' :title='pd.descr'>
         <td>
           {{pd.title}}
         </td>
@@ -37,6 +37,12 @@ export default {
       else
         return 'caret right icon'
     },
+    items() {
+      if(this.property.type === 'array')
+        return this.property.value
+  
+      return [this.property.value]
+    }
   },
   beforeCreate() {
     this.$options.components.Property = require('../Property.vue')
@@ -51,8 +57,10 @@ export default {
       return obj
     },
     onChange(pd, i, e) {
-      console.log(this.property.store, pd.name, e)
-      this.$set(this.property.store[this.property.name][i], pd.name, e)
+      if(this.property.type === 'array')
+        this.$set(this.property.store[this.property.name][i], pd.name, e)
+      else
+        this.$set(this.property.store[this.property.name], pd.name, e)
     }
   },
 }

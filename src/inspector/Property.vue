@@ -17,6 +17,7 @@ export default {
         type = OptionsProperty
         break
       case 'array':
+      case 'object':
         type = ArrayProperty
         break
     }

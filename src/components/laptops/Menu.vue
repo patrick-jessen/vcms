@@ -1,7 +1,7 @@
 <template>
 <div class='wrapper'>
-    <a class='logo-link' :href='logoLink'>
-        <img :src='logo'>
+    <a class='logo-link' :href='logo.link'>
+        <img :src='logo.image'>
     </a>
     <nav class='menus'>
         <a class='menu' v-for='m in menus' :href='m.link'>
@@ -9,9 +9,9 @@
         </a>
     </nav>
     <nav class='ui actions'>
-        <i class='comments icon'></i>
-        <i class='life ring icon'></i>
-        <i class='user icon'></i>
+        <a v-for='a in actions' :href='a.link'>
+            <i class='icon' :class='a.icon'></i>
+        </a>
     </nav>
 </div>
 </template>
@@ -19,14 +19,25 @@
 <script>
 export default {
     static: [
-        {name:'logoLink', type:'string.url', default:'http://google.com',
-         title: 'Logo link', descr: 'Link when clicking logo'},
-        {name:'logo', type:'string.img', default: 'https://d1vhcvzji58n1j.cloudfront.net/assets/logo-1c27efee7b.png',
-         title: 'Logo image', descr: 'Image to display as logo'},
+        // Company logo
+        {name:'logo',type:'object',title:'Company logo',descr:'Some descr',
+         props:[
+             {name:'image',type:'string.img',title:'Image'},
+             {name:'link',type:'string.url', title:'Link'}
+         ]},
+        // Menu items
         {name:'menus', type:'array', default: [{text:'laptops'},{text:'desktops'},{text:'servers'},{text:'swag'}],
-         props:[{name:'text', type:'string', title:'Text', descr:'Text of menu'},
-                {name:'link', type:'string.url', title:'Link', descr:'Link of menu'}],
-         title:'Menu items', descr:'Entries in the menu'},
+         title:'Menu items', descr:'Entries in the menu',
+         props:[
+            {name:'text', type:'string', title:'Text', descr:'Text of menu'},
+            {name:'link', type:'string.url', title:'Link', descr:'Link of menu'}
+         ]},
+        // Actions
+        {name:'actions',type:'array',title:'Actions',descr:'Some descr',
+         props: [
+             {name:'icon',type:'string',title:'Icon'},
+             {name:'link',type:'string.url',title:'Link'}
+         ]}
     ]
 }
 </script>
@@ -59,7 +70,8 @@ img {
     float: right;
     color: #574e4a;
 }
-.actions>i {
+.actions i {
     padding: 0 20px;
+    color: #574e4a;
 }
 </style>
