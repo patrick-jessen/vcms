@@ -5,7 +5,7 @@
   <Hierarchy/>
 
   <div class='ui dividing large header'>Properties</div>
-  <PropertyTable :properties='properties'/>
+  <PropertyTable name='properties' :properties='properties'/>
 
   </div>
 </div>

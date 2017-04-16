@@ -1,9 +1,9 @@
 <template>
 <table class='ui striped table'>
-  <tr v-for='p in properties' :title='p.descr'>
+  <tr v-for='p in properties' :title='p.descr' :key='p'>
     <td>{{p.title}}</td>
     <!--<td>{{p.value}}</td>-->
-    <td><Property :property='p' @change='propertyChange(p,$event)'/></td>
+    <td><Property :name='p.name' :property='p' @change='propertyChange(p,$event)'/></td>
   </tr>
 </table>
 </template>

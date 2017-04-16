@@ -1,41 +1,29 @@
-<template>
-<div class='ui item'>
-  <component :is='type' :property='property'/>
-</div>
-</template>
-
 <script>
-export default {
-  props: [
-    'property'
-  ],
-  computed: {
-    type() {
-      switch(this.property.type) {
-        case 'string':
-          return 'TextProperty'
-        case 'select':
-          return 'OptionsProperty'
-        case 'array':
-          return 'ArrayProptery'
-      }
-    },
-  },
-  methods: {
-    onChange(e) {
-      this.$emit('change', e.target.value)
-    },
-    onClick(e) {
-      if(this.property.type !== 'toggle')
-        return
+var ArrayProperty = require('./properties/ArrayProperty.vue')
+var OptionsProperty = require('./properties/OptionsProperty.vue')
+var TextProperty = require('./properties/TextProperty.vue')
 
-      this.$emit('change', e.target.checked)
+export default {
+  functional: true,
+  props: ['property'],
+
+  render(createElement, ctx) {
+    var type = ctx.props.property.type.split('.')[0]
+    switch(type) {
+      case 'string':
+        type = TextProperty
+        break
+      case 'select':
+        type = OptionsProperty
+        break
+      case 'array':
+        type = ArrayProperty
+        break
     }
+
+    ctx.data.attrs['property'] = ctx.props.property
+
+    return createElement(type, ctx.data)
   },
-  components: {
-    ArrayProptery: require('./properties/ArrayProperty.vue'),
-    OptionsProperty: require('./properties/OptionsProperty.vue'),
-    TextProperty: require('./properties/TextProperty.vue')
-  }
 }
 </script>

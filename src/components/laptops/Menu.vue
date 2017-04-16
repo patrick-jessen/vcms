@@ -19,13 +19,13 @@
 <script>
 export default {
     static: [
-        {name:'logoLink', type:'string', default:'http://google.com',
+        {name:'logoLink', type:'string.url', default:'http://google.com',
          title: 'Logo link', descr: 'Link when clicking logo'},
-        {name:'logo', type:'string', default: 'https://d1vhcvzji58n1j.cloudfront.net/assets/logo-1c27efee7b.png',
+        {name:'logo', type:'string.img', default: 'https://d1vhcvzji58n1j.cloudfront.net/assets/logo-1c27efee7b.png',
          title: 'Logo image', descr: 'Image to display as logo'},
         {name:'menus', type:'array', default: [{name:'laptops'},{name:'desktops'},{name:'servers'},{name:'swag'}],
-         props:[{name:'name', title:'Name', descr:'Name of menu'},
-                {name:'link', title:'Link', descr:'Link of menu'}],
+         props:[{name:'name', type:'string', title:'Name', descr:'Name of menu'},
+                {name:'link', type:'string,url', title:'Link', descr:'Link of menu'}],
          title:'Menu items', descr:'Entries in the menu'},
     ]
 }

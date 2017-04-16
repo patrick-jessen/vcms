@@ -1,6 +1,9 @@
 <template>
-  <select class='ui dropdown'>
-    <option v-for='o in property.options' :selected='isSelected'>{{o}}</option>
+  <select class='ui dropdown' @input='onChange'>
+    <option v-for='o in property.options' 
+      :selected='isSelected'>
+        {{o}}
+    </option>
   </select>
 </template>
 
@@ -12,6 +15,10 @@ export default {
       if(options === property.value)
         return true
       return false
+    },
+    onChange(e) {
+      console.log('aaaa', e)
+      this.$emit('change', e.target.value)
     }
   }
 }
