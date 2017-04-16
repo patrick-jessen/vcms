@@ -24,20 +24,29 @@ export default {
          props:[
              {name:'image',type:'string.img',title:'Image'},
              {name:'link',type:'string.url', title:'Link'}
-         ]},
+         ],
+         render: function(item) {
+             return `<img src='` + item.image + `'>`
+         }},
         // Menu items
         {name:'menus', type:'array', default: [{text:'laptops'},{text:'desktops'},{text:'servers'},{text:'swag'}],
          title:'Menu items', descr:'Entries in the menu',
          props:[
             {name:'text', type:'string', title:'Text', descr:'Text of menu'},
             {name:'link', type:'string.url', title:'Link', descr:'Link of menu'}
-         ]},
+         ],
+         render: function(item) {
+           return item.text + ','  
+         }},
         // Actions
         {name:'actions',type:'array',title:'Actions',descr:'Some descr',
          props: [
              {name:'icon',type:'string',title:'Icon'},
              {name:'link',type:'string.url',title:'Link'}
-         ]}
+         ],
+         render: function(item) {
+             return `<i class='icon ` + item.icon + `'></i>`
+         }}
     ]
 }
 </script>

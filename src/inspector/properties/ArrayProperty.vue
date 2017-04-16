@@ -3,22 +3,50 @@
 
   <div class='title' @click='toggle'>
     <i :class='icon'></i>
-    {{property.title}}
+    <template v-if='property.render'>
+      <template v-if='property.type === "array"'>
+        <template v-for='p in property.value'>
+          <span v-html='property.render(p)'></span>
+        </template>
+      </template>
+      <template v-else>
+        <span v-html='property.render(property.value)'></span>
+      </template>
+    </template>
+    <template v-else>
+      {{property.title}}
+    </template>
   </div>
 
-  <table v-if='expanded' class='ui striped table'>
-    <template v-for='(p, i) in items'>
-      <th v-if='items.length > 1'>Item #{{i}}</th>
-      <tr v-for='pd in property.props' :title='pd.descr'>
-        <td>
-          {{pd.title}}
-        </td>
-        <td>
-          <Property :property='childProp(pd, p)' @change='onChange(pd, i, $event)'/>
-        </td>
-      </tr>
+  <template v-if='expanded'>
+    <template v-if='property.type === "array"'>
+      <template v-for='(p, i) in property.value'>
+        Item {{i}}
+        <table>
+          <tr v-for='pd in property.props' :title='pd.descr'>
+            <td>
+              {{pd.title}}
+            </td>
+            <td>
+              <Property :property='childProp(pd, p)' @change='onChange(pd, i, $event)'/>
+            </td>
+          </tr>
+        </table>
+      </template>
     </template>
-  </table>
+    <template v-else>
+      <table>
+        <tr v-for='pd in property.props' :title='pd.descr'>
+          <td>
+            {{pd.title}}
+          </td>
+          <td>
+            <Property :property='childProp(pd, property.value)' @change='onChange(pd, 0, $event)'/>
+          </td>
+        </tr>
+      </table>
+    </template>
+  </template>
 </div>
 </template>
 
@@ -37,12 +65,6 @@ export default {
       else
         return 'caret right icon'
     },
-    items() {
-      if(this.property.type === 'array')
-        return this.property.value
-  
-      return [this.property.value]
-    }
   },
   beforeCreate() {
     this.$options.components.Property = require('../Property.vue')
@@ -69,5 +91,11 @@ export default {
 <style scoped>
 .title {
   cursor: pointer;
+}
+</style>
+<style>
+.title img {
+  max-width: 80%;
+  max-height: 25px;
 }
 </style>
