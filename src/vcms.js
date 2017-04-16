@@ -111,7 +111,7 @@ export default function plugin(Vue) {
         static: comp.static ? comp.static : [],
         children: comp.children ? comp.children : []
       }
-    }
+    },
   }
 
 

@@ -5,18 +5,7 @@
   <Hierarchy/>
 
   <div class='ui dividing large header'>Properties</div>
-  <Property v-for='(p, idx) in properties' :property='p' @change='propertyChange(p, $event)' :key='p'></Property>
-
-  <table class='ui striped table'>
-    <tr>
-      <td>Some property</td>
-      <td>Some value</td>
-    </tr>
-    <tr>
-      <td>Some property</td>
-      <td>Some value</td>
-    </tr>
-  </table>
+  <PropertyTable :properties='properties'/>
 
   </div>
 </div>
@@ -74,7 +63,9 @@ export default {
           name: '$type',
           type: 'select',
           options: matchingTypes,
-          value: 'None'
+          value: 'None',
+          title: 'Component type',
+          descr: 'Type of component'
         }]
       }
 
@@ -82,7 +73,9 @@ export default {
           name: '$type',
           type: 'select',
           options: matchingTypes,
-          value: store.$type
+          value: store.$type,
+          title: 'Component type',
+          descr: 'Type of component'
         }]
 
       var compDef = window.vcms.components[store.$type].static
@@ -98,57 +91,9 @@ export default {
       return inspectorArr
     }
   },
-
-  methods: {
-    propertyChange(p, v) {
-      var store = window.vcms.utils.getStore(this.selected)
-
-      if(p.name === '$type') {
-        if(!store) {
-          var name = this.selected.split('/').slice(-1)[0]
-          var parent = this.selected.split('/').slice(0, -1).join('/')
-          var type = v
-
-          var obj = {
-            $type: type
-          }
-
-          // copy defaults
-          var compDef = window.vcms.components[type]
-          if(compDef.static) {
-            compDef.static.forEach((s) => {
-              obj[s.name] = s.default
-            })
-          }
-
-          var parentStore = window.vcms.utils.getStore(parent)
-          if(!parentStore.$children)
-            this.$set(parentStore, '$children', {})
-
-          this.$set(parentStore.$children, name, obj)
-        }
-        else {
-          store.$type = v
-
-          // copy defaults (if value does not already exist)
-          var compDef = window.vcms.components[v]
-          if(compDef.static) {
-            compDef.static.forEach((s) => {
-              if(!store[s.name])
-                this.$set(store, s.name, s.default)
-            })
-          }
-        }
-      }
-      else {
-        this.$set(store, p.name, v)
-      }
-    }
-
-  },
   components: {
-    Property: require('./Property.vue'),
-    Hierarchy: require('./Hierarchy.vue')
+    Hierarchy: require('./Hierarchy.vue'),
+    PropertyTable: require('./PropertyTable.vue')
   },
 }
 </script>

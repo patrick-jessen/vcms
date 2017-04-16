@@ -19,9 +19,12 @@
 <script>
 export default {
     static: [
-        {name:'logoLink', type:'string', default:'http://google.com'},
-        {name:'logo', type:'string', default: 'https://d1vhcvzji58n1j.cloudfront.net/assets/logo-1c27efee7b.png'},
-        {name:'menus', type:'string', default: ['laptops','desktops','servers','swag']},
+        {name:'logoLink', type:'string', default:'http://google.com',
+         title: 'Logo link', descr: 'Link when clicking logo'},
+        {name:'logo', type:'string', default: 'https://d1vhcvzji58n1j.cloudfront.net/assets/logo-1c27efee7b.png',
+         title: 'Logo image', descr: 'Image to display as logo'},
+        {name:'menus', type:'string', default: ['laptops','desktops','servers','swag'],
+         title:'Menu items', descr:'Entries in the menu'},
     ]
 }
 </script>
