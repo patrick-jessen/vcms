@@ -54,8 +54,6 @@ export default {
         }
       }
       else {
-
-        console.log('store is', store, p.name, v)
         this.$set(store, p.name, v)
       }
     }

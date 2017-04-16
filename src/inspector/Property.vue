@@ -1,15 +1,6 @@
 <template>
 <div class='ui item'>
-  <div class='ui small header'>{{name}}</div>
-  <div :class='wrapperClass'>
-    <component 
-      :is='type'
-      v-bind='attr' 
-      v-html='cont' 
-      @input='onChange' 
-      @click='onClick'>
-    </component>
-  </div>
+  <component :is='type' :property='property'/>
 </div>
 </template>
 
@@ -22,63 +13,13 @@ export default {
     type() {
       switch(this.property.type) {
         case 'string':
-          return 'input'
+          return 'TextProperty'
         case 'select':
-          return 'select'
-        case 'toggle':
-          return 'input'
+          return 'OptionsProperty'
+        case 'array':
+          return 'ArrayProptery'
       }
     },
-    attr() {
-      switch(this.property.type) {
-        case 'string':
-          return {
-            value: this.property.value
-          }
-        case 'select':
-          return {
-            class: 'ui dropdown'
-          }
-        case 'toggle':
-          return {
-            type: 'checkbox',
-            checked: this.property.value
-          }
-      }
-    },
-    cont() {
-      switch(this.property.type) {
-        case 'select': {
-          var options = this.property.options
-          var str = '';
-
-          for(var i = 0; i < options.length; i++) {
-            if(options[i] === this.property.value)
-              str += '<option selected="selected">' + options[i] + '</option>'
-            else  
-              str += '<option>' + options[i] + '</option>'
-          }
-          return str
-        }
-      }
-    },
-    wrapperClass() {
-      switch(this.property.type) {
-        case 'string':
-          return 'ui input'
-        case 'toggle':
-          return ''//ui slider checkbox'
-      }
-    },
-    name() {
-      return this.property.name
-        // insert a space before all caps
-        .replace(/([A-Z])/g, ' $1')
-        // convert to lowercase
-        .toLowerCase()
-        // uppercase the first character
-        .replace(/^./, function(str){ return str.toUpperCase(); })
-    }
   },
   methods: {
     onChange(e) {
@@ -90,6 +31,11 @@ export default {
 
       this.$emit('change', e.target.checked)
     }
+  },
+  components: {
+    ArrayProptery: require('./properties/ArrayProperty.vue'),
+    OptionsProperty: require('./properties/OptionsProperty.vue'),
+    TextProperty: require('./properties/TextProperty.vue')
   }
 }
 </script>

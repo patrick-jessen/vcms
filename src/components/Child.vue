@@ -8,7 +8,6 @@ export default {
     context.data.attrs.name = context.props.name
 
     var namespace = context.parent.namespace + '/' + context.props.name
-    console.log('aaaa', namespace)
     var store = window.vcms.utils.getStore(namespace)
 
     if(!store) {

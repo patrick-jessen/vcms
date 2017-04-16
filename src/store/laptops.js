@@ -7,7 +7,7 @@ export default {
         $type: 'Menu',
         logoLink: 'http://google.com',
         logo: 'https://d1vhcvzji58n1j.cloudfront.net/assets/logo-1c27efee7b.png',
-        menus: ['laptops','desktops','servers','swag']
+        menus: [{name:'laptops'},{name:'desktops'},{name:'servers'},{name:'swag'}]
       }
     }
   }

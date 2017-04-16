@@ -43,8 +43,6 @@ export default {
         }
         if(!valid) continue
 
-        console.log('iface', iface)
-
         // check outputs
         for(var i = 0; i < iface.output.length; i++) {
           if(comp.output.indexOf(iface.output[i]) < 0) {

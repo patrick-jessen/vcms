@@ -5,7 +5,7 @@
     </a>
     <nav class='menus'>
         <a class='menu' v-for='m in menus'>
-            {{m}}
+            {{m.name}}
         </a>
     </nav>
     <nav class='ui actions'>
@@ -23,7 +23,9 @@ export default {
          title: 'Logo link', descr: 'Link when clicking logo'},
         {name:'logo', type:'string', default: 'https://d1vhcvzji58n1j.cloudfront.net/assets/logo-1c27efee7b.png',
          title: 'Logo image', descr: 'Image to display as logo'},
-        {name:'menus', type:'string', default: ['laptops','desktops','servers','swag'],
+        {name:'menus', type:'array', default: [{name:'laptops'},{name:'desktops'},{name:'servers'},{name:'swag'}],
+         props:[{name:'name', title:'Name', descr:'Name of menu'},
+                {name:'link', title:'Link', descr:'Link of menu'}],
          title:'Menu items', descr:'Entries in the menu'},
     ]
 }
