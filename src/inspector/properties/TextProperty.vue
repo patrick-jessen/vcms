@@ -1,5 +1,5 @@
 <template>
-<tr>
+<div class='tr row'>
   <td>
     <div :style='nest'>{{property.title}}</div>
   </td>
@@ -12,7 +12,7 @@
       <input :value='property.value' @input='onChange'>
     </div>
   </td>
-</tr>
+</div>
 </template>
 
 <script>
@@ -49,5 +49,8 @@ export default {
 <style scoped>
 input {
   width: 100%;
+}
+.tr { 
+  display: table-row;
 }
 </style>

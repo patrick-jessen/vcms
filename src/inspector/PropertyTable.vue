@@ -1,9 +1,9 @@
 <template>
-<table class='ui striped table'>
+<div class='ui striped table'>
   <template v-for='p in properties'>
     <Property :name='p.name' :property='p' @change='propertyChange(p,$event)' :title='p.descr' :key='p'/>
   </template>
-</table>
+</div>
 </template>
 
 <script>
@@ -63,13 +63,14 @@ export default {
 </script>
 
 <style>
-tbody:nth-child(odd) {
+.row:nth-child(odd) {
   background-color: rgba(0,0,50,.02);
 }
-tbody {
+.row {
   border: 1px solid lightgray;
 }
-table {
+.table {
   border-collapse: collapse !important;
+  display: table;
 }
 </style>

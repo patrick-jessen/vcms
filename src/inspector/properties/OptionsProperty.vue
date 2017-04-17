@@ -1,5 +1,5 @@
 <template>
-<tr>
+<div class='tr row'>
   <td>
     <div class='propname'>{{property.title}}</div>
   </td>
@@ -11,7 +11,7 @@
       </option>
     </select>
   </td>
-</tr>
+</div>
 </template>
 
 <script>
@@ -34,5 +34,8 @@ export default {
 <style scoped>
 .propname {
   margin-left: 10px !important;
+}
+.tr {
+  display: table-row;
 }
 </style>

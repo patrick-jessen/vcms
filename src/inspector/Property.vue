@@ -25,10 +25,7 @@ export default {
     ctx.data.attrs.property = ctx.props.property
     ctx.data.attrs.nested = ctx.props.nested
 
-    if(type == ArrayProperty || ctx.props.nested)
-      return createElement(type, ctx.data)
-
-    return createElement('tbody', [createElement(type, ctx.data)])
+    return createElement(type, ctx.data)
   },
 }
 </script>
