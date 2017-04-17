@@ -1,23 +1,56 @@
 <template>
-<div class='ui'>
-
-  <div class='title' @click='toggle'>
-    <i :class='icon'></i>
-    <template v-if='property.render'>
-      <template v-if='property.type === "array"'>
-        <template v-for='p in property.value'>
-          <span v-html='property.render(p)'></span>
-        </template>
-      </template>
-      <template v-else>
-        <span v-html='property.render(property.value)'></span>
-      </template>
-    </template>
-    <template v-else>
+<tbody>
+  <tr>
+    <td class='title' @click='toggle'>
+      <i :class='icon'></i>
       {{property.title}}
+    </td>
+    <td>  
+      <span v-html='preview' class='title' @click='toggle'></span>
+    </td>
+  </tr>
+  <template v-if='expanded'>
+    <template v-if='property.type === "array"'>
+      <tr v-for='(v, i) in property.value' class='child'>
+        <td>
+          <div class='props'> <i :class='icon'></i>{{i}}</div>
+        </td>
+        <td>
+        </td>
+      </tr>
+      
     </template>
-  </div>
+    <template v-else v-for='p in property.props'>
+      <Property 
+        :nested='1' 
+        :title='p.descr' 
+        :property='childProp(p, property.value)' 
+        @change='onChange(p, 0, $event)' 
+        :key='p'
+        class='child'
+        />
+    </template>
 
+
+    <!--<tr v-for='e in entries'>
+      <template v-if='property.type === "array"'>
+      </template>
+      <template v-else v-for='p in property.props'>
+        <td>
+          <div class='props'>
+          {{p}} asd
+          </div>
+        </td>
+        <td>  
+          {{p}}
+        </td>
+      </template>
+      
+    </tr>-->
+  </template>
+</tbody>
+
+<!--
   <template v-if='expanded'>
     <template v-if='property.type === "array"'>
       <template v-for='(p, i) in property.value'>
@@ -47,7 +80,7 @@
       </table>
     </template>
   </template>
-</div>
+</div>-->
 </template>
 
 <script>
@@ -64,6 +97,16 @@ export default {
         return 'caret down icon'
       else
         return 'caret right icon'
+    },
+    preview() {
+      // no render function
+      if(!this.property.render)
+        return this.property.value
+
+      return this.property.render(this.property.value)
+    },
+    keys() {
+      return Object.keys(this.property.value)
     },
   },
   beforeCreate() {
@@ -83,7 +126,7 @@ export default {
         this.$set(this.property.store[this.property.name][i], pd.name, e)
       else
         this.$set(this.property.store[this.property.name], pd.name, e)
-    }
+    },
   },
 }
 </script>
@@ -91,6 +134,26 @@ export default {
 <style scoped>
 .title {
   cursor: pointer;
+}
+.icon {
+  margin-left: -5px;
+  margin-right: -2px;
+}
+td {
+  position: relative;
+  padding-left: 10px !important;
+}
+.props {
+  margin-left: 30px;
+}
+.child:nth-child(odd) {
+  background-color: #eaffff !important;
+}
+.child:nth-child(even) {
+  background-color: #f6ffff !important;
+}
+.child:last-child {
+  border-bottom: 1px solid black !important;
 }
 </style>
 <style>

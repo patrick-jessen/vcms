@@ -35,8 +35,12 @@ export default {
             {name:'text', type:'string', title:'Text', descr:'Text of menu'},
             {name:'link', type:'string.url', title:'Link', descr:'Link of menu'}
          ],
-         render: function(item) {
-           return item.text + ','  
+         render: function(items) {
+            var str = ''
+            for(var i = 0; i < items.length - 1; i++) {
+                str += items[i].text + ', '
+            }
+            return str + items[i].text  
          }},
         // Actions
         {name:'actions',type:'array',title:'Actions',descr:'Some descr',
@@ -44,8 +48,12 @@ export default {
              {name:'icon',type:'string',title:'Icon'},
              {name:'link',type:'string.url',title:'Link'}
          ],
-         render: function(item) {
-             return `<i class='icon ` + item.icon + `'></i>`
+         render: function(items) {
+             var str = ''
+             for(var i = 0; i < items.length; i++) {
+                str += `<i class='icon ` + items[i].icon + `'></i>`
+             }
+             return str
          }}
     ]
 }

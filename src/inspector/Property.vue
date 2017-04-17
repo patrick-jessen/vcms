@@ -5,7 +5,7 @@ var TextProperty = require('./properties/TextProperty.vue')
 
 export default {
   functional: true,
-  props: ['property'],
+  props: ['property', 'nested'],
 
   render(createElement, ctx) {
     var type = ctx.props.property.type.split('.')[0]
@@ -22,9 +22,13 @@ export default {
         break
     }
 
-    ctx.data.attrs['property'] = ctx.props.property
+    ctx.data.attrs.property = ctx.props.property
+    ctx.data.attrs.nested = ctx.props.nested
 
-    return createElement(type, ctx.data)
+    if(type == ArrayProperty || ctx.props.nested)
+      return createElement(type, ctx.data)
+
+    return createElement('tbody', [createElement(type, ctx.data)])
   },
 }
 </script>

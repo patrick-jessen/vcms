@@ -1,10 +1,17 @@
 <template>
-  <select class='ui dropdown' @input='onChange'>
-    <option v-for='o in property.options' 
-      :selected='isSelected'>
-        {{o}}
-    </option>
-  </select>
+<tr>
+  <td>
+    <div class='propname'>{{property.title}}</div>
+  </td>
+  <td>
+    <select class='ui dropdown' @input='onChange'>
+      <option v-for='o in property.options' 
+        :selected='isSelected'>
+          {{o}}
+      </option>
+    </select>
+  </td>
+</tr>
 </template>
 
 <script>
@@ -23,3 +30,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.propname {
+  margin-left: 10px !important;
+}
+</style>

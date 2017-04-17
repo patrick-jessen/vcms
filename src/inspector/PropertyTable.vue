@@ -1,10 +1,8 @@
 <template>
 <table class='ui striped table'>
-  <tr v-for='p in properties' :title='p.descr' :key='p'>
-    <td>{{p.title}}</td>
-    <!--<td>{{p.value}}</td>-->
-    <td><Property :name='p.name' :property='p' @change='propertyChange(p,$event)'/></td>
-  </tr>
+  <template v-for='p in properties'>
+    <Property :name='p.name' :property='p' @change='propertyChange(p,$event)' :title='p.descr' :key='p'/>
+  </template>
 </table>
 </template>
 
@@ -63,3 +61,15 @@ export default {
   }
 }
 </script>
+
+<style>
+tbody:nth-child(odd) {
+  background-color: rgba(0,0,50,.02);
+}
+tbody {
+  border: 1px solid lightgray;
+}
+table {
+  border-collapse: collapse !important;
+}
+</style>
