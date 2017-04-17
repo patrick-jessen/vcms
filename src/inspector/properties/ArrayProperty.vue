@@ -1,6 +1,6 @@
 <template>
 <div class='trg row'>
-  <component is='td' colspan='2'>
+  <div class='td row'>
     <td class='title' @click='toggle'>
       <i :class='icon'></i>
       {{property.title}}
@@ -8,8 +8,9 @@
     <td>  
       <span v-html='preview' class='title' @click='toggle'></span>
     </td>
-  </component>
-  <template v-if='expanded'>
+  </div>
+  <td v-if='expanded' colspan='2' class='subtable'>
+    <table>
     <template v-if='property.type === "array"'>
       <!--<tr v-for='(v, i) in property.value' class='child'>
         <td>
@@ -56,7 +57,8 @@
       </template>
       
     </tr>-->
-  </template>
+    </table>
+  </td>
 </div>
 
 <!--
@@ -190,6 +192,16 @@ tbody.child {
 }
 .trg.child .row {
    display: table-row;
+}
+.td {
+  display: table-row;
+}
+
+.subtable {
+  padding: 0 !important;
+}
+.subtable table {
+  width: 100%;
 }
 
 </style>

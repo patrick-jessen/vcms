@@ -6,7 +6,7 @@
 
   <div class='ui dividing large header'>Properties</div>
   <PropertyTable name='properties' :properties='properties'/>
-
+  <PropertyTable2/>
   </div>
 </div>
 
@@ -92,7 +92,8 @@ export default {
   },
   components: {
     Hierarchy: require('./Hierarchy.vue'),
-    PropertyTable: require('./PropertyTable.vue')
+    PropertyTable: require('./PropertyTable.vue'),
+    PropertyTable2: require('./PropertyTable2.vue')
   },
 }
 </script>
