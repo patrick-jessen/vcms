@@ -21,7 +21,8 @@
         :key='p'
         class='child'
         />
-        </template>
+      </template>
+      <button @click='onAdd'>Add</button><button @click='onRemove'>Remove</button>
     </template>
     <template v-else v-for='p in property.props'>
       <Property 
@@ -33,58 +34,9 @@
         class='child'
         />
     </template>
-
-
-    <!--<tr v-for='e in entries'>
-      <template v-if='property.type === "array"'>
-      </template>
-      <template v-else v-for='p in property.props'>
-        <td>
-          <div class='props'>
-          {{p}} asd
-          </div>
-        </td>
-        <td>  
-          {{p}}
-        </td>
-      </template>
-      
-    </tr>-->
     </table>
   </td>
 </div>
-
-<!--
-  <template v-if='expanded'>
-    <template v-if='property.type === "array"'>
-      <template v-for='(p, i) in property.value'>
-        Item {{i}}
-        <table>
-          <tr v-for='pd in property.props' :title='pd.descr'>
-            <td>
-              {{pd.title}}
-            </td>
-            <td>
-              <Property :property='childProp(pd, p)' @change='onChange(pd, i, $event)'/>
-            </td>
-          </tr>
-        </table>
-      </template>
-    </template>
-    <template v-else>
-      <table>
-        <tr v-for='pd in property.props' :title='pd.descr'>
-          <td>
-            {{pd.title}}
-          </td>
-          <td>
-            <Property :property='childProp(pd, property.value)' @change='onChange(pd, 0, $event)'/>
-          </td>
-        </tr>
-      </table>
-    </template>
-  </template>
-</div>-->
 </template>
 
 <script>
@@ -133,7 +85,6 @@ export default {
           value: prop[i],
           render: (item) => {return this.property.render([item])},
           store: this.property.store[this.property.name][i],
-          
         }
       }
       return obj
@@ -142,9 +93,19 @@ export default {
       if(this.property.type === 'array')
         this.$set(this.property.store[this.property.name][i], pd.name, e)
       else {
-        console.log(this.property.store, pd.name, e)
         this.$set(this.property.store, pd.name, e)
       }
+    },
+    onAdd() {
+      var obj = {}
+      for(var i = 0; i < this.property.props.length; i++) {
+        obj[this.property.props[i].name] = this.property.props[i].default
+      }
+
+      this.property.value.push(obj)
+    },
+    onRemove() {
+      this.property.value.pop()
     },
   },
 }

@@ -45,8 +45,8 @@ export default {
         // Actions
         {name:'actions',type:'array',title:'Actions',descr:'Some descr',
          props: [
-             {name:'icon',type:'string',title:'Icon'},
-             {name:'link',type:'string.url',title:'Link'}
+             {name:'icon',type:'string',title:'Icon', default:'comments'},
+             {name:'link',type:'string.url',title:'Link',default:'/'}
          ],
          render: function(items) {
              var str = ''
