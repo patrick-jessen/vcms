@@ -12,19 +12,12 @@
   <td v-if='expanded' colspan='2' class='subtable'>
     <table>
     <template v-if='property.type === "array"'>
-      <!--<tr v-for='(v, i) in property.value' class='child'>
-        <td>
-          <div class='props'> <i :class='icon'></i>{{i}}</div>
-        </td>
-        <td>
-        </td>
-      </tr>-->
       <template v-for='(p, i) in property.value'>
       <Property 
         :nested='1' 
         :title='p.descr' 
         :property='childProp(property.props, i, property.value)' 
-        @change='onChange(p, 0, $event)' 
+        @change='onChange(p, i, $event)' 
         :key='p'
         class='child'
         />
@@ -136,18 +129,22 @@ export default {
         return {
           title:'Item ' + i, 
           type:'object',
-          props:propDef,
+          props: propDef,
           value: prop[i],
-          render: (item) => {return this.property.render([item])}
-        }  
+          render: (item) => {return this.property.render([item])},
+          store: this.property.store[this.property.name][i],
+          
+        }
       }
       return obj
     },
     onChange(pd, i, e) {
       if(this.property.type === 'array')
         this.$set(this.property.store[this.property.name][i], pd.name, e)
-      else
-        this.$set(this.property.store[this.property.name], pd.name, e)
+      else {
+        console.log(this.property.store, pd.name, e)
+        this.$set(this.property.store, pd.name, e)
+      }
     },
   },
 }
