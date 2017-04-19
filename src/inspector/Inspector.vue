@@ -6,6 +6,8 @@
 
   <div class='ui dividing large header'>Properties</div>
   <PropertyTable name='properties' :properties='properties'/>
+
+  <button @click='performSave'>SAVE</button>
   </div>
 </div>
 
@@ -93,6 +95,24 @@ export default {
     Hierarchy: require('./Hierarchy.vue'),
     PropertyTable: require('./PropertyTable.vue')
   },
+  methods: {
+    performSave() {
+      console.log('save')
+
+      var http = new XMLHttpRequest();
+      var url ='http://localhost:1337/'
+      var params = 'store=' + JSON.stringify(window.vcms.utils.getStore(''))
+      http.open('POST', url, true);
+      http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+      http.onreadystatechange = function() {
+        if(http.readyState == 4 && http.status == 200) {
+          console.log("SUCCESS", http.responseText)
+        }
+      }
+      http.send(params)
+    }
+  }
 }
 </script>
 

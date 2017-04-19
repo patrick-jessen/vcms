@@ -13,37 +13,29 @@ export default {
         },
         "menus": [
           {
-            "text": "laptops",
-            "link": "laptops"
+            "text": "laptops"
           },
           {
-            "text": "desktops",
-            "link": "desktops"
+            "text": "desktops"
           },
           {
-            "text": "servers",
-            "link": "servers"
+            "text": "servers"
           },
           {
-            "text": "swag",
-            "link": "swag"
+            "text": "swag"
           }
         ],
         "actions": [
           {
-            "icon": "comments",
-            "link": "contact"
+            "icon": "comment"
           },
           {
-            "icon": "life ring",
-            "link": "support"
+            "icon": "life ring"
           },
           {
-            "icon": "user",
-            "link": "my-account"
+            "icon": "user"
           }
-        ],
-        "link": "#"
+        ]
       }
     }
   }
