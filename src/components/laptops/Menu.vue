@@ -140,7 +140,6 @@ export default {
   display: inline-block;
   margin-right: 70px;
 }
-
 img {
   height: 52px;
 }
@@ -150,7 +149,6 @@ img {
   display: inline-block;
   margin-top: 15px;
 }
-
 .menu {
   padding: 20px;
   font-size: 16px;
@@ -163,7 +161,6 @@ img {
   float: right;
   color: #574e4a;
 }
-
 .actions i {
   padding: 0 20px;
   color: #574e4a;

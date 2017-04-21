@@ -1,6 +1,6 @@
 export default {
   "inspector": {
-    "selected": "app/menu"
+    "selected": "app/hero"
   },
   "app": {
     "$type": "App",
@@ -41,6 +41,31 @@ export default {
           {
             "icon": "user",
             "link": "my-account"
+          }
+        ]
+      },
+      "hero": {
+        "$type": "Hero",
+        "items": [
+          {
+            "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/gaze12/hero_wide_1280-e5a14a6c72.jpg",
+            "link": "#"
+          },
+          {
+            "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/oryp3/hero_wide_1280-02cc3e6cba.jpg",
+            "link": "#"
+          },
+          {
+            "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/kudu4/hero_wide_1280-d3924b7405.jpg",
+            "link": "#"
+          },
+          {
+            "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/galp2/hero_wide_1280-f762ff343f.jpg",
+            "link": "#"
+          },
+          {
+            "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/lemu7/hero_wide_1280-cbc61456c5.jpg",
+            "link": "#"
           }
         ]
       }

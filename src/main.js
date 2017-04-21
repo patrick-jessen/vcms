@@ -24,6 +24,7 @@ window.componentNames = [
   'Child',
   'Property',
   'laptops/Menu',
+  'laptops/Hero',
 ]
 window.vcms.utils.registerComponent('App', require('./Laptops.vue'))
 window.componentNames.forEach((name) => {

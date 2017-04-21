@@ -2,6 +2,7 @@
 <div>
 <div class='app'>
     <Child name='menu'/>
+    <Child name='hero'/>
 </div>
 </div>
 </template>
@@ -9,7 +10,8 @@
 <script>
 export default {
     children: [
-        {name: 'menu'}
+        {name: 'menu'},
+        {name: 'hero'}
     ]
 }
 </script>
