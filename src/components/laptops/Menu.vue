@@ -13,7 +13,7 @@
     </Property>
   
     <!-- Actions -->
-    <Property prop='actions' type='nav' class='ui actions'>
+    <Property prop='actions' type='nav' class='ui actions' :class='{lel:true}'>
       <a v-for='a in actions' :href='a.link'>
         <i class='icon' :class='a.icon'></i>
       </a>

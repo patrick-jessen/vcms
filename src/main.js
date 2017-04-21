@@ -10,7 +10,8 @@ window.vue = new Vue({
       createElement('Inspector')])
   },
   data: {
-    _store: Store  
+    _store: Store,
+    ctrl: false
   },
   components: {
     App: require('./Laptops.vue'),
@@ -33,3 +34,14 @@ window.componentNames.forEach((name) => {
 })
 
 window.vue.$mount('#app')
+
+window.addEventListener("keydown", function(event) {
+    if (event.keyCode == 17) {
+        window.vue.$data.ctrl = true
+    }
+}, false);
+window.addEventListener("keyup", function(event) {
+    if (event.keyCode == 17) {
+        window.vue.$data.ctrl = false
+    }
+}, false);
