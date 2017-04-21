@@ -6,7 +6,7 @@ Vue.use(Vcms)
 window.vue = new Vue({
   render(createElement) {
     return createElement('div', {attrs:{class:'ui grid',style:'height:100%'}},
-     [createElement('App', {attrs:{name:'app', class:'ui eleven wide column'}}),
+     [createElement('App', {attrs:{name:'app', class:'ui eleven wide column', style:'padding:14px 0 0 14px'}}),
       createElement('Inspector')])
   },
   data: {

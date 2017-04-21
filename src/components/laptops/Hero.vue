@@ -18,7 +18,7 @@ export default {
       this.currentIndex ++
       if(this.currentIndex == this.items.length)
         this.currentIndex = 0
-    }, 1000)
+    }, 5000)
   },
   destroyed() {
     clearInterval(this.interval)
@@ -74,9 +74,15 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .hero {
   height: 400px;
   background-color: white;
+}
+img {
+  width: 100%;
+}
+a {
+  display: block;
 }
 </style>
