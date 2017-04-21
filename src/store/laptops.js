@@ -42,8 +42,7 @@ export default {
             "icon": "user",
             "link": "my-account"
           }
-        ],
-        "link": "#"
+        ]
       }
     }
   }

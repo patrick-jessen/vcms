@@ -73,10 +73,6 @@ export default {
       this.expanded = !this.expanded
     },
     childProp(propDef, i, prop) {
-      var obj = Object.assign({}, propDef)
-      obj.value = prop[propDef.name]
-
-
       if(this.property.type === 'array') {
         return {
           title:'Item ' + i, 
@@ -87,21 +83,23 @@ export default {
           store: this.property.store[this.property.name][i],
         }
       }
+
+      var obj = Object.assign({}, propDef)
+      obj.value = prop[propDef.name]
+      obj.store = this.property.store[this.property]
+
       return obj
     },
     onChange(pd, i, e) {
-      if(this.property.type === 'array')
-        this.$set(this.property.store[this.property.name][i], pd.name, e)
-      else {
+      //tempoary hack
+      console.log(this.property.store[this.property.name], pd.name)
+      if(!this.property.store[pd.name])
+        this.$set(this.property.store[this.property.name], pd.name, e)  
+      else
         this.$set(this.property.store, pd.name, e)
-      }
     },
     onAdd() {
-      var obj = {}
-      for(var i = 0; i < this.property.props.length; i++) {
-        obj[this.property.props[i].name] = this.property.props[i].default
-      }
-
+      var obj = this.property.defaultItem
       this.property.value.push(obj)
     },
     onRemove() {
