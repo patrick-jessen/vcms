@@ -6,7 +6,7 @@
   <td>
     <select class='ui dropdown' @input='onChange'>
       <option v-for='o in property.options' 
-        :selected='isSelected'>
+        :selected='isSelected(o)'>
           {{o}}
       </option>
     </select>
@@ -19,7 +19,7 @@ export default {
   props: ['property'],
   methods: {
     isSelected(option) {
-      if(options === property.value)
+      if(option === this.property.value)
         return true
       return false
     },

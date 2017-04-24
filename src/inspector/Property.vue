@@ -2,6 +2,7 @@
 var ArrayProperty = require('./properties/ArrayProperty.vue')
 var OptionsProperty = require('./properties/OptionsProperty.vue')
 var TextProperty = require('./properties/TextProperty.vue')
+var NumberProperty = require('./properties/NumberProperty.vue')
 
 export default {
   functional: true,
@@ -20,6 +21,9 @@ export default {
       case 'object':
         type = ArrayProperty
         break
+
+      case 'number':
+        type = NumberProperty
     }
 
     ctx.data.attrs.property = ctx.props.property
