@@ -1,6 +1,6 @@
 export default {
   "inspector": {
-    "selected": "app/hero"
+    "selected": "app/content"
   },
   "app": {
     "$type": "App",
@@ -70,6 +70,9 @@ export default {
         ],
         "duration": "5000",
         "transition": "fade"
+      },
+      "content": {
+        "$type": "ProductList"
       }
     }
   }

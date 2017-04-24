@@ -3,6 +3,7 @@
 <div class='app'>
     <Child name='menu'/>
     <Child name='hero'/>
+    <Child name='content'/>
 </div>
 </div>
 </template>
@@ -11,7 +12,8 @@
 export default {
     children: [
         {name: 'menu'},
-        {name: 'hero'}
+        {name: 'hero'},
+        {name: 'content'}
     ]
 }
 </script>
