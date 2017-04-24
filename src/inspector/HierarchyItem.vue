@@ -2,7 +2,7 @@
 <div class='item link' @click='onClick' :class='{disable:!data}'>
   <i class='cube icon'></i>
   <div class='content'>
-    <div class='header' :class='{selected:isSelected}'>{{name}}</div>
+    <div class='header' :class='{selected:isSelected}'>{{nameStr}}</div>
     <template v-if='data'>
       <div class='list' v-if='childrenKeys.length > 0'>
         <HierarchyItem v-for='c in childrenKeys' :name='c' :data='child(c)' :key='c'/>
@@ -20,9 +20,9 @@ export default {
   },
   created() {
     if(this.$parent.namespace.length > 0)
-      this.namespace = this.$parent.namespace + '/' + this.name
+      this.namespace = this.$parent.namespace + '/' + this.nameStr()
     else
-      this.namespace = this.name
+      this.namespace = this.nameStr()
   },
   computed: {
     childrenKeys() {     
@@ -35,11 +35,20 @@ export default {
         return []
         
       return def.map((c) => {
+        if(typeof c.name === 'function')
+          return c.name()
         return c.name
       })
     },
     isSelected() {
       return window.vue.$data._store.inspector.selected === this.namespace
+    },
+    nameStr() {
+      if(typeof this.name === 'function') {
+        console.log("name is function", this.name())
+        return this.name();
+      }
+      return this.name
     }
   },
   methods: {

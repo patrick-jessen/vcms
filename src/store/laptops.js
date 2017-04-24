@@ -44,35 +44,40 @@ export default {
           }
         ]
       },
-      "hero": {
-        "$type": "Hero",
-        "items": [
-          {
-            "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/gaze12/hero_wide_1280-e5a14a6c72.jpg",
-            "link": "#0"
+      "laptops": {
+        "$type": "Laptops",
+        "$children": {
+          "hero": {
+            "$type": "Hero",
+            "items": [
+              {
+                "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/gaze12/hero_wide_1280-e5a14a6c72.jpg",
+                "link": "#0"
+              },
+              {
+                "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/oryp3/hero_wide_1280-02cc3e6cba.jpg",
+                "link": "#1"
+              },
+              {
+                "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/kudu4/hero_wide_1280-d3924b7405.jpg",
+                "link": "#2"
+              },
+              {
+                "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/galp2/hero_wide_1280-f762ff343f.jpg",
+                "link": "#3"
+              },
+              {
+                "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/lemu7/hero_wide_1280-cbc61456c5.jpg",
+                "link": "#4"
+              }
+            ],
+            "duration": "5000",
+            "transition": "fade"
           },
-          {
-            "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/oryp3/hero_wide_1280-02cc3e6cba.jpg",
-            "link": "#1"
-          },
-          {
-            "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/kudu4/hero_wide_1280-d3924b7405.jpg",
-            "link": "#2"
-          },
-          {
-            "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/galp2/hero_wide_1280-f762ff343f.jpg",
-            "link": "#3"
-          },
-          {
-            "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/lemu7/hero_wide_1280-cbc61456c5.jpg",
-            "link": "#4"
+          "content": {
+            "$type": "ProductList"
           }
-        ],
-        "duration": "5000",
-        "transition": "fade"
-      },
-      "content": {
-        "$type": "ProductList"
+        }
       }
     }
   }
