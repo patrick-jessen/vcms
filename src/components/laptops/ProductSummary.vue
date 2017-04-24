@@ -1,15 +1,15 @@
 <template>
-<a class='wrapper' href='#'>
-  <h3>Lemur <span class='display-size'>14"</span></h3>
-  <h4 class='price'>$699<span class='note'>NEW MODEL</span></h4>
-  <h5 class='price-finance'>starting at $62/month</h5>
-  <img class='image' src='https://d1vhcvzji58n1j.cloudfront.net/assets/products/lemu7/thumb-91f3e173bd.png'>
+<a class='wrapper' :href='laptop.link'>
+  <h3>{{laptop.name}} <span class='display-size'>{{laptop.displaySize}}</span></h3>
+  <h4 class='price'>{{laptop.price}}<span class='note'>{{laptop.note}}</span></h4>
+  <h5 class='price-finance'>starting at {{laptop.finance}}/month</h5>
+  <img class='image' :src='laptop.smallImage'>
 
-  <div v-for='m in meters'>
+  <div v-for='(m, i) in laptop.meters'>
     <div class='progress'>
-      <span class='meter' :style='"width:" + m.value + "%;"'></span>
+      <span class='meter' :style='"width:" + m + "%;"'></span>
     </div>
-    <h5>{{m.name}}</h5>
+    <h5>{{meterNames[i]}}</h5>
   </div>
 
 </a>
@@ -17,14 +17,10 @@
 
 <script>
 export default {
+  props: ['laptop'],
   data() {
     return {
-      meters: [
-        {name:'PORTABILITY', value: 80},
-        {name:'STORAGE', value: 80},
-        {name:'GRAPHICS PERFORMANCE', value: 80},
-        {name:'CPU PERFORMANCE', value: 80}
-      ]
+      meterNames: ['PORTABILITY', 'STORAGE', 'GRAPHICS PERFORMANCE', 'CPU PERFORMANCE']
     }
   }
 }
@@ -33,7 +29,7 @@ export default {
 <style scoped>
 .wrapper {
   padding: 5px;
-  margin: 10px;
+  margin: 15px;
   display: inline-block;
   width: 250px;
 }
@@ -72,13 +68,13 @@ h3 {
   width: 100%;
 }
 .progress {
-  height: 10px;
+  height: 7px;
   background-color: rgb(246, 246, 246);
   position: relative;
 }
 .meter {
   display: inline-block;
-  height: 10px;
+  height: 7px;
   background-color: rgb(250, 164, 26);
   position: absolute;
 }
@@ -87,6 +83,6 @@ h5 {
   font-weight: 100;
   font-family: sans-serif;
   color: #574e4a;
-  margin: 0 0 10px 0;
+  margin: 0 0 15px 0;
 }
 </style>
