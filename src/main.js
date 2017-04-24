@@ -1,7 +1,16 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+
 import Vcms from './vcms.js'
 import Store from './store/laptops'
+import routes from './routes.js'
 Vue.use(Vcms)
+
+var router = new VueRouter({
+  mode: 'history',
+  routes: routes
+})
 
 window.vue = new Vue({
   render(createElement) {
@@ -17,6 +26,7 @@ window.vue = new Vue({
     App: require('./Laptops.vue'),
     Inspector: require('./inspector/Inspector.vue')
   },
+  router
 })
 
 window.componentNames = [

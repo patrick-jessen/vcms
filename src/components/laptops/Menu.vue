@@ -1,22 +1,22 @@
 <template>
   <div class='wrapper'>
     <!-- Company logo -->
-    <Property prop='logo' type='a' class='logo' :href='logo.link'>
+    <Property prop='logo' type='router-link' class='logo' :to='logo.link'>
       <img :src='logo.image'>
     </Property>
   
     <!-- Menu items -->
     <Property prop='menus' type='nav' class='menus'>
-      <a class='menu' v-for='m in menus' :href='m.link'>
+      <router-link class='menu' v-for='m in menus' :to='m.link' :key='m'>
         {{m.text}}
-      </a>
+      </router-link>
     </Property>
   
     <!-- Actions -->
     <Property prop='actions' type='nav' class='ui actions' :class='{lel:true}'>
-      <a v-for='a in actions' :href='a.link'>
+      <router-link v-for='a in actions' :to='a.link' :key='a'>
         <i class='icon' :class='a.icon'></i>
-      </a>
+      </router-link>
     </Property>
   </div>
 </template>

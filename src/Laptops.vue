@@ -2,8 +2,10 @@
 <div>
 <div class='app'>
     <Child name='menu'/>
+    <router-view></router-view>
     <Child name='hero'/>
     <Child name='content'/>
+
 </div>
 </div>
 </template>

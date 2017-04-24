@@ -172,6 +172,6 @@ a {
   transition: transform 1s ease;
 }
 .slidein-enter {
-  transform: translateX(-60%);
+  transform: translateX(-50%);
 }
 </style>

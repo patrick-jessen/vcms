@@ -1,7 +1,7 @@
 <template>
 <div class='wrapper'>
   <div class='innerwrapper'>
-    <ProductSummary v-for='i in items' :laptop='i'/>
+    <ProductSummary v-for='i in items' :laptop='i' :key='i'/>
   </div>
 </div>
 </template>
@@ -85,12 +85,12 @@ export default {
 
 <style scoped>
 .wrapper {
-  padding: 50px;
+  padding: 50px 0 0 0;
   background-color: white;
   margin: auto;
 }
 .innerwrapper {
-  max-width: 900px;
+  max-width: 1200px;
   margin: auto;
 }
 </style>

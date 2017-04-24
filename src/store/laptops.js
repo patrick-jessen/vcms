@@ -1,6 +1,6 @@
 export default {
   "inspector": {
-    "selected": "app/content"
+    "selected": "app/menu"
   },
   "app": {
     "$type": "App",
@@ -14,19 +14,19 @@ export default {
         "menus": [
           {
             "text": "laptops",
-            "link": "laptops"
+            "link": "/laptops"
           },
           {
             "text": "desktops",
-            "link": "desktops"
+            "link": "/desktops"
           },
           {
             "text": "servers",
-            "link": "servers"
+            "link": "/servers"
           },
           {
             "text": "swag",
-            "link": "swag"
+            "link": "/swag"
           }
         ],
         "actions": [
