@@ -57,10 +57,10 @@ export default {
         case 'app':
           return 'cubes'
         case 'page':
-          return 'file outline'
+          return 'blue file outline'
         case 'component':
         default:
-          return 'cube'
+          return 'green cube'
       }
     }
   },

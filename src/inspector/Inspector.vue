@@ -19,9 +19,10 @@
   <div class='ui dividing header'>Properties</div>
   <PropertyTable name='properties' :properties='properties'/>
 
-  <Routes/>
-
-  <button @click='performSave'>SAVE</button>
+  <button class='ui basic button' @click='performSave'>
+    <i class='icon save'></i>
+    Save
+  </button>
 
 </div>
 </div>

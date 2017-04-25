@@ -32,6 +32,7 @@ export default {
 .ui.list {
   background-color: white;
   padding: 10px;
-  border: 1px solid gray;
+  border: 1px solid rgb(212, 212, 213);
+  border-radius: 3px;
 }
 </style>
