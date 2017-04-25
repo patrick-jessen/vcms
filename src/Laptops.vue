@@ -3,6 +3,7 @@
 <div class='app'>
     <Child name='menu'/>
     <router-view></router-view>
+    <Child name='footer'/>
 </div>
 </div>
 </template>
@@ -11,7 +12,8 @@
 export default {
     children: [
         {name: 'menu'},
-        {name: ''}
+        {name: ''},
+        {name: 'footer'}
     ],
     beforeCreate() {
         this.$options.children[1].name = ()=>{return this.routeName}

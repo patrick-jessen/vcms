@@ -1,5 +1,5 @@
 <template>
-<a class='wrapper' :href='laptop.link'>
+<router-link class='wrapper' :to='laptop.link'>
   <h3>{{laptop.name}} <span class='display-size'>{{laptop.displaySize}}</span></h3>
   <h4 class='price'>{{laptop.price}}<span class='note'>{{laptop.note}}</span></h4>
   <h5 class='price-finance'>starting at {{laptop.finance}}/month</h5>
@@ -12,7 +12,7 @@
     <h5>{{meterNames[i]}}</h5>
   </div>
 
-</a>
+</router-link>
 </template>
 
 <script>

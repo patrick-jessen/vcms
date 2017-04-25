@@ -1,6 +1,6 @@
 export default {
   "inspector": {
-    "selected": "app/menu"
+    "selected": "app/footer"
   },
   "app": {
     "$type": "App",
@@ -78,6 +78,9 @@ export default {
             "$type": "ProductList"
           }
         }
+      },
+      "footer": {
+        "$type": "Footer"
       }
     }
   }

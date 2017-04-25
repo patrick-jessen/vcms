@@ -165,4 +165,8 @@ img {
   padding: 0 20px;
   color: #574e4a;
 }
+
+.router-link-active {
+  font-weight: 800;
+}
 </style>
