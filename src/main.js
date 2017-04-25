@@ -18,13 +18,37 @@ router.beforeEach((to, from, next) => {
 
 window.vue = new Vue({
   render(createElement) {
-    return createElement('div', {attrs:{class:'ui grid',style:'height:100%'}},
-     [createElement('App', {attrs:{name:'app', class:'ui eleven wide column', style:'padding:14px 0 0 14px'}}),
-      createElement('Inspector')])
+
+    var appClass = 'wide column app'
+    var inspectorClass = 'four wide column inspector'
+
+    if(this.showInspector) {
+      appClass = 'twelve ' + appClass
+    }
+    else {
+      appClass = 'sixteen ' + appClass
+      inspectorClass = inspectorClass + ' hidden'
+    }
+
+    return createElement('div', {
+      class: 'ui grid'
+    },
+     [
+       createElement('App', {
+         attrs: {
+           name:'app', 
+           class: appClass
+          }}),
+        createElement('Inspector', {
+          attrs: {
+            class: inspectorClass
+          }
+        })])
   },
   data: {
     _store: Store,
-    ctrl: false
+    ctrl: false,
+    showInspector: true
   },
   components: {
     App: require('./Laptops.vue'),

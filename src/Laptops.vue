@@ -32,5 +32,7 @@ export default {
 .app {
     background-color: gray;
     height: 100%;
+    padding-right: 0 !important;
+    padding-bottom: 0 !important;
 }
 </style>

@@ -1,23 +1,40 @@
 <template>
-<div class='ui five wide column'>
-  <div class='main ui container'>
-  <div class='ui dividing large header'>Hierarchy</div>
-  <Hierarchy/>
+<div>
 
-  <div class='ui dividing large header'>Properties</div>
+<div class='container'>
+
+  <div class='ui dividing header'>Inspector</div>
+
+  <div class='ui top attached tabular menu'>
+    <a class='item' :class='activeTab("components")' data-tab='components' @click='showComponents'>Components</a>
+    <a class='item' :class='activeTab("pages")' data-tab='pages' @click='showPages'>Pages</a>
+  </div>
+  <div class='ui bottom attached tab segment' :class='activeTab("components")' data-tab='components'>
+    <Hierarchy/>
+  </div>
+  <div class='ui bottom attached tab segment' :class='activeTab("pages")' data-tab='pages'>
+    <Routes/>
+  </div>
+
+  <div class='ui dividing header'>Properties</div>
   <PropertyTable name='properties' :properties='properties'/>
 
   <Routes/>
 
   <button @click='performSave'>SAVE</button>
-  </div>
-</div>
 
+</div>
+</div>
 </template>
 
 <script>
 export default {
   static: [{name:'selected'}],
+  data() {
+    return {
+      currentTab: 'components'
+    }
+  },
   created() {
     this.namespace = 'inspector'
   },
@@ -99,6 +116,16 @@ export default {
     Routes: require('./Routes.vue')
   },
   methods: {
+    showComponents() {
+      this.currentTab = "components"
+    },
+    showPages() {
+      this.currentTab = "pages"
+    },
+    activeTab(name) {
+      if(name === this.currentTab)
+        return 'active'
+    },
     performSave() {
       console.log('save')
 
@@ -120,12 +147,14 @@ export default {
 </script>
 
 <style scoped>
-.ui.five.wide.column {
-  background-color: #eeeeee;
+.inspector {
+  background-color: #fafafa;
   border-left: 1px solid gray;
 }
-.main.ui.container {
-  width: 80%;
-  margin-top: 20px
+.inspector.hidden {
+  display: none !important;
+}
+.container {
+  padding: 20px;
 }
 </style>
