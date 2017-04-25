@@ -7,6 +7,8 @@
   <div class='ui dividing large header'>Properties</div>
   <PropertyTable name='properties' :properties='properties'/>
 
+  <Routes/>
+
   <button @click='performSave'>SAVE</button>
   </div>
 </div>
@@ -93,7 +95,8 @@ export default {
   },
   components: {
     Hierarchy: require('./Hierarchy.vue'),
-    PropertyTable: require('./PropertyTable.vue')
+    PropertyTable: require('./PropertyTable.vue'),
+    Routes: require('./Routes.vue')
   },
   methods: {
     performSave() {

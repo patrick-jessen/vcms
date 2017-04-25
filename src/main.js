@@ -11,6 +11,10 @@ var router = new VueRouter({
   mode: 'history',
   routes: routes
 })
+router.beforeEach((to, from, next) => {
+  console.log('ROUTE', to, from)
+  next()
+})
 
 window.vue = new Vue({
   render(createElement) {
