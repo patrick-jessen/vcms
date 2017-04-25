@@ -12,7 +12,6 @@ export default {
   ],
   beforeCreate() {
     this.page = true
-    this.name = 'default'
   }
 }
 </script>

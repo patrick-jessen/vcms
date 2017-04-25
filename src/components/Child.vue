@@ -6,6 +6,7 @@ export default {
 
   render(createElement, context) {
     context.data.attrs.name = context.props.name
+
     var type
     var namespace
 
@@ -15,12 +16,22 @@ export default {
         route = 'default'
 
       namespace = context.parent.namespace + '/$pages/' + route
+
+      var hovered = window.vue.$data.hoveredComponent === namespace
+      var hoverCls
+      if(hovered) {
+        hoverCls = 'hovered'
+      }
+
       return createElement('router-view', {
         on: {
           click: (e)=>{
             window.vcms.utils.getStore('inspector').selected = namespace
             e.stopPropagation()
           }
+        },
+        attrs: {
+          class: hoverCls
         }
       })
     }
@@ -35,6 +46,12 @@ export default {
       type = store.$type
     }
   
+    var hovered = window.vue.$data.hoveredComponent === namespace
+    var hoverCls
+    if(hovered) {
+      hoverCls = 'hovered'
+    }
+
     var child = createElement(type, context.data)
 
     return createElement('div', {
@@ -43,6 +60,9 @@ export default {
           window.vcms.utils.getStore('inspector').selected = namespace
           e.stopPropagation()
         }
+      },
+      attrs: {
+        class: hoverCls
       }
     }, [child])
   }
@@ -50,4 +70,17 @@ export default {
 </script>
 
 <style>
+.hovered {
+  position: relative;
+}
+.hovered:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: lightblue;
+  opacity: 0.4;
+}
 </style>

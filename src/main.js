@@ -48,7 +48,8 @@ window.vue = new Vue({
   data: {
     _store: Store,
     ctrl: false,
-    showInspector: true
+    showInspector: true,
+    hoveredComponent: ''
   },
   components: {
     App: require('./Laptops.vue'),

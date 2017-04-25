@@ -1,5 +1,5 @@
 <template>
-<div class='item link' @click='onClick' :class='{disable:!data}'>
+<div class='item link' @click='onClick' :class='{disable:!data}' @mouseover='onMouseOver'>
   <i class='icon' :class='icon'></i>
   <div class='content'>
     <div class='header' :class='{selected:isSelected}' :title='def.descr'>{{text}}</div>
@@ -91,6 +91,10 @@ export default {
     },
     onClick(e) {
       window.vue.$data._store.inspector.selected = this.namespace
+      e.stopPropagation()
+    },
+    onMouseOver(e) {
+      window.vue.$data.hoveredComponent = this.namespace
       e.stopPropagation()
     }
   }
