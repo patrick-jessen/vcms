@@ -1,14 +1,22 @@
 <template>
 <div class='ui list'>
-  <HierarchyItem :data='root' :def='{name:"app"}'/>
+  <HierarchyItem :data='app' :def='def'/>
 </div>
 </template>
 
 <script>
 export default {
   computed: {
-    root() {
+    app() {
       return window.vue.$data._store.app
+    },
+    def() {
+      return {
+        name:'app', 
+        type:'app',
+        title:'App',
+        descr:'App description'
+      }
     }
   },
   created() {

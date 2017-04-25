@@ -1,8 +1,8 @@
 <template>
 <div class='item link' @click='onClick' :class='{disable:!data}'>
-  <i class='cube icon'></i>
+  <i class='icon' :class='icon'></i>
   <div class='content'>
-    <div class='header' :class='{selected:isSelected}'>{{nameStr}}</div>
+    <div class='header' :class='{selected:isSelected}' :title='def.descr'>{{text}}</div>
     <template v-if='data'>
       <div class='list' v-if='childrenKeys.length > 0'>
         <HierarchyItem v-for='c in childrenKeys' :def='c' :data='child(c)' :key='c'/>
@@ -45,6 +45,23 @@ export default {
         return this.def.name();
       }
       return this.def.name
+    },
+    text() {
+      if(this.def.title)
+        return this.def.title
+      
+      return this.def.name
+    },
+    icon() {
+      switch(this.def.type) {
+        case 'app':
+          return 'cubes'
+        case 'page':
+          return 'file outline'
+        case 'component':
+        default:
+          return 'cube'
+      }
     }
   },
   methods: {
@@ -87,5 +104,8 @@ export default {
 }
 .disable .header {
   color: darkgray !important;
+}
+.link {
+  cursor: pointer;
 }
 </style>
