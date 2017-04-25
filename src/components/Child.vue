@@ -14,7 +14,7 @@ export default {
       if(route === '')
         route = 'default'
 
-      namespace = context.parent.namespace + '#pages#' + route
+      namespace = context.parent.namespace + '/$pages/' + route
       return createElement('router-view', {
         on: {
           click: (e)=>{
@@ -25,7 +25,7 @@ export default {
       })
     }
     else {
-      namespace = context.parent.namespace + '/' + context.props.name
+      namespace = context.parent.namespace + '/$children/' + context.props.name
       var store = window.vcms.utils.getStore(namespace)
 
       if(!store) {

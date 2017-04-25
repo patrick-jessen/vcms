@@ -19,12 +19,12 @@ export default {
     this.$options.components.HierarchyItem = require('./HierarchyItem.vue')
   },
   created() {
-    var delim = '/'
+    var scope = '/$children/'
     if(this.def.type === 'page')
-      delim = '#$pages#'
+      scope = '/$pages/'
 
     if(this.$parent.namespace.length > 0)
-      this.namespace = this.$parent.namespace + delim + this.nameStr
+      this.namespace = this.$parent.namespace + scope + this.nameStr
     else
       this.namespace = this.nameStr
   },
