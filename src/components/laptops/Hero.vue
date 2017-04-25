@@ -127,7 +127,6 @@ export default {
 
 <style scoped>
 .hero {
-  height: 416px;
   background-color: white;
   position: relative;
 }

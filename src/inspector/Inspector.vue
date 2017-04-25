@@ -6,14 +6,17 @@
   <div class='ui dividing header'>Inspector</div>
 
   <div class='ui top attached tabular menu'>
-    <a class='item' :class='activeTab("components")' data-tab='components' @click='showComponents'>Components</a>
-    <a class='item' :class='activeTab("pages")' data-tab='pages' @click='showPages'>Pages</a>
+    <a class='item' :class='activeTab("components")' data-tab='components' @click='showTab("components")'>Components</a>
+    <a class='item' :class='activeTab("pages")' data-tab='pages' @click='showTab("pages")'>Pages</a>
+    <a class='item' :class='activeTab("assets")' data-tab='assets' @click='showTab("assets")'>Assets</a>
   </div>
   <div class='ui bottom attached tab segment' :class='activeTab("components")' data-tab='components'>
     <Hierarchy/>
   </div>
   <div class='ui bottom attached tab segment' :class='activeTab("pages")' data-tab='pages'>
     <Routes/>
+  </div>
+  <div class='ui bottom attached tab segment' :class='activeTab("assets")' data-tab='assets'>
   </div>
 
   <div class='ui dividing header'>Properties</div>
@@ -117,11 +120,8 @@ export default {
     Routes: require('./Routes.vue')
   },
   methods: {
-    showComponents() {
-      this.currentTab = "components"
-    },
-    showPages() {
-      this.currentTab = "pages"
+    showTab(name) {
+      this.currentTab = name
     },
     activeTab(name) {
       if(name === this.currentTab)
