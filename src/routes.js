@@ -6,10 +6,9 @@ var layouts = {
 window.layouts = layouts
 
 export default [
-  {path:'/', component: layouts.Desktops},
-  {path:'/desktops', component: layouts.Desktops},
-  {path:'/test', component: layouts['Laptops']},
-  {path:'/laptops', component: layouts.Laptops,
+  {path:'/', component: layouts.Desktops, props:{name:'default'}},
+  {path:'/desktops', component: layouts.Laptops, props:{name:'desktops'}},
+  {path:'/laptops', component: layouts.Laptops, props:{name:'laptops'},
    children: [
      {path: 'lemur',    component: layouts.Laptops},
      {path: 'gazelle',  component: layouts.Laptops},

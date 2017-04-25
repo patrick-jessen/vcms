@@ -84,6 +84,12 @@ export default {
           }
         }
       },
+      "default": {
+        "$type":"Desktops",
+        "$children": {
+          
+        }
+      }
     }
   },
 }

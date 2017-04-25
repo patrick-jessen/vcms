@@ -14,17 +14,7 @@ export default {
         {name: 'menu'},
         {name: 'page', type: 'page'},
         {name: 'footer'}
-    ],
-    beforeCreate() {
-        this.$options.children[1].name = ()=>{
-            return this.routeName
-        }
-    },
-    computed: {
-        routeName() {
-            return this.$route.path.replace('/', '')
-        }
-    }
+    ]
 }
 </script>
 

@@ -66,7 +66,8 @@ window.componentNames = [
   'laptops/ProductList',
   'laptops/ProductSummary',
   'laptops/Footer',
-  'pages/Laptops'
+  'pages/Laptops',
+  'pages/Desktops'
 ]
 window.vcms.utils.registerComponent('App', require('./Laptops.vue'))
 window.componentNames.forEach((name) => {

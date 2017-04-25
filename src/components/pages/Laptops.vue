@@ -13,7 +13,6 @@ export default {
   ],
   beforeCreate() {
     this.page = true
-    this.name = 'laptops'
   }
 }
 </script>

@@ -5,7 +5,7 @@
     <div class='header' :class='{selected:isSelected}' :title='def.descr'>{{text}}</div>
     <template v-if='data'>
       <div class='list' v-if='childrenKeys.length > 0'>
-        <HierarchyItem v-for='c in childrenKeys' :def='c' :data='child(c)' :key='c'/>
+        <HierarchyItem v-for='c in childrenKeys' :def='c' :data='child(c)' :key='child(c)'/>
       </div>
     </template>
   </div>
@@ -30,7 +30,6 @@ export default {
   },
   computed: {
     childrenKeys() {     
-      console.log('type is', this.data.$type)
       var def = window.vcms.components[this.data.$type]
       if(!def) 
         return []
@@ -41,8 +40,11 @@ export default {
       return window.vue.$data._store.inspector.selected === this.namespace
     },
     nameStr() {
-      if(typeof this.def.name === 'function') {
-        return this.def.name();
+      if(this.def.type === 'page') {
+        var route = this.$route.path.replace('/', '')
+        if(route.length)
+          return route
+        return 'default'
       }
       return this.def.name
     },
@@ -70,9 +72,9 @@ export default {
         if(!this.data.$pages)
           return
 
-        var name = def.name
-        if(typeof name === 'function')
-          name = name()
+        var name = this.$route.path.replace('/', '')
+        if(!name.length)
+          name = 'default'
 
         return this.data.$pages[name]
       }
