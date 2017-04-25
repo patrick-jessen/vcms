@@ -12,7 +12,8 @@ export default {
     {name: 'content'}
   ],
   beforeCreate() {
-    this.name = 'laptops'
+    this.page = true
+    this.name = '$pages#laptops'
   }
 }
 </script>

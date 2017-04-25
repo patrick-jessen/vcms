@@ -42,7 +42,6 @@ window.componentNames = [
 ]
 window.vcms.utils.registerComponent('App', require('./Laptops.vue'))
 window.componentNames.forEach((name) => {
-  console.log("requiring",name )
   var comp = require('./components/' + name + '.vue')
   name = name.split('/').slice(-1)[0]
   window.vcms.utils.registerComponent(name, comp)

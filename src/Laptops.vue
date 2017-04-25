@@ -2,7 +2,7 @@
 <div>
 <div class='app'>
     <Child name='menu'/>
-    <router-view></router-view>
+    <Child name='page' type='page'/>
     <Child name='footer'/>
 </div>
 </div>
@@ -12,11 +12,13 @@
 export default {
     children: [
         {name: 'menu'},
-        {name: ''},
+        {name: 'page', type: 'page'},
         {name: 'footer'}
     ],
     beforeCreate() {
-        this.$options.children[1].name = ()=>{return this.routeName}
+        this.$options.children[1].name = ()=>{
+            return this.routeName
+        }
     },
     computed: {
         routeName() {

@@ -41,12 +41,13 @@ export default function plugin(Vue) {
     // get store object which represents the namespace
     getStore(namespace) {
       var store = window.vue.$data._store
-      var path = namespace.split('/')
-
+      var fullNamespace = namespace.replace(/\//g, '/$children/')
+      fullNamespace = fullNamespace.replace(/#/g, '/')
+      var path = fullNamespace.split('/')
+      
       try {
         for(var i = 0; i < path.length; i++) {
           if(!path[i].length) continue
-          if(i != 0) store = store.$children
           store = store[path[i]]
         }
       }
@@ -126,8 +127,12 @@ export default function plugin(Vue) {
       registerStore(this)
     },
     created() {
+      var delim = '/'
+      if(this.page)
+        delim = '#'
+
       if(this.$parent && this.$parent.namespace && this.$parent.namespace.length > 0)
-        this.namespace = this.$parent.namespace + '/' + this.name
+        this.namespace = this.$parent.namespace + delim + this.name
       else
         this.namespace = this.name
     },

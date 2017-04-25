@@ -1,6 +1,6 @@
 <template>
 <div class='ui list'>
-  <HierarchyItem :data='root' name='app'/>
+  <HierarchyItem :data='root' :def='{name:"app"}'/>
 </div>
 </template>
 

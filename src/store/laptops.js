@@ -44,6 +44,11 @@ export default {
           }
         ]
       },
+      "footer": {
+        "$type": "Footer"
+      }
+    },
+    "$pages" : {
       "laptops": {
         "$type": "Laptops",
         "$children": {
@@ -79,9 +84,6 @@ export default {
           }
         }
       },
-      "footer": {
-        "$type": "Footer"
-      }
     }
   }
 }
