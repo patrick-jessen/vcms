@@ -12,10 +12,7 @@ var router = new VueRouter({
   routes: routes
 })
 
-
-
 router.beforeEach((to, from, next) => {
-
   if(to.matched.length === 0) {
     router.addRoutes([
       {path:to.path, component: window.layouts.NewPage}
@@ -24,8 +21,17 @@ router.beforeEach((to, from, next) => {
     next(to)
     return
   }
-  else if(to.path === '/laptops') {
-    to.matched[0].components.default = window.layouts.Laptops
+  else {
+    if(window.vue) {
+      var namespace = 'app' + to.fullPath.replace('/', '/$pages/')
+      if(to.path === '/')
+        namespace += 'default'
+
+      var store = window.vcms.utils.getStore(namespace)
+      var type = store.$type
+
+      to.matched[0].components.default = window.layouts[type]
+    }
   }
 
   next()
