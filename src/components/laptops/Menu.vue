@@ -1,8 +1,8 @@
 <template>
-  <div class='wrapper'>
+  <div class='wrapper' :class='{invert}'>
     <!-- Company logo -->
     <Property prop='logo' type='router-link' class='logo' :to='logo.link'>
-      <img :src='logo.image'>
+      <img :src='logoSrc'>
     </Property>
   
     <!-- Menu items -->
@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  props: ['invert'],
   static: [
     // Company logo
     {
@@ -34,6 +35,11 @@ export default {
         {
           title:'Image',
           name: 'image',
+          type: 'string.img',
+        },
+        {
+          title:'Inverted image',
+          name: 'invertedimage',
           type: 'string.img',
         },
         {
@@ -126,14 +132,23 @@ export default {
         return str
       }
     }
-  ]
+  ],
+  computed: {
+    logoSrc() {
+      if(this.invert)
+        return this.logo.invertedimage
+      return this.logo.image
+    }
+  }
 }
 </script>
 
 <style scoped>
 .wrapper {
   padding: 20px;
-  /*background-color: white;*/
+}
+.wrapper.invert {
+  border-bottom: 1px solid white;
 }
 
 .logo {
@@ -154,16 +169,21 @@ img {
   font-size: 16px;
   color: #574e4a;
 }
+.invert .menu {
+  color: white;
+}
 
 .actions {
   margin-top: 15px;
   vertical-align: top;
   float: right;
-  color: #574e4a;
 }
 .actions i {
   padding: 0 20px;
   color: #574e4a;
+}
+.invert .actions i {
+  color: white;
 }
 
 .router-link-active {

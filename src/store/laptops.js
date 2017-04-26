@@ -9,7 +9,8 @@ export default {
         "$type": "Menu",
         "logo": {
           "link": "/",
-          "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/logo-1c27efee7b.png"
+          "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/logo-1c27efee7b.png",
+          "invertedimage": "https://d1vhcvzji58n1j.cloudfront.net/assets/logo-white-mono-ccaad31ec9.png"
         },
         "menus": [
           {

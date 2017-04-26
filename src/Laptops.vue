@@ -1,7 +1,7 @@
 <template>
 <div>
 <div class='app'>
-    <Child name='menu'/>
+    <Child name='menu' :invert='invertMenu'/>
     <Child name='page' type='page'/>
     <Child name='footer'/>
 </div>
@@ -14,7 +14,15 @@ export default {
         {name: 'menu'},
         {name: 'page', type: 'page'},
         {name: 'footer'}
-    ]
+    ],
+    computed: {
+        invertMenu() {
+            if(this.$route.path === '/')
+                return true
+                
+            return false
+        }
+    }
 }
 </script>
 

@@ -28,4 +28,9 @@ export default {
   z-index: -1;
   position: absolute;
 }
+
+.wrapper {
+  border-bottom: 1px solid white !important;
+  color: white !important;
+}
 </style>
