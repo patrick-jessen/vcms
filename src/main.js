@@ -32,6 +32,11 @@ router.beforeEach((to, from, next) => {
 
       to.matched[0].components.default = window.layouts[type]
     }
+    else {
+      // Temp hack
+      setTimeout(()=>{next(to)}, 1)
+      return
+    }
   }
 
   next()
@@ -88,8 +93,10 @@ window.componentNames = [
   'laptops/ProductList',
   'laptops/ProductSummary',
   'laptops/Footer',
+
   'pages/Laptops',
-  'pages/Desktops'
+  'pages/Desktops',
+  'pages/Frontpage'
 ]
 window.vcms.utils.registerComponent('App', require('./Laptops.vue'))
 window.componentNames.forEach((name) => {

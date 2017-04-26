@@ -1,6 +1,6 @@
 export default {
   "inspector": {
-    "selected": "app/footer"
+    "selected": "app/$children/menu"
   },
   "app": {
     "$type": "App",
@@ -48,7 +48,7 @@ export default {
         "$type": "Footer"
       }
     },
-    "$pages" : {
+    "$pages": {
       "laptops": {
         "$type": "Laptops",
         "$children": {
@@ -85,17 +85,13 @@ export default {
         }
       },
       "default": {
-        "$type":"Desktops",
-        "$children": {
-          
-        }
+        "$type": "Frontpage",
+        "$children": {}
       },
       "desktops": {
-        "$type":"Desktops",
-        "$children": {
-          
-        }
+        "$type": "Desktops",
+        "$children": {}
       }
     }
-  },
+  }
 }

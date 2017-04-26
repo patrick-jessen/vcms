@@ -133,7 +133,7 @@ export default {
 <style scoped>
 .wrapper {
   padding: 20px;
-  background-color: white;
+  /*background-color: white;*/
 }
 
 .logo {

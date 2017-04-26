@@ -2,6 +2,7 @@ var layouts = {
   Laptops: require('./components/pages/Laptops.vue'),
   Desktops: require('./components/pages/Desktops.vue'),
   NewPage: require('./components/pages/NewPage.vue'),
+  Frontpage: require('./components/pages/Frontpage.vue'),
 }
 
 window.layouts = layouts
