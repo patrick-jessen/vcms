@@ -156,7 +156,7 @@ export default {
   margin-right: 70px;
 }
 img {
-  height: 52px;
+  width: 210px;
 }
 
 .menus {

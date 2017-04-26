@@ -1,22 +1,59 @@
 <template>
 <div>
   <div class='video'>
-    <video autoplay="autoplay">
-      <source src='https://d1vhcvzji58n1j.cloudfront.net/assets/home/hero-749e29ffaf.mp4' type="video/mp4">
+    <video autoplay="autoplay" muted='muted' loop='loop' :poster='video.poster'>
+      <source :src='video.videofile' type="video/mp4">
     </video>
+    <div class='text'>
+      <h1>{{heading}}</h1>
+      <h2>{{subheading}}</h2>
+    </div>
   </div>
 </div>
 </template>
 
 <script>
 export default {
+  static: [
+    {
+      title: 'Video',
+      name: 'video',
+      type: 'object',
+      props:[
+        {
+          title: 'Video',
+          name: 'videofile',
+          type: 'string.url'
+        },
+        {
+          title: 'Poster',
+          name: 'poster',
+          type: 'string.url'
+        }
+      ],
+      render: (item) => {
+        return ''
+      }
+
+    },
+    {
+      title: 'Heading',
+      name: 'heading',
+      type: 'string'
+    },
+    {
+      title: 'Subheading',
+      name: 'subheading',
+      type: 'string'
+    }
+  ],
   beforeCreate() {
     this.page = true
   }
 }
 </script>
 
-<style>
+<style scoped>
 .video {
   margin-top: -96px;
   z-index: -1;
@@ -28,9 +65,20 @@ export default {
   z-index: -1;
   position: absolute;
 }
-
-.wrapper {
-  border-bottom: 1px solid white !important;
-  color: white !important;
+.text {
+  max-width: 600px;
+  margin: auto;
+  padding-top: 250px;
+  text-align: center;
+  color: white;
+}
+.text>h1 {
+  font-family: serif;
+  font-size: 3.2rem;
+}
+.text>h2 {
+  font-family: serif;
+  font-size: 3rem;
+  font-weight: 100;
 }
 </style>
