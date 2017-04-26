@@ -79,7 +79,10 @@ export default {
           type:'object',
           props: propDef,
           value: prop[i],
-          render: (item) => {return this.property.render([item])},
+          render: (item) => {
+            if(this.property.render)
+              return this.property.render([item])
+          },
           store: this.property.store[this.property.name][i],
         }
       }

@@ -66,9 +66,7 @@ export default {
     else if(context.props.type === 'arraychild') {
       namespace = context.parent.namespace + '/$children/' + context.props.name
       var store = window.vcms.utils.getStore(namespace)
-
-      console.log(namespace, store)
-
+      
       if(!store) {
         context.data.attrs.props = context.data.attrs
         return createElement('None', context.data)// Child does not exist

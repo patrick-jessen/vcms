@@ -1,6 +1,6 @@
 export default {
   "inspector": {
-    "selected": "app/$pages/default/$children/content/$children/banners/1"
+    "selected": "app/$pages/default/$children/content/$children/banners/0"
   },
   "app": {
     "$type": "App",
@@ -97,38 +97,22 @@ export default {
             "$children": {
               "banners": [
                 {
-                  "$type": "FullWidthBanner"
+                  "$type": "FullWidthBanner",
+                  "button": {
+                    "link": "/",
+                    "text": "VIEW NOW"
+                  },
+                  "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/galp2/hero_1280-7dd0f44210.jpg",
+                  "overlay": []
                 },
                 {
                   "$type": "FullWidthBanner",
-                  "logo": {
-                    "image": "default.png",
-                    "link": "/"
+                  "button": {
+                    "link": "/",
+                    "text": "VIEW NOW"
                   },
-                  "menus": [
-                    {
-                      "text": "laptops",
-                      "link": "#"
-                    },
-                    {
-                      "text": "desktops",
-                      "link": "#"
-                    },
-                    {
-                      "text": "servers",
-                      "link": "#"
-                    },
-                    {
-                      "text": "swag",
-                      "link": "#"
-                    }
-                  ],
-                  "actions": [
-                    {
-                      "icon": "comment",
-                      "link": "#"
-                    }
-                  ]
+                  "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/kaby-lake/hero-bg_1280-cca66a08e9.jpg",
+                  "overlay": []
                 }
               ]
             }
