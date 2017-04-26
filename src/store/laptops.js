@@ -89,6 +89,12 @@ export default {
         "$children": {
           
         }
+      },
+      "desktops": {
+        "$type":"Desktops",
+        "$children": {
+          
+        }
       }
     }
   },

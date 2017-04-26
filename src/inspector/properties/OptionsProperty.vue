@@ -24,7 +24,6 @@ export default {
       return false
     },
     onChange(e) {
-      console.log('aaaa', e)
       this.$emit('change', e.target.value)
     }
   }

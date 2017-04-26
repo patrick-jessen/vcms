@@ -11,8 +11,23 @@ var router = new VueRouter({
   mode: 'history',
   routes: routes
 })
+
+
+
 router.beforeEach((to, from, next) => {
-  console.log('ROUTE', to, from)
+
+  if(to.matched.length === 0) {
+    router.addRoutes([
+      {path:to.path, component: window.layouts.NewPage}
+    ])
+    routes.push({path:to.path, component: window.layouts.NewPage})
+    next(to)
+    return
+  }
+  else if(to.path === '/laptops') {
+    to.matched[0].components.default = window.layouts.Laptops
+  }
+
   next()
 })
 

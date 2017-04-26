@@ -128,19 +128,11 @@ export default {
         return 'active'
     },
     performSave() {
-      console.log('save')
-
       var http = new XMLHttpRequest();
       var url ='http://localhost:1337/'
       var params = 'store=' + JSON.stringify(window.vcms.utils.getStore(''))
       http.open('POST', url, true);
       http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-      http.onreadystatechange = function() {
-        if(http.readyState == 4 && http.status == 200) {
-          console.log("SUCCESS", http.responseText)
-        }
-      }
       http.send(params)
     }
   }

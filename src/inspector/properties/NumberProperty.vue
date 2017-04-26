@@ -18,8 +18,6 @@ export default {
     onChange(e) {
       var test = /[^0-9]+/g
       var sanitized = e.target.value.replace(test, '')
-
-      console.log(e, sanitized)
       
       if(sanitized === e.target.value)
         this.$emit('change', e.target.value)

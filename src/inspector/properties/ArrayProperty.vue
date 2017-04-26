@@ -92,7 +92,6 @@ export default {
     },
     onChange(pd, i, e) {
       //tempoary hack
-      console.log(this.property.store[this.property.name], pd.name)
       if(!this.property.store[pd.name])
         this.$set(this.property.store[this.property.name], pd.name, e)  
       else
