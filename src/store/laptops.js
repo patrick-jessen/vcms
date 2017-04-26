@@ -1,6 +1,6 @@
 export default {
   "inspector": {
-    "selected": "app/$pages/default/$children/content/$children/banners"
+    "selected": "app/$pages/default/$children/content/$children/banners/1"
   },
   "app": {
     "$type": "App",
@@ -96,8 +96,40 @@ export default {
             "$type": "Banners",
             "$children": {
               "banners": [
-                {"$type": "FullWidthBanner"},
-                {"$type": "FullWidthBanner"}
+                {
+                  "$type": "FullWidthBanner"
+                },
+                {
+                  "$type": "FullWidthBanner",
+                  "logo": {
+                    "image": "default.png",
+                    "link": "/"
+                  },
+                  "menus": [
+                    {
+                      "text": "laptops",
+                      "link": "#"
+                    },
+                    {
+                      "text": "desktops",
+                      "link": "#"
+                    },
+                    {
+                      "text": "servers",
+                      "link": "#"
+                    },
+                    {
+                      "text": "swag",
+                      "link": "#"
+                    }
+                  ],
+                  "actions": [
+                    {
+                      "icon": "comment",
+                      "link": "#"
+                    }
+                  ]
+                }
               ]
             }
           }

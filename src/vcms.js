@@ -115,7 +115,7 @@ export default function plugin(Vue) {
 
 
   Vue.mixin({
-    props: ['name'],
+    props: ['name', 'setType'],
     data() {
       return {
         namespace: '',
@@ -126,7 +126,7 @@ export default function plugin(Vue) {
     },
     created() {
       var scope = '/$children/'
-      if(this.page)
+      if(this.type === 'page')
         scope = '/$pages/'
 
       if(this.$parent && this.$parent.namespace && this.$parent.namespace.length > 0)

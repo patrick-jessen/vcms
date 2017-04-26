@@ -52,7 +52,7 @@ export default {
     {name: 'content'}
   ],
   beforeCreate() {
-    this.page = true
+    this.type = 'page'
   }
 }
 </script>

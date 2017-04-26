@@ -42,8 +42,14 @@ export default {
       namespace = context.parent.namespace + '/$children/' + context.props.name
       var store = window.vcms.utils.getStore(namespace)
 
-      for(var i = 0; i < store.length; i++)
-        children.push(createElement(store[i].$type, context.data))
+      var data = context.data
+      if(!data.attrs) data.attrs = {}
+
+      data.attrs.type = 'arraychild'
+      for(var i = 0; i < store.length; i++) {
+        data.attrs.name = context.props.name + '/' + i
+        children.push(createElement('Child', data))
+      }
 
       return createElement('div', {
         on: {
@@ -56,6 +62,18 @@ export default {
           class: hoverCls
         }
       }, children)
+    }
+    else if(context.props.type === 'arraychild') {
+      namespace = context.parent.namespace + '/$children/' + context.props.name
+      var store = window.vcms.utils.getStore(namespace)
+
+      console.log(namespace, store)
+
+      if(!store) {
+        context.data.attrs.props = context.data.attrs
+        return createElement('None', context.data)// Child does not exist
+      } 
+      type = store.$type
     }
     else {
       namespace = context.parent.namespace + '/$children/' + context.props.name
