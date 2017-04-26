@@ -1,6 +1,9 @@
 <template>
 <div>
-  <RouteItem :data='$router.options.routes'/>
+  <div class='ui list'>
+    <RouteItem :data='app'/>
+  </div>
+  
   <div class='ui mini basic buttons'>
     <div class='ui button'>
       <i class="icons">
@@ -19,6 +22,11 @@
 export default {
   created() {
     this.namespace = ''
+  },
+  computed: {
+    app() {
+      return {path: 'App', children: this.$router.options.routes}
+    }
   },
   components: {
     RouteItem: require('./RouteItem.vue')

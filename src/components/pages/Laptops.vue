@@ -9,7 +9,7 @@
 export default {
   children: [
     {name: 'hero'},
-    {name: 'content'}
+    {name: 'content'},
   ],
   beforeCreate() {
     this.page = true
