@@ -9,6 +9,7 @@
       <h2>{{subheading}}</h2>
     </div>
   </div>
+  <Child name='content'/>
 </div>
 </template>
 
@@ -47,6 +48,9 @@ export default {
       type: 'string'
     }
   ],
+  children: [
+    {name: 'content'}
+  ],
   beforeCreate() {
     this.page = true
   }
@@ -55,7 +59,7 @@ export default {
 
 <style scoped>
 .video {
-  margin-top: -96px;
+  margin-top: -98px;
   z-index: -1;
   height: 600px;
   position: relative;

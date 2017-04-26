@@ -22,6 +22,8 @@ export default {
     var scope = '/$children/'
     if(this.def.type === 'page')
       scope = '/$pages/'
+    else if(this.def.type === 'arraychild')
+      scope = '/'
 
     if(this.$parent.namespace.length > 0)
       this.namespace = this.$parent.namespace + scope + this.nameStr
@@ -30,6 +32,14 @@ export default {
   },
   computed: {
     childrenKeys() {     
+      if(this.def.type === 'array') {
+        var children = []
+        for(var i = 0; i < this.data.length; i++) {
+          children.push({title:'Item '+i, name:''+i, type:'arraychild'})
+        }
+        return children
+      }
+
       var def = window.vcms.components[this.data.$type]
       if(!def) 
         return []
@@ -58,6 +68,8 @@ export default {
       switch(this.def.type) {
         case 'app':
           return 'cubes'
+        case 'array':
+          return 'green cubes'
         case 'page':
           return 'blue file outline'
         case 'component':
@@ -77,6 +89,9 @@ export default {
           name = 'default'
 
         return this.data.$pages[name]
+      }
+      else if(def.type === 'arraychild') {
+        return this.data[def.name]
       }
       else {
         if(!this.data.$children)

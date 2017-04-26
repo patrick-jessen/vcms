@@ -36,6 +36,27 @@ export default {
         key: namespace
       })
     }
+    else if(context.props.type === 'array') {
+      var children = []
+
+      namespace = context.parent.namespace + '/$children/' + context.props.name
+      var store = window.vcms.utils.getStore(namespace)
+
+      for(var i = 0; i < store.length; i++)
+        children.push(createElement(store[i].$type, context.data))
+
+      return createElement('div', {
+        on: {
+          click: (e)=>{
+            window.vcms.utils.getStore('inspector').selected = namespace
+            e.stopPropagation()
+          }
+        },
+        attrs: {
+          class: hoverCls
+        }
+      }, children)
+    }
     else {
       namespace = context.parent.namespace + '/$children/' + context.props.name
       var store = window.vcms.utils.getStore(namespace)

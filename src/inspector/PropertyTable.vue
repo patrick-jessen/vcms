@@ -17,7 +17,7 @@ export default {
       if(p.name === '$type') {
         if(!store) {
           var name = selected.split('/').slice(-1)[0]
-          var parent = selected.split('/').slice(0, -1).join('/')
+          var parent = selected.split('/').slice(0, -2).join('/')
           var type = v
 
           var obj = {

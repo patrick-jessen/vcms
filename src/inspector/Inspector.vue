@@ -48,6 +48,10 @@ export default {
       if(this.selected === 'app') 
         return []
 
+      var store = window.vcms.utils.getStore(this.selected)
+      if(Array.isArray(store))
+        return []
+
       // get interface of child
       var iface = window.vcms.utils.getInterface(this.selected)
       var matchingTypes = ['None']

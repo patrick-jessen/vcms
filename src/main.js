@@ -7,6 +7,8 @@ import Store from './store/laptops'
 import routes from './routes.js'
 Vue.use(Vcms)
 
+window.store = Store
+
 var router = new VueRouter({
   mode: 'history',
   routes: routes
@@ -93,6 +95,8 @@ window.componentNames = [
   'laptops/ProductList',
   'laptops/ProductSummary',
   'laptops/Footer',
+  'laptops/Banners',
+  'laptops/FullWidthBanner',
 
   'pages/Laptops',
   'pages/Desktops',

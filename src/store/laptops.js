@@ -1,6 +1,6 @@
 export default {
   "inspector": {
-    "selected": "app/$pages/default"
+    "selected": "app/$pages/default/$children/content/$children/banners"
   },
   "app": {
     "$type": "App",
@@ -91,7 +91,17 @@ export default {
           "videofile": "https://d1vhcvzji58n1j.cloudfront.net/assets/home/hero-749e29ffaf.mp4",
           "poster": "https://d1vhcvzji58n1j.cloudfront.net/assets/home/hero-coffee-09be8e6aae.jpg"
         },
-        "$children": {},
+        "$children": {
+          "content": {
+            "$type": "Banners",
+            "$children": {
+              "banners": [
+                {"$type": "FullWidthBanner"},
+                {"$type": "FullWidthBanner"}
+              ]
+            }
+          }
+        },
         "heading": "We are System76.",
         "subheading": "We make powerful computers to help you do more, go further, and unleash your potential."
       },
