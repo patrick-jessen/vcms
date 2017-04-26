@@ -23,6 +23,8 @@ export default {
         hoverCls = 'hovered'
       }
 
+      console.log('here', namespace)
+
       return createElement('router-view', {
         on: {
           click: (e)=>{
@@ -32,7 +34,8 @@ export default {
         },
         attrs: {
           class: hoverCls
-        }
+        },
+        key: namespace
       })
     }
     else {
