@@ -71,6 +71,7 @@ export default {
   padding-top: 250px;
   text-align: center;
   color: white;
+  text-shadow: 0 0 10px #222;
 }
 .text>h1 {
   font-family: serif;

@@ -110,6 +110,10 @@ window.vue.$mount('#app')
 window.addEventListener("keydown", function(event) {
     if (event.keyCode == 17) {
         window.vue.$data.ctrl = true
+    }    
+    if(event.key === 'e' && event.ctrlKey) {
+      window.vue.showInspector = !window.vue.showInspector
+      event.preventDefault()
     }
 }, false);
 window.addEventListener("keyup", function(event) {
