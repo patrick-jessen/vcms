@@ -1,4 +1,3 @@
-
 export default function plugin(Vue) {
 
   window.vcms = {
@@ -203,5 +202,47 @@ function registerStore(vm) {
         }
       })
     }
+  }
+}
+
+//////////////////////////////////////
+
+export class Component {
+  constructor(namespace) { 
+    this.namespace = namespace
+    this.store = window.vcms.utils.getStore(namespace)
+  }
+
+  get type() {
+    return this.store.$type
+  }
+  get properties() {
+    var obj = {}
+    for(var k in this.store) {
+      if(!this.store.hasOwnProperty(k)) continue
+      if(k.startsWith('$')) continue
+
+      obj[k] = this.store[k]
+    }
+    return obj
+  }
+  get children() {
+    return this.store.$children
+  }
+  get parent() {
+    var parentNamespace = this.namespace.split('/').slice(0,-2).join('/')
+    if(parentNamespace.length === 0)
+      return 
+      
+    return new Component(parentNamespace)
+  }
+}
+
+class Property {
+  get value() {
+
+  }
+  get def() {
+
   }
 }

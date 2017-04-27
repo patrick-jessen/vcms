@@ -3,11 +3,13 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import Vcms from './vcms.js'
+import {Component} from './vcms.js'
 import Store from './store/laptops'
 import routes from './routes.js'
 Vue.use(Vcms)
 
 window.store = Store
+window.Component = Component
 
 var router = new VueRouter({
   mode: 'history',
