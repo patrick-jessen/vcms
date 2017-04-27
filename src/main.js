@@ -4,7 +4,7 @@ Vue.use(VueRouter)
 
 import Vcms from './vcms.js'
 import {Component} from './vcms.js'
-import Store from './store/laptops'
+import Store from './store/laptops2'
 import routes from './routes.js'
 Vue.use(Vcms)
 
@@ -79,7 +79,8 @@ window.vue = new Vue({
     _store: Store,
     ctrl: false,
     showInspector: true,
-    hoveredComponent: ''
+    hoveredComponent: '',
+    selectedComponent: null
   },
   components: {
     App: require('./Laptops.vue'),

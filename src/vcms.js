@@ -40,7 +40,7 @@ export default function plugin(Vue) {
     // get store object which represents the namespace
     getStore(namespace) {
       var store = window.vue.$data._store
-      var path = namespace.split('/')
+      var path = namespace.string.split('.')
       
       try {
         for(var i = 0; i < path.length; i++) {
@@ -114,24 +114,31 @@ export default function plugin(Vue) {
 
 
   Vue.mixin({
-    props: ['name', 'setType'],
+    props: ['name'],
     data() {
       return {
-        namespace: '',
+        component: null
       }
     },
     beforeCreate() {
       registerStore(this)
     },
     created() {
-      var scope = '/$children/'
-      if(this.type === 'page')
-        scope = '/$pages/'
+      if(!this.name)
+        return
 
-      if(this.$parent && this.$parent.namespace && this.$parent.namespace.length > 0)
-        this.namespace = this.$parent.namespace + scope + this.name
-      else
-        this.namespace = this.name
+      var namespace
+
+      // This is a child component
+      if(this.$parent && this.$parent.component) {
+        namespace = this.$parent.component.namespace.child(this.name)
+      }
+      // This is the root component
+      else {
+        namespace = new Namespace(this.name)
+      }
+
+      this.component = new Component(namespace)
     },
     methods: {
       emit(event, ...args) {
@@ -145,17 +152,7 @@ export default function plugin(Vue) {
 function StoreAccessor(property) {
   return {
     get() {
-      if(!this.namespace) return
-
-      var store = window.vcms.utils.getStore(this.namespace)
-      return store[property]
-    },
-
-    set(value) {
-      if(!this.namespace) return
-
-      var store = window.vcms.utils.getStore(this.namespace)
-      store[property] = value;
+      return this.component.store.$props[property]
     }
   }
 }
@@ -208,9 +205,11 @@ function registerStore(vm) {
 //////////////////////////////////////
 
 export class Component {
-  constructor(namespace) { 
+  constructor(namespace, store) { 
     this.namespace = namespace
-    this.store = window.vcms.utils.getStore(namespace)
+    if(!store)
+      store = window.vcms.utils.getStore(namespace)
+    this.store = store
   }
 
   get type() {
@@ -227,16 +226,45 @@ export class Component {
     return obj
   }
   get children() {
-    return this.store.$children
+    var obj = {}
+    var c = this.store.$children
+    for(var k in c) {
+      if(!c.hasOwnProperty(k)) continue
+      var namespace = this.namespace.child(k)
+      obj[k] = new Component(namespace, c[k])
+    }
+    return obj
   }
   get parent() {
-    var parentNamespace = this.namespace.split('/').slice(0,-2).join('/')
-    if(parentNamespace.length === 0)
-      return 
-      
+    var parentNamespace = this.namespace.parent
+    if(!parentNamespace)
+      return
     return new Component(parentNamespace)
   }
 }
+
+class Namespace {
+  constructor(namespace) {
+    this.namespace = namespace
+  }
+
+  get string() {
+    return this.namespace
+  }
+
+  child(name) {
+    return new Namespace(this.namespace + '.$children.' + name)
+  }
+
+  get parent() {
+    var parentNamespace = this.namespace.split('.').slice(0,-2).join('.')
+    if(parentNamespace.length === 0)
+      return 
+
+    return new Namespace(parentNamespace)
+  }
+}
+
 
 class Property {
   get value() {

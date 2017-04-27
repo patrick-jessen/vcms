@@ -26,7 +26,7 @@ export default {
         existingClick()
     }
 
-    var actions = createElement(PictureControls)
+    var actions// = createElement(PictureControls)
 
     data.class = 'property'
     return createElement(type, data, [ctx.slots().default,actions])

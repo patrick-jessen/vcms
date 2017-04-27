@@ -19,18 +19,22 @@ export default {
     this.$options.components.HierarchyItem = require('./HierarchyItem.vue')
   },
   created() {
-    var scope = '/$children/'
-    if(this.def.type === 'page')
-      scope = '/$pages/'
-    else if(this.def.type === 'arraychild')
-      scope = '/'
+    // var scope = '/$children/'
+    // if(this.def.type === 'page')
+    //   scope = '/$pages/'
+    // else if(this.def.type === 'arraychild')
+    //   scope = '/'
 
-    if(this.$parent.namespace.length > 0)
-      this.namespace = this.$parent.namespace + scope + this.nameStr
-    else
-      this.namespace = this.nameStr
+    // if(this.$parent.namespace.length > 0)
+    //   this.namespace = this.$parent.namespace + scope + this.nameStr
+    // else
+    //   this.namespace = this.nameStr
   },
   computed: {
+    selectedComponent: {
+      get() {return this.$root.selectedComponent},
+      set(val) {this.$root.selectedComponent = val}
+    },
     childrenKeys() {     
       if(this.def.type === 'array') {
         var children = []
@@ -47,7 +51,7 @@ export default {
       return def.children
     },
     isSelected() {
-      return window.vue.$data._store.inspector.selected === this.namespace
+      return this.selectedComponent === this.data
     },
     nameStr() {
       if(this.def.type === 'page') {
@@ -105,7 +109,7 @@ export default {
       }
     },
     onClick(e) {
-      window.vue.$data._store.inspector.selected = this.namespace
+      this.selectedComponent = this.data
       e.stopPropagation()
     },
     onMouseOver(e) {

@@ -33,7 +33,6 @@
 
 <script>
 export default {
-  static: [{name:'selected'}],
   data() {
     return {
       currentTab: 'components'
@@ -43,10 +42,17 @@ export default {
     this.namespace = 'inspector'
   },
   computed: {
+    selected() {
+      return this.$root.selectedComponent
+    },
     properties() {
+      if(!this.selected) 
+        return []
+
       // app is imutable
       if(this.selected === 'app') 
         return []
+
 
       var store = window.vcms.utils.getStore(this.selected)
       if(Array.isArray(store))

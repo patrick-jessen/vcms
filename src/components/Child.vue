@@ -74,7 +74,7 @@ export default {
       type = store.$type
     }
     else {
-      namespace = context.parent.namespace + '/$children/' + context.props.name
+      namespace = context.parent.component.namespace.child(context.props.name)
       var store = window.vcms.utils.getStore(namespace)
 
       if(!store) {

@@ -8,7 +8,7 @@
 export default {
   computed: {
     app() {
-      return window.vue.$data._store.app
+      return window.vue.$children[0].component // 'app' component
     },
     def() {
       return {
