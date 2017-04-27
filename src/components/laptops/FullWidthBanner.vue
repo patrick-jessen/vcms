@@ -1,8 +1,10 @@
 <template>
 <div class='banner'>
-  <img :src='image'>
-  <div v-for='o in overlay'>
-    <img :src='o.image'>
+  <img class='background' :src='image'>
+  <div class='overlay'>
+    <div v-for='(o, i) in overlay'>
+      <img :style='"z-index:" + i + "; width:" + o.width + "%"' :src='o.image'>
+    </div>
   </div>
   <router-link :to='button.link'>{{button.text}}</router-link>
 </div>
@@ -24,9 +26,16 @@ export default {
         {
           title:'Image',
           descr:'',
-          name:'image', type: 'string.url'}
+          name:'image', type: 'string.url'
+        },
+        {
+          title:'Width (%)',
+          descr:'',
+          name:'width',
+          type:'string'
+        }
       ],
-      defaultItem: {image:''}
+      defaultItem: {image:'default.png', width: '100'}
     },
     {
       title: 'Button',
@@ -53,9 +62,33 @@ export default {
 
 <style scoped>
 .banner {
-  height: 200px;
+  height: 30rem;
   width: 100%;
   background-color: green;
-  border: 1px solid white;
+  border-top: 1px solid white;
+  position: relative;
+  overflow: hidden;
+}
+.background {
+  width: 100%;
+  position: absolute;
+  display: inline-block;
+}
+.overlay {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  height: 100%;
+}
+.overlay > div {
+  /*max-width: 40%;
+  max-height: 70%;*/
+  margin: auto;
+  display: inline-block;
+}
+.overlay img {
+  max-width: 100%;
+  max-height: 100%;
+  /*width: auto;*/
 }
 </style>

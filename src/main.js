@@ -90,6 +90,7 @@ window.componentNames = [
   'None',
   'Child',
   'Property',
+
   'laptops/Menu',
   'laptops/Hero',
   'laptops/ProductList',

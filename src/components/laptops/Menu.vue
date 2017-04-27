@@ -1,8 +1,10 @@
 <template>
   <div class='wrapper' :class='{invert}'>
     <!-- Company logo -->
-    <Property prop='logo' type='router-link' class='logo' :to='logo.link'>
-      <img :src='logoSrc'>
+    <Property prop='logo' class='logo'>
+      <router-link :to='logo.link'>
+        <img :src='logoSrc'>
+      </router-link>
     </Property>
   
     <!-- Menu items -->

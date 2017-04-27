@@ -1,6 +1,6 @@
 export default {
   "inspector": {
-    "selected": "app/$pages/default/$children/content/$children/banners/0"
+    "selected": "app/$pages/default/$children/content/$children/banners/1"
   },
   "app": {
     "$type": "App",
@@ -103,7 +103,12 @@ export default {
                     "text": "VIEW NOW"
                   },
                   "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/galp2/hero_1280-7dd0f44210.jpg",
-                  "overlay": []
+                  "overlay": [
+                    {
+                      "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/products/galp2/hero-home-text_1280-eed98825eb.png",
+                      "width": "50"
+                    }
+                  ]
                 },
                 {
                   "$type": "FullWidthBanner",
@@ -112,7 +117,20 @@ export default {
                     "text": "VIEW NOW"
                   },
                   "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/kaby-lake/hero-bg_1280-cca66a08e9.jpg",
-                  "overlay": []
+                  "overlay": [
+                    {
+                      "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/kaby-lake/wavy-text-a5e54583b6.png",
+                      "width": "50"
+                    },
+                    {
+                      "image": "http://d1vhcvzji58n1j.cloudfront.net/assets/products/oryp3/feature_1280-d664fb9e20.png",
+                      "width": "30"
+                    },
+                    {
+                      "image": "https://d1vhcvzji58n1j.cloudfront.net/assets/kaby-lake/now-shipping-oryx-e25729595a.png",
+                      "width": "25"
+                    }
+                  ]
                 }
               ]
             }

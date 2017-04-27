@@ -1,9 +1,11 @@
 <script>
+var PictureControls = require('./PictureControls.vue')
+
 export default {
   props: ['prop', 'type'],
   functional: true,
   render(createElement, ctx) {
-  
+ 
     var type = ctx.props.type
     if(!type)
       type = 'div'
@@ -12,6 +14,7 @@ export default {
     if(!data.on)
       data.on = {}
     
+    var showActions = false
     var existingClick = data.on.click
     data.on.click = (e)=>{
       if(e.ctrlKey) {
@@ -23,9 +26,10 @@ export default {
         existingClick()
     }
 
-    
-    data.class = {'property' : window.vue.$data.ctrl}
-    return createElement(type, data, [ctx.slots().default])
+    var actions = createElement(PictureControls)
+
+    data.class = 'property'
+    return createElement(type, data, [ctx.slots().default,actions])
   }
 }
 </script>
@@ -33,9 +37,10 @@ export default {
 <style>
 .property {
   display: inline-block;
-  background-color: #eee;
+  position: relative;
 }
 .property:hover {
   outline: 1px dashed gray;
 }
+
 </style>
