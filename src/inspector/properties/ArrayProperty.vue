@@ -95,11 +95,15 @@ export default {
     },
     onChange(pd, i, e) {
 
-      //tempoary hack
-      if(!this.property.store[pd.name])
-        this.$set(this.property.store[this.property.name], pd.name, e)  
-      else
-        this.$set(this.property.store, pd.name, e)
+      if(this.pd.name === '$type')
+        this.$set(this.property.store[this.property.name], pd.name, e)
+      // else 
+
+      // //tempoary hack
+      // if(!this.property.store[pd.name])
+      //   this.$set(this.property.store[this.property.name], pd.name, e)  
+      // else
+      //   this.$set(this.property.store, pd.name, e)
     },
     onAdd() {
       var obj = this.property.defaultItem

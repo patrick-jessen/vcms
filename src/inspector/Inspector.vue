@@ -46,53 +46,49 @@ export default {
       return this.$root.selectedComponent
     },
     properties() {
-      //TEMP
-      return  []
-
       if(!this.selected) 
         return []
 
       // app is imutable
-      if(this.selected === 'app') 
+      if(this.selected.namespace.string === 'app') 
         return []
 
-
-      var store = window.vcms.utils.getStore(this.selected)
-      if(Array.isArray(store))
+      if(this.selected.isArray)
         return []
 
-      // get interface of child
-      var iface = window.vcms.utils.getInterface(this.selected)
-      var matchingTypes = ['None']
+      // // get interface of child
+      // var iface = window.vcms.utils.getInterface(this.selected)
+      // var matchingTypes = ['None']
 
-      for(var key in window.vcms.components) {
-        if(!window.vcms.components.hasOwnProperty(key)) continue
+      // for(var key in window.vcms.components) {
+      //   if(!window.vcms.components.hasOwnProperty(key)) continue
 
-        var comp = window.vcms.components[key]
-        var valid = true
+      //   var comp = window.vcms.components[key]
+      //   var valid = true
 
-        // check inputs
-        for(var i = 0; i < comp.input.length; i++) {
-          if(iface.input.indexOf(comp.input[i]) < 0) {
-            valid = false
-            break
-          }
-        }
-        if(!valid) continue
+      //   // check inputs
+      //   for(var i = 0; i < comp.input.length; i++) {
+      //     if(iface.input.indexOf(comp.input[i]) < 0) {
+      //       valid = false
+      //       break
+      //     }
+      //   }
+      //   if(!valid) continue
 
-        // check outputs
-        for(var i = 0; i < iface.output.length; i++) {
-          if(comp.output.indexOf(iface.output[i]) < 0) {
-            valid = false
-            break
-          }
-        }
+      //   // check outputs
+      //   for(var i = 0; i < iface.output.length; i++) {
+      //     if(comp.output.indexOf(iface.output[i]) < 0) {
+      //       valid = false
+      //       break
+      //     }
+      //   }
 
-        if(valid)
-          matchingTypes.push(key)
-      }
+      //   if(valid)
+      //     matchingTypes.push(key)
+      // }
+      var matchingTypes = []
+      var store = this.selected.store
 
-      var store = window.vcms.utils.getStore(this.selected)
       if(!store) {
         return [{
           name: '$type',
@@ -113,12 +109,12 @@ export default {
           descr: 'Type of component'
         }]
 
-      var compDef = window.vcms.components[store.$type].static
+      var compDef = this.selected.def.static
       if(compDef) {   
         Object.keys(compDef).forEach(property => {
           var obj = Object.assign({}, compDef[property])
           var name = compDef[property].name
-          obj.value = store[name]
+          obj.value = store.$props[name]
           obj.store = store
           inspectorArr.push(obj)
         })
