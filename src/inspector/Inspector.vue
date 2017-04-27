@@ -46,6 +46,9 @@ export default {
       return this.$root.selectedComponent
     },
     properties() {
+      //TEMP
+      return  []
+
       if(!this.selected) 
         return []
 

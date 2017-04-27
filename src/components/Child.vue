@@ -11,22 +11,21 @@ export default {
     var namespace
 
     if(context.props.type === 'page') {
-      var route = window.vue.$route.path.replace('/', '')
-      if(route === '')
-        route = 'default'
+      var route = window.vue.$route.path
 
-      namespace = context.parent.namespace + '/$pages/' + route
+      var name = context.props.name
+      namespace = context.parent.component.namespace.child(name).append('$pages', route)
 
-      var hovered = window.vue.$data.hoveredComponent === namespace
-      var hoverCls
-      if(hovered) {
-        hoverCls = 'hovered'
-      }
+      // var hovered = window.vue.$data.hoveredComponent === namespace
+      // var hoverCls
+      // if(hovered) {
+      //   hoverCls = 'hovered'
+      // }
 
       return createElement('router-view', {
         on: {
           click: (e)=>{
-            window.vcms.utils.getStore('inspector').selected = namespace
+            window.vue.$root.selectedComponent = new Component(namespace)
             e.stopPropagation()
           }
         },
@@ -39,22 +38,23 @@ export default {
     else if(context.props.type === 'array') {
       var children = []
 
-      namespace = context.parent.namespace + '/$children/' + context.props.name
-      var store = window.vcms.utils.getStore(namespace)
+      namespace = context.parent.component.namespace.child(context.props.name)
+      var comp = new Component(namespace)
+      var store = comp.store
 
       var data = context.data
       if(!data.attrs) data.attrs = {}
 
       data.attrs.type = 'arraychild'
       for(var i = 0; i < store.length; i++) {
-        data.attrs.name = context.props.name + '/' + i
+        data.attrs.name = context.props.name + '.' + i
         children.push(createElement('Child', data))
       }
 
       return createElement('div', {
         on: {
           click: (e)=>{
-            window.vcms.utils.getStore('inspector').selected = namespace
+            window.vue.$root.selectedComponent = comp
             e.stopPropagation()
           }
         },
@@ -63,16 +63,16 @@ export default {
         }
       }, children)
     }
-    else if(context.props.type === 'arraychild') {
-      namespace = context.parent.namespace + '/$children/' + context.props.name
-      var store = window.vcms.utils.getStore(namespace)
+    // else if(context.props.type === 'arraychild') {
+    //   namespace = context.parent.namespace + '/$children/' + context.props.name
+    //   var store = window.vcms.utils.getStore(namespace)
       
-      if(!store) {
-        context.data.attrs.props = context.data.attrs
-        return createElement('None', context.data)// Child does not exist
-      } 
-      type = store.$type
-    }
+    //   if(!store) {
+    //     context.data.attrs.props = context.data.attrs
+    //     return createElement('None', context.data)// Child does not exist
+    //   } 
+    //   type = store.$type
+    // }
     else {
       namespace = context.parent.component.namespace.child(context.props.name)
       var store = window.vcms.utils.getStore(namespace)
@@ -95,7 +95,7 @@ export default {
     return createElement('div', {
       on: {
         click: (e)=>{
-          window.vcms.utils.getStore('inspector').selected = namespace
+          window.vue.$root.selectedComponent = new Component(namespace)
           e.stopPropagation()
         }
       },

@@ -18,23 +18,20 @@ var router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if(to.matched.length === 0) {
-    router.addRoutes([
-      {path:to.path, component: window.layouts.NewPage}
-    ])
-    routes.push({path:to.path, component: window.layouts.NewPage})
-    next(to)
-    return
+    // router.addRoutes([
+    //   {path:to.path, component: window.layouts.NewPage}
+    // ])
+    // routes.push({path:to.path, component: window.layouts.NewPage})
+    // next(to)
+    // return
+    console.log("PATH DOES NOT EXIST")
   }
   else {
     if(window.vue) {
-      var namespace = 'app' + to.fullPath.replace('/', '/$pages/')
-      if(to.path === '/')
-        namespace += 'default'
-
-      var store = window.vcms.utils.getStore(namespace)
-      var type = store.$type
-
-      to.matched[0].components.default = window.layouts[type]
+      var namespace = window.vue.$root.$children[0].component.namespace.child('page').append('$pages', to.fullPath)
+      console.log("NAM", namespace)
+      var comp = new Component(namespace)
+      to.matched[0].components.default = window.layouts[comp.type]
     }
     else {
       // Temp hack

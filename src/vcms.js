@@ -204,12 +204,44 @@ function registerStore(vm) {
 
 //////////////////////////////////////
 
+function currentRoute() {
+  return window.vue.$route.fullPath
+}
+
 export class Component {
   constructor(namespace, store) { 
-    this.namespace = namespace
+    if(typeof namespace === 'string')
+      namespace = new Namespace(namespace)
+
     if(!store)
       store = window.vcms.utils.getStore(namespace)
-    this.store = store
+
+    this._namespace = namespace
+    this._store = store
+  }
+
+  get isPage() {
+    return this._store.$type === 'Page'
+  }
+  get isArray() {
+    return Array.isArray(this.store)
+  }
+
+  get namespace() {
+    if(this.isPage) {
+      var route = currentRoute()
+      return this._namespace.append('$pages', route)
+    }
+
+    return this._namespace
+  }
+
+  get store() {
+    if(this.isPage) {
+      var route = currentRoute()
+      return this._store.$pages[route]
+    }
+    return this._store
   }
 
   get type() {
@@ -227,19 +259,55 @@ export class Component {
   }
   get children() {
     var obj = {}
-    var c = this.store.$children
-    for(var k in c) {
-      if(!c.hasOwnProperty(k)) continue
+    var children = this.store.$children
+
+    for(var k in children) {
+      if(!children.hasOwnProperty(k)) continue
       var namespace = this.namespace.child(k)
-      obj[k] = new Component(namespace, c[k])
+      obj[k] = new Component(namespace, children[k])
     }
     return obj
   }
+
   get parent() {
     var parentNamespace = this.namespace.parent
     if(!parentNamespace)
       return
     return new Component(parentNamespace)
+  }
+
+  get def() {
+    if(this.isArray) {
+      var obj = {
+        children: []
+      }
+      for(var i in this.store) {
+        obj.children.push({
+          title: 'Item ' + i,
+          name: i
+        })
+      }
+      return obj
+    }
+      
+    return window.vcms.components[this.type]
+  }
+
+  child(name) {
+    if(this.isArray) {
+      var store = this.store[name]
+      if(!store)
+        return
+
+      return new Component(this.namespace.append(name))
+    }
+    else {
+      var store = this.store.$children[name]
+      if(!store)
+        return
+
+      return new Component(this.namespace.child(name))
+    }
   }
 }
 
@@ -254,6 +322,15 @@ class Namespace {
 
   child(name) {
     return new Namespace(this.namespace + '.$children.' + name)
+  }
+
+  append(...names) {
+    var ns = this.namespace
+    for(var n in names) {
+      ns += '.' + names[n]
+    }
+
+    return new Namespace(ns)
   }
 
   get parent() {

@@ -18,95 +18,46 @@ export default {
   beforeCreate() {
     this.$options.components.HierarchyItem = require('./HierarchyItem.vue')
   },
-  created() {
-    // var scope = '/$children/'
-    // if(this.def.type === 'page')
-    //   scope = '/$pages/'
-    // else if(this.def.type === 'arraychild')
-    //   scope = '/'
-
-    // if(this.$parent.namespace.length > 0)
-    //   this.namespace = this.$parent.namespace + scope + this.nameStr
-    // else
-    //   this.namespace = this.nameStr
-  },
   computed: {
     selectedComponent: {
       get() {return this.$root.selectedComponent},
       set(val) {this.$root.selectedComponent = val}
     },
     childrenKeys() {     
-      if(this.def.type === 'array') {
-        var children = []
-        for(var i = 0; i < this.data.length; i++) {
-          children.push({title:'Item '+i, name:''+i, type:'arraychild'})
-        }
-        return children
-      }
-
-      var def = window.vcms.components[this.data.$type]
-      if(!def) 
-        return []
-
-      return def.children
+      return this.data.def.children
     },
     isSelected() {
-      return this.selectedComponent === this.data
-    },
-    nameStr() {
-      if(this.def.type === 'page') {
-        var route = this.$route.path.replace('/', '')
-        if(route.length)
-          return route
-        return 'default'
-      }
-      return this.def.name
+      if(!this.selectedComponent || !this.data)
+        return false
+
+      return this.selectedComponent.namespace.string === this.data.namespace.string
     },
     text() {
+      var t
       if(this.def.title)
-        return this.def.title
-      
-      return this.def.name
+        t = this.def.title
+      else
+        t = this.def.name
+
+      if(this.data.isPage) {
+        t += ' ( ' + this.$route.fullPath + ' )'
+      }
+
+      return t
     },
     icon() {
-      switch(this.def.type) {
-        case 'app':
-          return 'cubes'
-        case 'array':
-          return 'green cubes'
-        case 'page':
-          return 'blue file outline'
-        case 'component':
-        default:
-          return 'green cube'
-      }
+      if(this.data.type === 'App')
+        return 'cubes'
+      if(this.data.isArray)
+        return 'green cubes'
+      if(this.data.isPage)
+        return 'blue file outline'
+      return 'green cube'
     }
   },
   methods: {
     child(def) {
-      if(def.type === 'page') {
-        if(!this.data.$pages)
-          return
-
-        var name = this.$route.path.replace('/', '')
-        if(!name.length)
-          name = 'default'
-
-        return this.data.$pages[name]
-      }
-      else if(def.type === 'arraychild') {
-        return this.data[def.name]
-      }
-      else {
-        if(!this.data.$children)
-          return
-
-        var name = def.name
-        if(typeof name === 'function')
-          name = name()
-
-        return this.data.$children[name]
-      }
+      return this.data.child(def.name)
     },
     onClick(e) {
       this.selectedComponent = this.data
