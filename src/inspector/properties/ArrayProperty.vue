@@ -3,7 +3,7 @@
   <div class='td row'>
     <td class='title' @click='toggle'>
       <i :class='icon'></i>
-      {{property.title}}
+      {{property.def.title}}
     </td>
     <td>  
       <span v-html='preview' class='title' @click='toggle'></span>
@@ -11,12 +11,12 @@
   </div>
   <td v-if='expanded' colspan='2' class='subtable'>
     <table>
-    <template v-if='property.type === "array"'>
+    <template v-if='property.def.type === "array"'>
       <template v-for='(p, i) in property.value'>
       <Property 
         :nested='1' 
         :title='p.descr' 
-        :property='childProp(property.props, i, property.value)' 
+        :property='childProp(property.props, i, property)' 
         @change='onChange(p, i, $event)' 
         :key='p'
         class='child'
@@ -24,11 +24,11 @@
       </template>
       <button @click='onAdd'>Add</button><button @click='onRemove'>Remove</button>
     </template>
-    <template v-else v-for='p in property.props'>
+    <template v-else v-for='p in property.def.props'>
       <Property 
         :nested='1' 
         :title='p.descr' 
-        :property='childProp(p, 0, property.value)' 
+        :property='childProp(p, 0, property)' 
         @change='onChange(p, 0, $event)' 
         :key='p'
         class='child'
@@ -56,10 +56,10 @@ export default {
     },
     preview() {
       // no render function
-      if(!this.property.render)
+      if(!this.property.def.render)
         return this.property.value
 
-      return this.property.render(this.property.value)
+      return this.property.def.render(this.property.value)
     },
     keys() {
       return Object.keys(this.property.value)
@@ -73,25 +73,31 @@ export default {
       this.expanded = !this.expanded
     },
     childProp(propDef, i, prop) {
-      if(this.property.type === 'array') {
-        return {
-          title:'Item ' + i, 
-          type:'object',
-          props: propDef,
-          value: prop[i],
-          render: (item) => {
-            if(this.property.render)
-              return this.property.render([item])
-          },
-          store: this.property.store[this.property.name][i],
-        }
-      }
+      // if(this.property.def.type === 'array') {
+      //   return {
+      //     title:'Item ' + i, 
+      //     type:'object',
+      //     props: propDef,
+      //     value: prop[i],
+      //     render: (item) => {
+      //       if(this.property.def.render)
+      //         return this.property.render([item])
+      //     },
+      //     store: this.property.store[this.property.name][i],
+      //   }
+      // }
 
-      var obj = Object.assign({}, propDef)
-      obj.value = prop[propDef.name]
-      obj.store = this.property.store[this.property]
+      // console.log(propDef)
 
-      return obj
+      // var obj = Object.assign({}, propDef)
+      // obj.value = prop[propDef.name]
+      // obj.store = this.property.store[this.property]
+
+      // return obj
+      if(this.property.def.type === 'array')
+        return prop.subProperty(i)
+
+      return prop.subProperty(propDef.name)
     },
     onChange(pd, i, e) {
 

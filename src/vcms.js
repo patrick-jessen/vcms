@@ -247,16 +247,19 @@ export class Component {
   get type() {
     return this.store.$type
   }
+
   get properties() {
     var obj = {}
-    for(var k in this.store) {
-      if(!this.store.hasOwnProperty(k)) continue
-      if(k.startsWith('$')) continue
+    var props = this.store.$props
 
-      obj[k] = this.store[k]
+    for(var k in props) {
+      if(!props.hasOwnProperty(k)) continue
+      var namespace = this.namespace.prop(k)
+      obj[k] = new Property(namespace, this)
     }
     return obj
   }
+
   get children() {
     var obj = {}
     var children = this.store.$children
@@ -324,6 +327,12 @@ class Namespace {
     return new Namespace(this.namespace + '.$children.' + name)
   }
 
+  prop(name) {
+    if(this.namespace.indexOf('.$props.') < 0)
+      return new Namespace(this.namespace + '.$props.' + name)
+    return new Namespace(this.namespace + '.' + name)
+  }
+
   append(...names) {
     var ns = this.namespace
     for(var n in names) {
@@ -340,14 +349,47 @@ class Namespace {
 
     return new Namespace(parentNamespace)
   }
+
+  get last() {
+    return this.namespace.split('.').slice(-1)[0]
+  }
 }
 
 
 class Property {
-  get value() {
-
+  constructor(namespace, component, parentProp) {
+    this.component = component
+    this.namespace = namespace
+    this.name = namespace.last
+    this.value = window.vcms.utils.getStore(namespace)
+    this.parentProp = parentProp
   }
-  get def() {
 
+  subProperty(name) {
+    return new Property(this.namespace.prop(name), this.component, this)
+  }
+
+  get def() {
+    var def = {props:this.component.def.static}
+
+    var propChain = [this.name]
+    var currProp = this
+    while(currProp.parentProp) {
+      propChain.push(currProp.parentProp.name)
+      currProp = currProp.parentProp
+    }
+
+    for(var i = propChain.length-1; i >= 0; i--) {
+      var p = propChain[i]
+
+      for(var ii = 0; ii < def.props.length; ii++) {
+        if(def.props[ii].name === p) {
+          def = def.props[ii]
+          break
+        }
+      }
+    }
+
+    return def    
   }
 }

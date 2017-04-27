@@ -1,7 +1,7 @@
 <template>
 <div class='tr row'>
   <td>
-    <div :style='nest'>{{property.title}}</div>
+    <div :style='nest'>{{property.def.title}}</div>
   </td>
   <td>
     <div v-if='icon' class='ui icon input'>
@@ -20,7 +20,7 @@ export default {
   props: ['property', 'nested'],
   computed: {
     icon() {
-      var type = this.property.type.split('.')
+      var type = this.property.def.type.split('.')
       if(type.length > 1) {
         switch(type[1]) {
           case 'url':

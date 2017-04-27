@@ -9,7 +9,7 @@ export default {
   props: ['property', 'nested'],
 
   render(createElement, ctx) {
-    var type = ctx.props.property.type.split('.')[0]
+    var type = ctx.props.property.def.type.split('.')[0]
     switch(type) {
       case 'string':
         type = TextProperty

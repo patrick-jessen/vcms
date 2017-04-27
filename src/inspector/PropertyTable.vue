@@ -1,7 +1,7 @@
 <template>
 <div class='ui striped table'>
   <template v-for='p in properties'>
-    <Property :name='p.name' :property='p' @change='propertyChange(p,$event)' :title='p.descr' :key='p'/>
+    <Property :name='p.name' :property='p' @change='propertyChange(p,$event)' :title='p.def.descr' :key='p'/>
   </template>
 </div>
 </template>
@@ -11,6 +11,8 @@ export default {
   props: ['properties'],
   methods: {
     propertyChange(p, v) {
+      return 
+
       var selected = this.$parent.selected
       var store = window.vcms.utils.getStore(selected)
 

@@ -20,7 +20,7 @@
   </div>
 
   <div class='ui dividing header'>Properties</div>
-  <PropertyTable name='properties' :properties='properties'/>
+  <PropertyTable :properties='properties'/>
 
   <button class='ui basic button' @click='performSave'>
     <i class='icon save'></i>
@@ -120,7 +120,8 @@ export default {
         })
       }
 
-      return inspectorArr
+      //return inspectorArr
+      return this.selected.properties
     }
   },
   components: {
