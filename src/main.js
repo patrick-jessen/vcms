@@ -90,25 +90,31 @@ window.componentNames = [
   'None',
   'Child',
   'Property',
-
-  'laptops/Menu',
-  'laptops/Hero',
-  'laptops/ProductList',
-  'laptops/ProductSummary',
-  'laptops/Footer',
-  'laptops/Banners',
-  'laptops/FullWidthBanner',
-
-  'pages/Laptops',
-  'pages/Desktops',
-  'pages/Frontpage'
 ]
+
 window.vcms.utils.registerComponent('App', require('./Laptops.vue'))
 window.componentNames.forEach((name) => {
   var comp = require('./components/' + name + '.vue')
   name = name.split('/').slice(-1)[0]
   window.vcms.utils.registerComponent(name, comp)
 })
+
+var comps = require.context('./components/laptops', true, /\.vue$/)
+comps.keys().forEach((name) => {
+  name = name.split('/').slice(-1)[0]
+  name = name.split('.')[0]
+  var comp = require('./components/laptops/' + name + '.vue')
+  window.vcms.utils.registerComponent(name, comp)
+})
+
+comps = require.context('./components/pages', true, /\.vue$/)
+comps.keys().forEach((name) => {
+  name = name.split('/').slice(-1)[0]
+  name = name.split('.')[0]
+  var comp = require('./components/pages/' + name + '.vue')
+  window.vcms.utils.registerComponent(name, comp)
+})
+
 
 window.vue.$mount('#app')
 
