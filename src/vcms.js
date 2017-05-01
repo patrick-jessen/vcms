@@ -1,3 +1,5 @@
+import init from './init.js'
+
 export default function plugin(Vue) {
 
   window.vcms = {
@@ -146,6 +148,8 @@ export default function plugin(Vue) {
       }
     }
   })
+
+  init()
 }
 
 
@@ -183,15 +187,6 @@ function registerStore(vm) {
         else
           vm.$options.computed[property] = new StoreAccessor(property);
       });
-    }
-
-    // Loop through config file
-    iter = window.tmpDefs[name]
-    if(iter) {
-      iter.properties.forEach(property => {
-        var n = Object.keys(property)[0]
-        vm.$options.computed[n] = new StoreAccessor(n);
-      })
     }
 
     // Loop through emits

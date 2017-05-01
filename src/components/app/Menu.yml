@@ -1,54 +1,54 @@
 properties:
-  - logo:
-      title: Company logo
-      descr: The company's logo
-      type: object
-      props:
-        - image:
-            title: Image
-            type: string.img
-        - invertedimage:
-            title: Inverted image
-            type: string.img
-        - link:
-            title: Link
-            type: string.url
-      default:
-        image: default.png
+  - name: logo
+    title: Company logo
+    descr: The company's logo
+    type: object
+    props:
+      - name: image
+        title: Image
+        type: string.img
+      - name: invertedimage
+        title: Inverted image
+        type: string.img
+      - name: link
+        title: Link
+        type: string.url
+    default:
+    image: default.png
+    link: /
+  - name: menus
+    title: Menu items
+    descr: Entries in the menu
+    type: array
+    props:
+      - name: text
+        title: Text
+        descr: Text of menu
+        type: string
+      - name: link
+        title: Link
+        descr: Link of menu
+        type: string.url
+    default:
+      - text: laptops
         link: /
-  - menus:
-      title: Menu items
-      descr: Entries in the menu
-      type: array
-      props:
-        - text:
-            title: Text
-            descr: Text of menu
-            type: string
-        - link:
-            title: Link
-            descr: Link of menu
-            type: string.url
-      default:
-        - text: laptops
-          link: /
-        - text: desktops
-          link: /
-        - text: servers
-          link: /
-        - text: swag
-          link: /
-      defaultItem:
-        text: New menu
+      - text: desktops
         link: /
-  - actions:
-      title: Actions
-      type: array
-      props:
-        - icon:
-            title: Icon
-            type: string
-        - link:
-            title: Link
-            type: string.url
+      - text: servers
+        link: /
+      - text: swag
+        link: /
+    defaultItem:
+      text: New menu
+      link: /
+  - name: actions
+    title: Actions
+    type: array
+    props:
+      - name: icon
+        title: Icon
+        type: string
+      - name: link
+        title: Link
+        type: string.url
       

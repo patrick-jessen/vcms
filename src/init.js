@@ -1,8 +1,5 @@
-import Vue from 'vue'
-
-window.tmpDefs = {}
-
 export default () => {
+
   // Load VCMS components
   var components = require.context('./components/vcms', true, /\.vue$/)
   components.keys().forEach((name) => {
@@ -11,13 +8,6 @@ export default () => {
     window.vcms.utils.registerComponent(fileName, component)
   })
 
-  // Load app components
-  var defs = require.context('./components/app', true, /\.yml$/)
-  defs.keys().forEach((name) => {
-    var fileName = name.match(/\w+(?=\.)/)[0]
-    var def = require('./components/app/' + fileName + '.yml')
-    window.tmpDefs[fileName] = def
-  })
   components = require.context('./components/app', true, /\.vue$/)
   components.keys().forEach((name) => {
     var fileName = name.match(/\w+(?=\.)/)[0]

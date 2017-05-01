@@ -8,10 +8,6 @@ import Store from './store/laptops2'
 import routes from './routes.js'
 Vue.use(Vcms)
 
-import init from './init.js'
-init()
-
-
 window.store = Store
 window.Component = Component
 
