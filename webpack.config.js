@@ -30,6 +30,10 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /\.yml$/,
+        loader: 'yml-loader'
       }
     ]
   },

@@ -1,0 +1,43 @@
+properties:
+  - logo:
+      title: Company logo
+      descr: The company's logo
+      type: object
+      props:
+        - image:
+            title: Image
+            type: string.img
+        - invertedimage:
+            title: Inverted image
+            type: string.img
+        - link:
+            title: Link
+            type: string.url
+      default:
+        image: default.png
+        link: /
+  - menu:
+      title: Menu items
+      descr: Entries in the menu
+      type: array
+      props:
+        - text:
+            title: Text
+            descr: Text of menu
+            type: string
+        - link:
+            title: Link
+            descr: Link of menu
+            type: string.url
+      default:
+        - text: laptops
+          link: /
+        - text: desktops
+          link: /
+        - text: servers
+          link: /
+        - text: swag
+          link: /
+      defaultItem:
+        text: New menu
+        link: /

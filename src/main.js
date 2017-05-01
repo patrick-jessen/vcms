@@ -8,6 +8,10 @@ import Store from './store/laptops2'
 import routes from './routes.js'
 Vue.use(Vcms)
 
+import init from './init.js'
+init()
+
+
 window.store = Store
 window.Component = Component
 
@@ -79,41 +83,9 @@ window.vue = new Vue({
     hoveredComponent: '',
     selectedComponent: null
   },
-  components: {
-    App: require('./Laptops.vue'),
-    Inspector: require('./inspector/Inspector.vue')
-  },
   router
 })
 
-window.componentNames = [
-  'None',
-  'Child',
-  'Property',
-]
-
-window.vcms.utils.registerComponent('App', require('./Laptops.vue'))
-window.componentNames.forEach((name) => {
-  var comp = require('./components/' + name + '.vue')
-  name = name.split('/').slice(-1)[0]
-  window.vcms.utils.registerComponent(name, comp)
-})
-
-var comps = require.context('./components/laptops', true, /\.vue$/)
-comps.keys().forEach((name) => {
-  name = name.split('/').slice(-1)[0]
-  name = name.split('.')[0]
-  var comp = require('./components/laptops/' + name + '.vue')
-  window.vcms.utils.registerComponent(name, comp)
-})
-
-comps = require.context('./components/pages', true, /\.vue$/)
-comps.keys().forEach((name) => {
-  name = name.split('/').slice(-1)[0]
-  name = name.split('.')[0]
-  var comp = require('./components/pages/' + name + '.vue')
-  window.vcms.utils.registerComponent(name, comp)
-})
 
 
 window.vue.$mount('#app')

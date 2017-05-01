@@ -15,11 +15,12 @@
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
+    "vue": "^2.2.6",
     "vue-loader": "^11.1.4",
+    "vue-router": "^2.5.1",
     "vue-template-compiler": "^2.2.1",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0",
-    "vue":"^2.2.6",
-    "vue-router":"^2.5.1"
+    "yml-loader": "^2.0.1"
   }
 }
