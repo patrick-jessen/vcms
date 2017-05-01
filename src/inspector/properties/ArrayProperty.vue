@@ -59,6 +59,13 @@ export default {
       if(!this.property.def.render)
         return this.property.value
 
+      if(typeof this.property.def.render === 'string') {
+        var val = this.property.value
+        if(!Array.isArray(val) && this.property.def.type === 'array')
+          val = [val]
+        return new Function('val', this.property.def.render)(val)
+      }
+
       return this.property.def.render(this.property.value)
     },
     keys() {

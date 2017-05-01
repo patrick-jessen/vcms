@@ -14,8 +14,9 @@ properties:
         title: Link
         type: string.url
     default:
-    image: default.png
-    link: /
+      image: default.png
+      link: /
+    render: "return '<img src=' + val.image + '>'"
   - name: menus
     title: Menu items
     descr: Entries in the menu
@@ -41,6 +42,14 @@ properties:
     defaultItem:
       text: New menu
       link: /
+    render: |
+      var str = '';
+      for(var i = 0; i < val.length - 1; i++) {
+        str += val[i].text + ', ';
+      }
+      str += val[i].text;      
+      return str;
+
   - name: actions
     title: Actions
     type: array
@@ -51,4 +60,9 @@ properties:
       - name: link
         title: Link
         type: string.url
-      
+    render: |
+      var str = '';
+      for(var i in val) {
+        str += '<i class="icon ' + val[i].icon + '"></i>'
+      }
+      return str
