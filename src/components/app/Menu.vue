@@ -26,6 +26,8 @@
 <script>
 export default {
   props: ['invert'],
+  
+  /*
   static: [
     // Company logo
     {
@@ -134,7 +136,7 @@ export default {
         return str
       }
     }
-  ],
+  ],*/
   computed: {
     logoSrc() {
       if(this.invert)

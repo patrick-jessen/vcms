@@ -16,7 +16,7 @@ properties:
       default:
         image: default.png
         link: /
-  - menu:
+  - menus:
       title: Menu items
       descr: Entries in the menu
       type: array
@@ -41,3 +41,14 @@ properties:
       defaultItem:
         text: New menu
         link: /
+  - actions:
+      title: Actions
+      type: array
+      props:
+        - icon:
+            title: Icon
+            type: string
+        - link:
+            title: Link
+            type: string.url
+      

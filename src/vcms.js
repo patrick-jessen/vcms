@@ -185,6 +185,15 @@ function registerStore(vm) {
       });
     }
 
+    // Loop through config file
+    iter = window.tmpDefs[name]
+    if(iter) {
+      iter.properties.forEach(property => {
+        var n = Object.keys(property)[0]
+        vm.$options.computed[n] = new StoreAccessor(n);
+      })
+    }
+
     // Loop through emits
     if (typeof vm.$options.methods === 'undefined') {
       vm.$options.methods = {};
