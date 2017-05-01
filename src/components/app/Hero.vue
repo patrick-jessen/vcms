@@ -69,7 +69,8 @@ export default {
       this.startInterval()
     }
   },
-  static: [
+  vcms: {
+    properties: [
     {
       title:'Items',
       descr:'Items to show as slideshow',
@@ -121,7 +122,7 @@ export default {
       options: ['fade', 'slide'],
       default:'fade'
     }
-  ]
+  ]}
 }
 </script>
 

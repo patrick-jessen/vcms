@@ -6,8 +6,10 @@
 
 <script>
 export default {
-  children: [
-    {name:'banners', type:'array'}
-  ]
+  vcms: {
+    children: [
+      {name:'banners', type:'array'}
+    ]
+  }
 }
 </script>

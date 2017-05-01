@@ -10,11 +10,12 @@
 
 <script>
 export default {
+    vcms:{
     children: [
         {name: 'menu'},
         {name: 'page', type: 'page'},
         {name: 'footer'}
-    ],
+    ]},
     computed: {
         invertMenu() {
             if(this.$route.path === '/')

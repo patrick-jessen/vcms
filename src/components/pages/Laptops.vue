@@ -7,10 +7,11 @@
 
 <script>
 export default {
+  vcms: {
   children: [
     {name: 'hero'},
     {name: 'content'},
-  ],
+  ]},
   beforeCreate() {
     this.type = 'page'
   }

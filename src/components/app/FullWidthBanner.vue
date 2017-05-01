@@ -12,7 +12,8 @@
 
 <script>
 export default {
-  static: [
+  vcms: {
+  properties: [
     {
       title: 'Image',
       name: 'image',
@@ -54,7 +55,7 @@ export default {
         }
       ]
     }
-  ],
+  ]},
   methods: {
   }
 }

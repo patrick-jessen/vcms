@@ -27,7 +27,7 @@
 
 export default {
   props: ['invert'],
-  static: require('./Menu.yml').properties,
+  vcms: require('./Menu.yml'),
   computed: {
     logoSrc() {
       if(this.invert)

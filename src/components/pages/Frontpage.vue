@@ -15,7 +15,8 @@
 
 <script>
 export default {
-  static: [
+  vcms:{
+  properties: [
     {
       title: 'Video',
       name: 'video',
@@ -50,7 +51,7 @@ export default {
   ],
   children: [
     {name: 'content'}
-  ],
+  ]},
   beforeCreate() {
     this.type = 'page'
   }

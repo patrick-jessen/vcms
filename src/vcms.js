@@ -108,8 +108,8 @@ export default function plugin(Vue) {
       window.vcms.components[name] = {
         input: requires,
         output: comp.emits ? comp.emits : [],
-        static: comp.static ? comp.static : [],
-        children: comp.children ? comp.children : []
+        static: comp.vcms && comp.vcms.properties ? comp.vcms.properties : [],
+        children: comp.vcms && comp.vcms.children ? comp.vcms.children : []
       }
     },
   }
@@ -171,7 +171,11 @@ function registerStore(vm) {
     var name = vm.$options._componentTag
 
     // Loop through the elements of the "static" option.
-    var iter = vm.$options.static
+    var vcms = vm.$options.vcms
+    if(!vcms)
+      return
+
+    var iter = vcms.properties
     if(iter) {
       // Initialize the computed option if it hasn't already been initialized.
       if (typeof vm.$options.computed === 'undefined') {
