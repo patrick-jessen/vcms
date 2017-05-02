@@ -1,10 +1,8 @@
 <template>
-<div>
 <div class='app'>
     <Child name='menu' :invert='invertMenu'/>
     <Child name='page' type='page'/>
     <Child name='footer'/>
-</div>
 </div>
 </template>
 
@@ -33,5 +31,6 @@ export default {
     height: 100%;
     padding-right: 0 !important;
     padding-bottom: 0 !important;
+    display: inline-block;
 }
 </style>

@@ -1,33 +1,33 @@
 <template>
-<div>
+<div class='vcms inspector'>
+  <div class='drag'></div>
+  <div class='container'>
 
-<div class='container'>
+    <div class='ui dividing header'>Inspector</div>
 
-  <div class='ui dividing header'>Inspector</div>
+    <div class='ui top attached tabular menu'>
+      <a class='item' :class='activeTab("components")' data-tab='components' @click='showTab("components")'>Components</a>
+      <a class='item' :class='activeTab("pages")' data-tab='pages' @click='showTab("pages")'>Pages</a>
+      <a class='item' :class='activeTab("assets")' data-tab='assets' @click='showTab("assets")'>Assets</a>
+    </div>
+    <div class='ui bottom attached tab segment' :class='activeTab("components")' data-tab='components'>
+      <Hierarchy/>
+    </div>
+    <div class='ui bottom attached tab segment' :class='activeTab("pages")' data-tab='pages'>
+      <Routes/>
+    </div>
+    <div class='ui bottom attached tab segment' :class='activeTab("assets")' data-tab='assets'>
+    </div>
 
-  <div class='ui top attached tabular menu'>
-    <a class='item' :class='activeTab("components")' data-tab='components' @click='showTab("components")'>Components</a>
-    <a class='item' :class='activeTab("pages")' data-tab='pages' @click='showTab("pages")'>Pages</a>
-    <a class='item' :class='activeTab("assets")' data-tab='assets' @click='showTab("assets")'>Assets</a>
+    <div class='ui dividing header'>Properties</div>
+    <PropertyTable :properties='properties'/>
+
+    <button class='ui basic button' @click='performSave'>
+      <i class='icon save'></i>
+      Save
+    </button>
+
   </div>
-  <div class='ui bottom attached tab segment' :class='activeTab("components")' data-tab='components'>
-    <Hierarchy/>
-  </div>
-  <div class='ui bottom attached tab segment' :class='activeTab("pages")' data-tab='pages'>
-    <Routes/>
-  </div>
-  <div class='ui bottom attached tab segment' :class='activeTab("assets")' data-tab='assets'>
-  </div>
-
-  <div class='ui dividing header'>Properties</div>
-  <PropertyTable :properties='properties'/>
-
-  <button class='ui basic button' @click='performSave'>
-    <i class='icon save'></i>
-    Save
-  </button>
-
-</div>
 </div>
 </template>
 
@@ -149,15 +149,30 @@ export default {
 }
 </script>
 
-<style scoped>
-.inspector {
-  background-color: #fafafa;
-  border-left: 1px solid gray;
+<style lang='scss'>
+.vcms {
+  &.inspector {
+    background-color: #fafafa;
+    border-left: 1px solid gray;
+    vertical-align: top;
+    height: 100%;
+    display: inline-block;
+  }
 }
+
 .inspector.hidden {
   display: none !important;
 }
 .container {
   padding: 20px;
+  display: inline-block;
+
+}
+.drag {
+  display: inline-block;
+  width: 2px;
+  height: 100%;
+  background-color: gray;
+  cursor: ew-resize;
 }
 </style>

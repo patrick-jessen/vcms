@@ -46,30 +46,20 @@ router.beforeEach((to, from, next) => {
 window.vue = new Vue({
   render(createElement) {
 
-    var appClass = 'wide column app'
-    var inspectorClass = 'four wide column inspector'
+    var appWidth = 80;
+    var inspectorCls = ''
 
-    if(this.showInspector) {
-      appClass = 'twelve ' + appClass
-    }
-    else {
-      appClass = 'sixteen ' + appClass
-      inspectorClass = inspectorClass + ' hidden'
+    if(!this.showInspector) {
+      appWidth = 100;
     }
 
-    return createElement('div', {
-      class: 'ui grid'
-    },
-     [
-       createElement('App', {
-         attrs: {
-           name:'app', 
-           class: appClass
-          }}),
+    return createElement('div', [
+       createElement('App', {attrs: {name:'app'},style: {
+            width: '' + appWidth + '%' }
+        }),
         createElement('Inspector', {
-          attrs: {
-            class: inspectorClass
-          }
+          class: { 'hidden': !this.showInspector  },
+          style: {  width: '' + (100-appWidth) + '%', }
         })])
   },
   data: {
