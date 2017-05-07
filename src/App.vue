@@ -1,5 +1,5 @@
 <template>
-<div class='app'>
+<div id='app' class='app'>
     <Child name='menu' :invert='invertMenu'/>
     <Child name='page' type='page'/>
     <Child name='footer'/>

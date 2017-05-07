@@ -1,6 +1,6 @@
 <template>
 <div class='vcms inspector'>
-  <div class='drag'></div>
+  <div class='drag' @click='startResize'></div>
   <div class='container'>
 
     <div class='ui dividing header'>Inspector</div>
@@ -144,6 +144,19 @@ export default {
       http.open('POST', url, true);
       http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       http.send(params)
+    },
+    resize(e) {
+      console.log("RESIZE", e)
+    },
+
+    startDrag(e) {
+      console.log("START DRAG")
+    },
+    doDrag(e) {
+      console.log("DO DRAG")
+    },
+    stopDrag(e) {
+      console.log("STOP DRAG")
     }
   }
 }
@@ -152,11 +165,13 @@ export default {
 <style lang='scss'>
 .vcms {
   &.inspector {
+    display: inline-block;
+    position: fixed;
+    height: 100vh;
+
     background-color: #fafafa;
     border-left: 1px solid gray;
     vertical-align: top;
-    height: 100%;
-    display: inline-block;
   }
 }
 
@@ -174,5 +189,6 @@ export default {
   height: 100%;
   background-color: gray;
   cursor: ew-resize;
+  position: absolute;
 }
 </style>

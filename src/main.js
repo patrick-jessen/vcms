@@ -1,11 +1,11 @@
-import Vue from 'vue'
+//import Vue from 'vue'
 import VueRouter from 'vue-router'
-Vue.use(VueRouter)
-
 import Vcms from './vcms.js'
 import {Component} from './vcms.js'
 import Store from './store/laptops2'
 import routes from './routes.js'
+
+Vue.use(VueRouter)
 Vue.use(Vcms)
 
 window.store = Store
