@@ -1,5 +1,5 @@
 <template>
-<div id='app' class='app'>
+<div id='app'>
     <Child name='menu' :invert='invertMenu'/>
     <Child name='page' type='page'/>
     <Child name='footer'/>
@@ -25,9 +25,9 @@ export default {
 }
 </script>
 
-<style scoped>
-.app {
-    /*background-color: gray;*/
+<style>
+#app {
+    width: 100%;
     height: 100%;
     padding-right: 0 !important;
     padding-bottom: 0 !important;

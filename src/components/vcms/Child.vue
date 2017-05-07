@@ -30,7 +30,8 @@ export default {
           }
         },
         attrs: {
-          class: hoverCls
+          class: hoverCls,
+          child: context.props.name // userfriendly DOM inspection
         },
         key: namespace
       })
@@ -59,7 +60,8 @@ export default {
           }
         },
         attrs: {
-          class: hoverCls
+          class: hoverCls,
+          child: context.props.name // userfriendly DOM inspection
         }
       }, children)
     }
@@ -100,7 +102,8 @@ export default {
         }
       },
       attrs: {
-        class: hoverCls
+        class: hoverCls,
+        child: context.props.name // userfriendly DOM inspection
       }
     }, [child])
   }

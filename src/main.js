@@ -1,4 +1,8 @@
-//import Vue from 'vue'
+// var Vue = Vue
+if(process.env.NODE_ENV === 'development') {
+  window.Vue = require('vue').default
+}
+// import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vcms from './vcms.js'
 import {Component} from './vcms.js'
@@ -44,24 +48,11 @@ router.beforeEach((to, from, next) => {
 })
 
 window.vue = new Vue({
-  render(createElement) {
-
-    var appWidth = 80;
-    var inspectorCls = ''
-
-    if(!this.showInspector) {
-      appWidth = 100;
+  render: h => h('App', {
+    attrs: {
+      name: 'app'
     }
-
-    return createElement('div', [
-       createElement('App', {attrs: {name:'app'},style: {
-            width: '' + appWidth + '%' }
-        }),
-        createElement('Inspector', {
-          class: { 'hidden': !this.showInspector  },
-          style: {  width: '' + (100-appWidth) + '%', }
-        })])
-  },
+  }),
   data: {
     _store: Store,
     ctrl: false,

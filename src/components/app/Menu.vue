@@ -38,7 +38,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .wrapper {
   padding: 20px;
 }

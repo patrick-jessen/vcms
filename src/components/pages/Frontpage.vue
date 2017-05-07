@@ -58,7 +58,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .video {
   margin-top: -98px;
   z-index: -1;
