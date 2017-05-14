@@ -287,6 +287,27 @@ export class Component {
     return new Component(parentNamespace)
   }
 
+  get parentDef() {
+    if(!this.parent)
+      return {
+        title: 'App',
+        name: 'app',
+        descr: 'Some descr'
+      }
+
+    var ref = this.namespace.last
+    if(this.isPage) {
+      var split = this.namespace.string.split('.')
+      ref = split[split.length - 3]
+    }
+
+    return this.parent.def.children.find((c) => {
+      if(c.name === ref)
+        return true
+      return false
+    })
+  }
+
   get def() {
     if(this.isArray) {
       var obj = {
@@ -351,7 +372,14 @@ class Namespace {
   }
 
   get parent() {
-    var parentNamespace = this.namespace.split('.').slice(0,-2).join('.')
+    var split = this.namespace.split('.')
+    var parentNamespace
+
+    if(split[split.length-2] === '$pages')
+      parentNamespace = split.slice(0, -4).join('.')
+    else
+      parentNamespace = split.slice(0,-2).join('.')
+
     if(parentNamespace.length === 0)
       return 
 
@@ -373,6 +401,19 @@ class Property {
     this.parentProp = parentProp
   }
 
+  get properties() {
+    if(typeof this.value !== 'object')
+      return []
+      
+    var keys = Object.keys(this.value)
+    var arr = []
+
+    for(var i in keys) {
+      arr.push(this.subProperty(keys[i]))
+    }
+    return arr
+  }
+
   subProperty(name) {
     return new Property(this.namespace.prop(name), this.component, this)
   }
@@ -387,6 +428,8 @@ class Property {
       currProp = currProp.parentProp
     }
 
+    var render = currProp.render
+
     for(var i = propChain.length-1; i >= 0; i--) {
       var p = propChain[i]
 
@@ -398,6 +441,8 @@ class Property {
       }
     }
 
+    if(!def.render)
+      def.render = render
     return def    
   }
 }

@@ -16,11 +16,14 @@ export default {
       var name = context.props.name
       namespace = context.parent.component.namespace.child(name).append('$pages', route)
 
-      // var hovered = window.vue.$data.hoveredComponent === namespace
-      // var hoverCls
-      // if(hovered) {
-      //   hoverCls = 'hovered'
-      // }
+      var hovered // = window.vue.$data.hoveredComponent === namespace
+      if(window.vue.hoveredNamespace === namespace.string)
+        hovered = true
+      var hoverCls
+      if(hovered) {
+        hoverCls = 'hovered'
+      }
+      
 
       return createElement('router-view', {
         on: {
@@ -87,6 +90,11 @@ export default {
     }
   
     var hovered = window.vue.$data.hoveredComponent === namespace
+
+    //new
+    if(window.vue.hoveredNamespace === namespace.string)
+      hovered = true
+
     var hoverCls
     if(hovered) {
       hoverCls = 'hovered'

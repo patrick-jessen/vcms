@@ -1,16 +1,19 @@
 // var Vue = Vue
-if(process.env.NODE_ENV === 'development') {
-  window.Vue = require('vue').default
-}
+// if(process.env.NODE_ENV === 'development') {
+//   window.Vue = require('vue').default
+// }
 // import Vue from 'vue'
-import VueRouter from 'vue-router'
+// import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
+Vue.use(Vcms)
+
 import Vcms from './vcms.js'
 import {Component} from './vcms.js'
 import Store from './store/laptops2'
 import routes from './routes.js'
 
-Vue.use(VueRouter)
-Vue.use(Vcms)
+
 
 window.store = Store
 window.Component = Component
@@ -33,7 +36,6 @@ router.beforeEach((to, from, next) => {
   else {
     if(window.vue) {
       var namespace = window.vue.$root.$children[0].component.namespace.child('page').append('$pages', to.fullPath)
-      console.log("NAM", namespace)
       var comp = new Component(namespace)
       to.matched[0].components.default = window.layouts[comp.type]
     }
@@ -58,9 +60,11 @@ window.vue = new Vue({
     ctrl: false,
     showInspector: true,
     hoveredComponent: '',
-    selectedComponent: null
+    selectedComponent: null,
+    hoveredNamespace: ''
   },
-  router
+  router,
+  name: 'App'
 })
 
 
