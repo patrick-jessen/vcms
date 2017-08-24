@@ -1,9 +1,5 @@
-// var Vue = Vue
-// if(process.env.NODE_ENV === 'development') {
-//   window.Vue = require('vue').default
-// }
-// import Vue from 'vue'
-// import VueRouter from 'vue-router'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 Vue.use(Vcms)
